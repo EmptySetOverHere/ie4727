@@ -6,6 +6,7 @@
 - **Variables**: Use `camelCase` (e.g., `$userName`).
 - **Constants**: Use `UPPER_SNAKE_CASE` (e.g., `MAX_USERS`).
 - **Filenames**: Use `lower_snake_case` (e.g., `user_account.php`) for consistency and enhanced readability.
+- **Handler Files**: For files that handle POST requests, name them `handler_[action].php` (e.g., `handler_create_user.php`).
 
 ## HTML/CSS
 - **HTML Elements**: Use `lower_snake_case` or `kebab-case` for IDs and classes (e.g., `user_profile`, `main-header`).
