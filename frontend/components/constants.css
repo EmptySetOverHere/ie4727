@@ -1,0 +1,12 @@
+:root {
+    --max-phone-screen-width: 479px;
+    --max-tablet-screen-width: 767px;
+    --max-pc-screen-width: 991px;
+    --min-pc-screen-width: 1076px;
+
+    --main-background: #FCFCFC;
+    --navi-bar-background: #EFC69B;
+    
+
+    --border-radius: 5px;
+}

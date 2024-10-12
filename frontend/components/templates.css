@@ -1,0 +1,63 @@
+@import url("./constants.css");
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* @media screen and (min-width: var(--min-pc-screen-width))  { */
+    .screen-adjuster {
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    .main-outline {
+        display: flex;
+        flex-direction: column;
+        min-width: 800px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .nav-bar-outline {
+        position: fixed;
+        margin: 50px 30px 50px 30px;
+    }
+
+    .navi-bar-container {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        border-radius: var(--border-radius);
+    }
+
+    .navi-bar-container > * {
+        display: inline-block;
+    }
+
+    .navi-bar-container {
+        
+    }
+    
+    .navi-links-container > * {
+        display: inline-block;
+    }
+
+    .sign-in-up-container {
+        margin: 10px 10px 10px 10px;
+        width: 300px;
+        height: inherit;
+        text-align: center;
+    }
+
+    .sign-in-sign-up {
+        
+    }
+
+    .restaurant-icon-name {
+        
+    }
+/* } */
+

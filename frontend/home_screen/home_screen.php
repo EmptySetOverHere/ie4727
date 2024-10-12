@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once "./components/templates.php";
+
 ?>
 
 this is da home screen<br>
