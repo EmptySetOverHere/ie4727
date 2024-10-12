@@ -30,6 +30,7 @@
   - [ ] Test enforcement of strong password policies
 - [ ] Session Expiration
   - [ ] Test session expiration after inactivity
+- [ ] Test that HTTP requests to unauthorised files be rejected
 
 ## Performance Tests
 - [ ] Load Testing
