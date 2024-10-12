@@ -32,17 +32,32 @@ class NyanDB
         $this->close();
     }
 
-    public static function single_query($sql) {
-        $database = new NyanDB();
-        $result = $database->db->query($sql);
-        if (!$result) {throw new Exception("Query Error: " . $database->db->error);}
-        $database->close();
+    private function prepare($sql,$params = []){
+        $stmt = $this->db->prepare($sql);
+        if (!$stmt) {
+            throw new Exception("Prepare Error: " . $this->db->error);
+        }
+        if (!empty($params)){
+            $types = str_repeat('s',count($params));
+            $stmt->bind_param($types, ...$params);
+        }
+        return $stmt;
+    }
+
+    public function query($sql,$params){
+        $stmt = $this->prepare($sql,$params);
+        $result = $stmt->execute();
+        if (!$result) {throw new Exception("Query Error: " . $stmt->error);}
+        if (stripos(trim($sql), 'SELECT') === 0) {
+            return $stmt->get_result(); // Return the result set for SELECT queries
+        }
         return $result;
     }
 
-    public function query($sql){
-        $result = this->db->query($sql);
-        if (!$result) {throw new Exception("Query Error: " . $database->db->error);}
+    public static function single_query($sql,$params) {
+        $database = new NyanDB();
+        $result = $database->query($sql,$params);
+        $database->close();
         return $result;
     }
 }

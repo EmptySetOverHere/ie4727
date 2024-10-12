@@ -25,13 +25,12 @@ $password     = $_POST['password'];
 $sql = "
 SELECT hashed_password
 FROM user_auths 
-WHERE email = '$email' AND phone_number = '$phone_number'
+WHERE email = ? AND phone_number = ?
 LIMIT 1;
 ";
-$results = NyanDB::single_query($sql);
+$results = NyanDB::single_query($sql, [$email, $phone_number]);
 $result = $results->fetch_assoc();
 $results->free();
-print_r($result);
 if (!empty($result)){
     echo 'hey such account with same name/email already exists';
     //redirect to signin TODO
@@ -47,9 +46,9 @@ if (!empty($result)){
 $hashed_password = password_hash($_SESSION['bob'], PASSWORD_ARGON2ID);
 $sql = "
 INSERT INTO user_auths (email, phone_number, hashed_password) 
-VALUES ('$email', '$phone_number', '$hashed_password');
+VALUES (?, ?, ?);
 ";
-NyanDB::single_query($sql); //if insert operation fails the class will handle it by throwing an error
+NyanDB::single_query($sql, [$email, $phone_number, $hashed_password]); //if insert operation fails the class will handle it by throwing an error
 echo 'yay signup done';
 
 ////signup successful redirect to relevant screen
