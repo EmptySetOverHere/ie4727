@@ -1,7 +1,7 @@
 <?php
 
 session_status() === PHP_SESSION_NONE ? session_start(): null;
-require_once '../database/NyanDB.php'; //import class definition
+require_once '../core/NyanDB.php'; //import class definition
 
 
 

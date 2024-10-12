@@ -1,7 +1,7 @@
 <?php
 
 try {
-    include 'api_signup_execution.php';
+    include 'signup_execution.php';
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
