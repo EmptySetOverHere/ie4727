@@ -1,7 +1,7 @@
 <?php
 
 try {
-    include 'api_signup_execution.php';
+    include 'api_signin_execution.php';
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
@@ -21,14 +21,19 @@ try {
             throw $e;//TODO
             break;
 
-        //email/phone number already exists
+        //email/phone number does not exist yet
         case 69003:
+            throw $e;//TODO
+            break;
+
+        //wrong password
+        case 69004:
             throw $e;//TODO
             break;
 
         // //undefined error
         // case 69xxx:
-        //     //do something
+        //     throw $e;//TODO
         //     break;
 
         // Catch-all for undefined error codes

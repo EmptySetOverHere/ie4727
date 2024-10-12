@@ -1,8 +1,11 @@
 <?php
 
-session_start();
+session_status() === PHP_SESSION_NONE ? session_start(): null;
 require '../database/NyanDB.php'; //import class definition
 
+
+
+////assign HTTP request values
 $email        = $_POST['email'];
 $phone_number = $_POST['phone_number'];
 $password     = $_POST['password'];
@@ -11,11 +14,13 @@ $password     = $_POST['password'];
 
 
 ////verify email formats, phone number and password.
-if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email)>254){
+$is_valid_email = (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email)<=254);
+$phone_number_reg = '/^\+[\d]{8,14}$/';
+$is_valid_phone = (preg_match($phone_number_reg,$phone_number));
+if(!$is_valid_email){
     throw new Exception("email not valid",69000);
 }
-$phone_number_reg = '/^\+[\d]{8,14}$/';
-if(!preg_match($phone_number_reg,$phone_number)){
+if(!$is_valid_phone){
     throw new Exception("phone number not valid",69000);
 }
 if(!$password){
@@ -63,9 +68,9 @@ $user_id = NyanDB::single_query($sql, [$email, $phone_number, $hashed_password])
 
 
 
-////signup successful redirect to relevant screen should be done outside this file
+////signup successful, redirecting to relevant screen should be done outside this file
 $_SESSION['user_id'] = $user_id;
-echo $_SESSION['user_id'];
+// echo $_SESSION['user_id'];
 
 
 ?>
