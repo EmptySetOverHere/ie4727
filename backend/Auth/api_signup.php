@@ -22,6 +22,7 @@ try {
             break;
 
         //email/phone number already exists
+        //error message contains two booleans saying whether email/phone number already exists
         case 69003:
             throw $e;//TODO
             break;

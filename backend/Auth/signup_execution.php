@@ -15,7 +15,7 @@ $password     = $_POST['password'];
 
 ////verify email formats, phone number and password.
 $is_valid_email = (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email)<=254);
-$phone_number_reg = '/^\+[\d]{8,14}$/';
+$phone_number_reg = '/^[\d]{8,14}$/';
 $is_valid_phone = (preg_match($phone_number_reg,$phone_number));
 if(!$is_valid_email){
     throw new Exception("email not valid",69000);
@@ -59,8 +59,8 @@ null;//TODO
 ////insert new user
 $hashed_password = password_hash($password, PASSWORD_ARGON2ID);
 $sql = "
-INSERT INTO user_auths (email, phone_number, hashed_password) 
-VALUES (?, ?, ?);
+INSERT INTO user_auths (email, phone_number, hashed_password, account_creation_time, last_login_time) 
+VALUES (?, ?, ?, NOW(), NOW());
 ";
 //if insert operation fails the NyanDB class will handle it by throwing a query error
 //also assigns the last inserted user_id to the variable $user_id

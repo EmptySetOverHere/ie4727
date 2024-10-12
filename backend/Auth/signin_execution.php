@@ -15,7 +15,7 @@ $password     = $_POST['password'];
 
 ////verify email formats, phone number and password.
 $is_valid_email = (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email)<=254);
-$phone_number_reg = '/^\+[\d]{8,14}$/';
+$phone_number_reg = '/^[\d]{8,14}$/';
 $is_valid_phone = (preg_match($phone_number_reg,$phone_number));
 if(!$is_valid_email && !$is_valid_phone){
     throw new Exception("not a valid email or phone number ",69000);
@@ -41,9 +41,15 @@ if(!password_verify($password , $result['hashed_password'])){
     throw new Exception("wrong password", 69004);
 }
 
-
+////update last_login_time
+$sql = "
+UPDATE user_auths
+SET last_login_time = NOW()
+WHERE user_id = ?;
+";
+NyanDB::single_query($sql, [$result['user_id']]);
 
 ////signin successful, redirecting to relevant screen should be done outside this file
 $_SESSION['user_id'] = $result['user_id'];;//successfull signin
-echo 'successfull sign in';
+// echo 'successful sign in';
 ?>
