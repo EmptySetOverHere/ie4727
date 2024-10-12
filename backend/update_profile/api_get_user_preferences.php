@@ -1,0 +1,1 @@
+TODO //retreives current state of user preferences

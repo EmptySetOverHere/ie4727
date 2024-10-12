@@ -65,11 +65,20 @@ VALUES (?, ?, ?, NOW(), NOW());
 //if insert operation fails the NyanDB class will handle it by throwing a query error
 //also assigns the last inserted user_id to the variable $user_id
 $user_id = NyanDB::single_query($sql, [$email, $phone_number, $hashed_password]);
+$_SESSION['user_id'] = $user_id;
 
+
+
+////insert new user's user_preference
+$sql = "
+INSERT INTO user_preferences (user_id, is_notify_by_sms, is_notify_by_email, is_notify_by_whatsapp, is_notify_by_telegram)
+VALUES (?,FALSE, TRUE, FALSE, FALSE);
+";
+NyanDB::single_query($sql, [$_SESSION['user_id']]);
 
 
 ////signup successful, redirecting to relevant screen should be done outside this file
-$_SESSION['user_id'] = $user_id;
+
 // echo $_SESSION['user_id'];
 
 

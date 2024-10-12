@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2024 at 10:38 AM
+-- Generation Time: Oct 12, 2024 at 11:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,15 +31,27 @@ CREATE TABLE `user_auths` (
   `user_id` int(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` int(15) NOT NULL,
-  `hashed_password` varchar(255) NOT NULL
+  `hashed_password` varchar(255) NOT NULL,
+  `account_creation_time` datetime NOT NULL,
+  `last_login_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `user_auths`
+-- Table structure for table `user_preferences`
 --
 
-INSERT INTO `user_auths` (`user_id`, `email`, `phone_number`, `hashed_password`) VALUES
-(1, 'bob@gmail.com', 9999, '$argon2id$v=19$m=65536,t=4,p=1$OXFGV2l0ZjhLUW1rMGhhLw$r0SEqckac5k4hj8QBIHsIjY2AhS+Ucf8X56foDze7XY');
+CREATE TABLE `user_preferences` (
+  `user_id` int(50) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `preferred_payment_method` varchar(63) DEFAULT NULL,
+  `is_notify_by_sms` tinyint(1) NOT NULL,
+  `is_notify_by_email` tinyint(1) NOT NULL,
+  `is_notify_by_whatsapp` tinyint(1) NOT NULL,
+  `is_notify_by_telegram` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -52,6 +64,12 @@ ALTER TABLE `user_auths`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -59,7 +77,7 @@ ALTER TABLE `user_auths`
 -- AUTO_INCREMENT for table `user_auths`
 --
 ALTER TABLE `user_auths`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
