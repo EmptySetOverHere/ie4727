@@ -1,57 +1,42 @@
 <?php
 
-session_start();
+try{
+    include 'api_signup_execution.php';
+    null;//defines what happens if execution successful here 
+} catch (Exception $e) {
+    switch($e->getCode()){
+        //invalid http parameters formatW
+        case 69000:
+            throw $e;//TODO
+            break;
 
-require '../database/NyanDB.php';
+        //database connection refused/query error
+        case 69001:
+            throw $e;//TODO
+            break;
+
+        //database prepare error
+        case 69002:
+            throw $e;//TODO
+            break;
+
+        //email/phone number already exists
+        case 69003:
+            throw $e;//TODO
+            break;
+
+        // //undefined error
+        // case 69xxx:
+        //     //do something
+        //     break;
+
+        // Catch-all for undefined error codes
+        default:
+            throw $e;
+        break;
 
 
-// echo session_id();
-
-// echo $_SESSION['bob']; //$_SESSION['bob'] is = to 'bobicus'
-// $hashedPassword = password_hash($_SESSION['bob'], PASSWORD_ARGON2ID);
-// echo '<br>';
-// echo $hashedPassword;
-// echo password_verify('bobicus',$hashedPassword) ? '<br>yay bob' : '<br>u not bob';
-
-$email        = $_POST['email'];
-$phone_number = $_POST['phone_number'];
-$password     = $_POST['password'];
-
-// print_r ([$email,$phone_number,$password])
-
-////verify phone number and email formats.TODO
-
-////retrieve database phone nnumber/email/password
-$sql = "
-SELECT hashed_password
-FROM user_auths 
-WHERE email = ? AND phone_number = ?
-LIMIT 1;
-";
-$results = NyanDB::single_query($sql, [$email, $phone_number]);
-$result = $results->fetch_assoc();
-$results->free();
-if (!empty($result)){
-    echo 'hey such account with same name/email already exists';
-    //redirect to signin TODO
-    exit();
-} else {
-    //its a new sign in, proceed
+    }
 }
-
-////send confirmation email TODO
-
-
-////insert new user
-$hashed_password = password_hash($_SESSION['bob'], PASSWORD_ARGON2ID);
-$sql = "
-INSERT INTO user_auths (email, phone_number, hashed_password) 
-VALUES (?, ?, ?);
-";
-NyanDB::single_query($sql, [$email, $phone_number, $hashed_password]); //if insert operation fails the class will handle it by throwing an error
-echo 'yay signup done';
-
-////signup successful redirect to relevant screen
-
 
 ?>
