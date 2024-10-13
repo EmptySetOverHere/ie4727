@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2024 at 02:57 PM
+-- Generation Time: Oct 13, 2024 at 06:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -91,7 +91,7 @@ CREATE TABLE `user_auths` (
 --
 
 INSERT INTO `user_auths` (`user_id`, `email`, `phone_number`, `hashed_password`, `account_creation_time`, `last_login_time`) VALUES
-(0, 'bob@sg.sg', 88888888, '$argon2id$v=19$m=65536,t=4,p=1$L3pReDdVTWsxZmJ2WnZHRg$kludBRfB7OGEEQIn3PE9QZW6BlBM4LV41EchrCPWJ8s', '2024-10-13 01:54:48', '2024-10-13 02:10:47');
+(0, 'bob@sg.sg', 88888888, '$argon2id$v=19$m=65536,t=4,p=1$L3pReDdVTWsxZmJ2WnZHRg$kludBRfB7OGEEQIn3PE9QZW6BlBM4LV41EchrCPWJ8s', '2024-10-13 01:54:48', '2024-10-13 21:52:20');
 
 -- --------------------------------------------------------
 
@@ -152,19 +152,19 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT for table `imagetest`
 --
 ALTER TABLE `imagetest`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_auths`
 --
 ALTER TABLE `user_auths`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

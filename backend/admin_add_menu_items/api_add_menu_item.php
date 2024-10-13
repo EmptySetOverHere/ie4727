@@ -1,17 +1,15 @@
 <?php
 
 try {
-    require_once 'add_new_menuitem_execution.php';
-    // $result is an assoc array containing the relevant information
+    require_once 'add_menu_item_execution.php';
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
-        //invalid http parameters format
-        // //no parameters required for this get request
-        // case 69000:
-        //     throw $e;//TODO
-        //     break;
+        //invalid parameters
+        case 69000:
+            throw $e;//TODO
+            break;
 
         //database connection refused/query error
         case 69001:
@@ -28,8 +26,13 @@ try {
             throw $e;//TODO
             break;
         
-        //user does not exist in database
+        //user not allowed, insufficient permissions
         case 69004:
+            throw $e;//TODO
+            break;
+
+        //file wrong format or too large
+        case 69005:
             throw $e;//TODO
             break;
 
