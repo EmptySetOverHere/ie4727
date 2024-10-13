@@ -8,6 +8,13 @@ isset($_SESSION['user_id'])? null : throw new Exception('user not logged in',690
 
 
 ////assign HTTP request values
+$is_bad_request = !(
+    isset($_POST['is_notify_by_sms']) &&
+    isset($_POST['is_notify_by_email']) &&
+    isset($_POST['is_notify_by_whatsapp']) &&
+    isset($_POST['is_notify_by_telegram'])
+);
+$is_bad_request ? throw new Exception('bad request',69000) : null;
 $name                     = $_POST['name'] ?? null;
 $address                  = $_POST['address'] ?? null;
 $preferred_payment_method = $_POST['preferred_payment_method'] ?? null;
@@ -23,7 +30,7 @@ $is_notify_by_telegram    = $_POST['is_notify_by_telegram'];
 $boolean_array = [$is_notify_by_sms ,$is_notify_by_email,$is_notify_by_whatsapp ,$is_notify_by_telegram];
 foreach ($boolean_array as $value) {
     if(!is_bool($value)){
-        throw new Exception('invalid input boolean parameters',69000);
+        throw new Exception('bad request:invalid input boolean parameters',69000);
     }
 }
 

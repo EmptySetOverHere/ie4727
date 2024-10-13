@@ -81,7 +81,7 @@ class PageTemplate
             <nav class="navi-bar-container">
                 <div class="cater-icon-name-container">
                     <div class="cater-icon">
-                        <img src="../assests/cat-space.gif" alt="NyanCat">
+                        <img src="../assets/cat-space.gif" alt="NyanCat">
                     </div>
                     <div class="cater-name">
                         {$this->header_title}

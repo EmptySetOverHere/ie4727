@@ -1,7 +1,7 @@
 <?php
 
 try {
-    include 'signup_execution.php';
+    require_once 'signup_execution.php';
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
