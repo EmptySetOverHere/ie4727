@@ -6,6 +6,14 @@ require_once '../core/NyanDB.php'; //import class definition
 
 
 ////assign HTTP request values
+$is_bad_request = !(
+    isset($_POST['password']) &&
+    (
+        (isset($_POST['email']) && isset($_POST['phone_number'])) || 
+        isset($_POST['email/phone_number'])
+    )
+);
+$is_bad_request ? throw new Exception('bad request',69000) : null;
 $email        = $_POST['email'] ?? $_POST['email/phone_number'];
 $phone_number = $_POST['phone_number'] ?? $_POST['email/phone_number'];
 $password     = $_POST['password'];
