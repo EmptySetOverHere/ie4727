@@ -2,30 +2,38 @@
 class PageTemplate
 {
 
-    private static int $instance = 0; // Singleton
+    // private static int $instance = 0;
     private ?string $content = null;
     private string $header_title;
     private string $header;
     private string $outline;
     private string $navibar;
+    private string $footer;
 
-    private const NAVIBAR_PLACEHOLDER = "{{navibar}}";
-    private const CONTENT_PLACEHOLDER = "{{content}}";
+    private const NAVIBAR_PLACEHOLDER       = "{{navibar}}";
+    private const CONTENT_PLACEHOLDER       = "{{content}}";
+    private const FOOTER_PLACEHOLDER        = "{{footer}}";
 
-    public function __construct() {
-        if (self::$instance > 0) {
-            throw new Exception("There page template should only be rendered once");
-        }
-        self::$instance += 1;
+    public function __construct()
+    {
+        // if (self::$instance > 0) {
+        //     throw new Exception("Page template should only be rendered once");
+        // }
+        // self::$instance += 1;
+
+        $this->content = <<<HTML
+            <div id="dummy-content"></div>
+        HTML;
     }
 
-
-    public function set_content(string $content): self {
+    public function set_content(string $content): self
+    {
         $this->content = $content;
         return $this;
     }
 
-    public function set_header(string $title, array $style_files): self {
+    public function set_header(string $title, array $style_files): self
+    {
         $this->header_title = $title;
         $this->header = <<<HTML
             <!DOCTYPE html> 
@@ -34,54 +42,65 @@ class PageTemplate
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>$title</title>
-                <link rel="stylesheet" href="templates.css">
         HTML;
-        foreach($style_files as $style_file) {
+        foreach ($style_files as $style_file) {
             $this->header .= <<<STYLE
                 <link rel="stylesheet" href="$style_file"> 
             STYLE;
         }
-        $this->header .=  <<<HTML
+        $this->header .= <<<HTML
             </head>
         HTML;
+
+        // echo $this->header;
         return $this;
     }
 
-    public function set_outline(): self
-    {   
-        $NAVIBAR_PLACEHOLDER = $this->NAVIBAR_PLACEHOLDER;
-        $CONTENT_PLACEHOLDER = $this->CONTENT_PLACEHOLDER;
+    public function set_outline(array $scripts): self
+    {
+        $NAVIBAR_PLACEHOLDER = self::NAVIBAR_PLACEHOLDER;
+        $CONTENT_PLACEHOLDER = self::CONTENT_PLACEHOLDER;
+        $FOOTER_PLACEHOLDER  = self::FOOTER_PLACEHOLDER;
+
         $this->outline = <<<HTML
-        <body>
-        <div class="screen-adjuster">
-            <div class="main-outline">
-                <div class="nav-bar-outline">
-                    $NAVIBAR_PLACEHOLDER
-                </div>
-                <div class="page-content-container">
-                    $CONTENT_PLACEHOLDER
+            <body>
+            <div class="screen-adjuster">
+                <div class="main-outline">
+                    <div class="nav-bar-outline">
+                        $NAVIBAR_PLACEHOLDER
+                    </div>
+                        $CONTENT_PLACEHOLDER
+                    <div>
+                        $FOOTER_PLACEHOLDER    
+                    </div>
                 </div>
             </div>
-        </div>
+            
         HTML;
+
+        foreach ($scripts as $script_file) {
+            $this->outline .= <<<HTML
+                <script src="$script_file" defer></script>
+            HTML;
+        }
+
+        $this->outline .= <<<HTML
+            </body>
+        HTML;
+
         return $this;
+
     }
 
-    public function demo(): void
+
+    public function set_navibar(array $links, ?string $username = null)
     {
-        ?>  
-        <?php
-    }
-
-    
-
-    public function set_navibar(array $links, ?string $username = null) {
         // appending restaurant icon and name        
         $this->navibar = <<<HTML
             <nav class="navi-bar-container">
                 <div class="cater-icon-name-container">
                     <div class="cater-icon">
-                        <img src="../assets/cat-space.gif" alt="NyanCat">
+                        <img src="./assets/cat-space.gif" alt="NyanCat">
                     </div>
                     <div class="cater-name">
                         {$this->header_title}
@@ -95,9 +114,9 @@ class PageTemplate
             $this->navibar .= <<<HTML
                 <div class="navi-link-container">
             HTML;
-            
+
             if (is_array($content)) {
-                foreach($content as $sub_cat => $sub_content) {
+                foreach ($content as $sub_cat => $sub_content) {
                     // TODO: we populate the dropdown list if there is subcontent for display
                 }
             } else {
@@ -105,30 +124,33 @@ class PageTemplate
                     <a href="$content">$category</a>
                 HTML;
             }
-            
-            $this->navibar .= "</div> /n";
+
+            $this->navibar .= "</div>";
         }
 
         // appending sign in sign up button
         $this->navibar .= <<<HTML
                 </div>
                 <div class="spacer"></div>
-                <button class="sign-in-up-container">
-                    <div class="avatar-container"></div>
-                    <span class="sign-in-sign-up">
         HTML;
 
         // appending welcome message if the user has signed in 
         if ($username !== null) {
             $this->navibar .= <<<HTML
-                Welcome $username <br>
+                <div class="welcome-message-container">
+                    <span>
+                        Welcome $username <br>
+                    </span>
+                </div>
             HTML;
-        } 
+        }
 
         $this->navibar .= <<<HTML
-             Sign-in / Sign-up
-                    </span>
-                </button>
+            <button class="sign-in-up-container">
+                <a class="sign-in-sign-up">
+                    Sign-in
+                </a>
+            </button>
             </nav>
         HTML;
 
@@ -137,37 +159,47 @@ class PageTemplate
 
     public function set_footer()
     {
+        $this->footer = <<<HTML
+            <footer>
+                <Address>
+                    <div class="footer-text-title">Address</div>
+                    <div class="footer-text-body">
+                        Nyan Cat Residence              <br>
+                        42 Rainbow Lane                 <br>
+                        Pixelville, Internet Universe   <br>  
+                        Purrfect Galaxy, 001010         <br>
+                        Cyberspace                      <br>
+                    </div>
+                </Address>
+                <div>
+                    <div class="footer-text-title">Email</div>
+                    <div class="footer-text-body">nyancat@localhost.org</div>
+                </div>
+                <div class="footer-text-title">Participate</div>
+                <div class="footer-text-title">Term of Service</div>
+                <div class="footer-text-title">Policy</div>
+                <div class="footer-text-title">Cookie Policy</div>
+            </footer>
+        HTML;
         return $this;
     }
 
-    public function render() {
-        $placeholders= [
-            $this::NAVIBAR_PLACEHOLDER, 
-            $this::CONTENT_PLACEHOLDER
+    public function render()
+    {
+        $placeholders = [
+            self::NAVIBAR_PLACEHOLDER,
+            self::CONTENT_PLACEHOLDER,
+            self::FOOTER_PLACEHOLDER,
         ];
 
+        $body = str_replace(
+            $placeholders, 
+            [$this->navibar, $this->content, $this->footer], 
+            $this->outline
+        );
         
-        $this->outline = str_replace($placeholders, [$this->navibar, $this->content], $this->outline);
-        $page = $this->header . $this->outline;
+        $page = $this->header . $body;
         echo $page;
     }
-
 }
-?>
-
-
-<?php
-$links = [
-    "GPT" => "https://chatgpt.com",
-    "GITHUB" => "https://github.com",
-    "GOOGLE" => "https://google.com",
-    "BING" => ""
-];
-
-(new PageTemplate()) 
-    ->set_header("Nyan CATering", [])
-    ->set_outline()
-    ->set_navibar($links, "no one")
-    ->set_footer()
-    ->render();
 ?>

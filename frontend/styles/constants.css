@@ -4,9 +4,10 @@
     --max-pc-screen-width: 991px;
     --min-pc-screen-width: 1076px;
 
-    --main-background: #F2F2F2;
+    --main-background: rgb(22,20,21);
+    --main-background-ligher: #1B1B1B;
     --navi-bar-background: #EFC69B;
-
-
+    --nyan-cat-background: #043264;
+    
     --border-radius: 5px;
 }
