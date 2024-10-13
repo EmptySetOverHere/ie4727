@@ -136,10 +136,11 @@
         height: 300px;
         width: 100%;
         border-radius: 30px;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        padding: 30px 300px 0px 300px; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        padding: 30px 200px 0px 200px; 
         background-color: var(--main-background-ligher);
         color: white;
+        overflow: hidden;
     }
 
     .footer-text-title {
