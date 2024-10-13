@@ -2,12 +2,10 @@
 
 enum payment_method_enum : int
 {
-    
     case mastercard = 1;
     case visa = 2;
     case paynow = 3;
     case paypal = 4;
-
 }
 
 // echo payment_method_enum::mastercard->value;

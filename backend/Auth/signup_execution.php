@@ -4,7 +4,6 @@ session_status() === PHP_SESSION_NONE ? session_start(): null;
 require_once '../core/NyanDB.php'; //import class definition
 
 
-
 ////assign HTTP request values
 $email        = $_POST['email'];
 $phone_number = $_POST['phone_number'];
