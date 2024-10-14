@@ -1,30 +1,35 @@
 <?php
 
+require_once '../core/Errorcodes.php';
+
 try {
     require_once 'signup_execution.php';
+    signup();
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
-        //invalid http parameters format
-        case 69000:
-            throw $e;//TODO
+        // Invalid HTTP parameters format
+        case ERRORCODES::general_error['bad_request']:
+            throw $e; // TODO
             break;
 
-        //database connection refused/query error
-        case 69001:
-            throw $e;//TODO
+        // Email/phone number already exists
+        // Error message contains two booleans saying whether email/phone number already exists
+        case ERRORCODES::api_signup['email_or_phone_exists']:
+            throw $e; // TODO
+            break;
+        
+
+            
+        // Database connection refused/query error
+        case ERRORCODES::server_error['database_connection_error']:
+            throw $e; // TODO
             break;
 
-        //database prepare error
-        case 69002:
-            throw $e;//TODO
-            break;
-
-        //email/phone number already exists
-        //error message contains two booleans saying whether email/phone number already exists
-        case 69003:
-            throw $e;//TODO
+        // Database prepare error
+        case ERRORCODES::server_error['database_prepare_error']:
+            throw $e; // TODO
             break;
 
         // //undefined error

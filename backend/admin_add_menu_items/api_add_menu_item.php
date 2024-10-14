@@ -1,45 +1,38 @@
 <?php
 
+require_once '../core/Errorcodes.php';
+
 try {
     require_once 'add_menu_item_execution.php';
+    add_menu_item();
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
-        //invalid parameters
-        case 69000:
-            throw $e;//TODO
-            break;
-
-        //database connection refused/query error
-        case 69001:
-            throw $e;//TODO
-            break;
-
-        //database prepare error
-        case 69002:
-            throw $e;//TODO
-            break;
-
-        //session does not have a associated userID, because user not logged in
-        case 69003:
+        // Invalid HTTP parameters format
+        case ERRORCODES::general_error['bad_request']:
             throw $e;//TODO
             break;
         
         //user not allowed, insufficient permissions
-        case 69004:
+        case ERRORCODES::server_error['invalid_credentials']:
             throw $e;//TODO
             break;
 
         //file wrong format or too large
-        case 69005:
+        case ERRORCODES::api_add_menu_item['invalid_file_format']:
             throw $e;//TODO
             break;
 
-        // //undefined error
-        // case 69xxx:
-        //     throw $e;//TODO
-        //     break;
+        // Database connection refused/query error
+        case ERRORCODES::server_error['database_connection_error']:
+            throw $e; // TODO
+            break;
+
+        // Database prepare error
+        case ERRORCODES::server_error['database_prepare_error']:
+            throw $e; // TODO
+            break;
 
         // Catch-all for undefined error codes
         default:

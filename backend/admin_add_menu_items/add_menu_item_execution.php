@@ -1,13 +1,20 @@
 <?php
 
 function add_menu_item(){
-    session_status() === PHP_SESSION_NONE ? session_start(): null;
-    require_once '../core/NyanDB.php'; //import class definition
-    require_once '../core/Image.php'; //import class definition
+    require_once '../core/NyanDB.php';
+    require_once '../core/Image.php';
+    require_once '../core/Errorcodes.php'; 
 
-    ////check that session has a user_id
-    isset($_SESSION['user_id'])? null : throw new Exception('user not logged in',69003);
-    //TODO check that user is priviledged and allowed to access this file.
+    ////check that session user_id
+    if (session_status() === PHP_SESSION_NONE){
+        throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
+    }
+    if(!isset($_SESSION['user_id'])){
+        throw new Exception('user not logged in', ERRORCODES::general_error['bad_request']);
+    }
+    if($_SESSION['user_id'] != 0){
+        throw new Exception('insufficient access rights', ERRORCODES::general_error['invalid_credentials']);
+    }
 
 
 
@@ -18,7 +25,7 @@ function add_menu_item(){
         isset($_POST['price']) && 
         isset($_POST['category'])
     );
-    $is_bad_request ? throw new Exception('bad request',69000) : null;
+    $is_bad_request ? throw new Exception('bad request', ERRORCODES::general_error['bad_request']) : null;
 
     $item_name     = $_POST['item_name'];
     $description   = $_POST['description'];
@@ -37,17 +44,17 @@ function add_menu_item(){
     $is_price_valid     = preg_match('/^\d+(\.\d{1,2})?$/', $price);
     $is_category_valid  = in_array($category, ['main', 'side', 'dessert', 'drink']);
     if(!($is_item_name_valid && $is_price_valid && $is_category_valid)){
-        throw new Exception('bad request',69000);
+        throw new Exception('wrong format', ERRORCODES::general_error['bad_request']);
     }
     if (isset($_FILES['image'])) {
         $file_mime = mime_content_type($_FILES['image']['tmp_name']);
         $allowed_mimes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($file_mime, $allowed_mimes)) {
-            throw new Exception('Bad request, file type invalid', 69005);
+            throw new Exception('file type invalid', ERRORCODES::api_add_menu_item['invalid_file_format']);
         }
         $max_size = 10 * 1024 * 1024; // 10MB in bytes
         if ($_FILES['image']['size'] > $max_size) {
-            throw new Exception('Bad request, file too large', 69005);
+            throw new Exception('file too large', ERRORCODES::api_add_menu_item['invalid_file_format']);
         }
     }
 
@@ -79,7 +86,7 @@ function add_menu_item(){
     ];
     $menu_item_id = NyanDB::single_query($sql, $params);
 
-    ////if no image preview, file finished execution
+    ////if no image submitted, function finished execution
     if (!isset($_FILES['image'])){
         return true;
     }
@@ -96,11 +103,8 @@ function add_menu_item(){
 
 
 
-    //done execution
-    // echo 'donedeon';
+    ////done execution
 
 }
-
-add_menu_item()
 
 ?>

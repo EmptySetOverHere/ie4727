@@ -1,42 +1,33 @@
 <?php
 
+require_once '../core/Errorcodes.php';
+
 try {
     require_once 'get_user_preferences_execution.php';
-    // $result is an assoc array containing the relevant information
+    $result = get_user_preferences(); // $result is an assoc array containing the relevant information
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
-        //invalid http parameters format
-        // //no parameters required for this get request
-        // case 69000:
-        //     throw $e;//TODO
-        //     break;
-
-        //database connection refused/query error
-        case 69001:
-            throw $e;//TODO
-            break;
-
-        //database prepare error
-        case 69002:
-            throw $e;//TODO
-            break;
-
         //session does not have a associated userID, because user not logged in
-        case 69003:
-            throw $e;//TODO
-            break;
-        
-        //user does not exist in database
-        case 69004:
+        case ERRORCODES::general_error['bad_request']:
             throw $e;//TODO
             break;
 
-        // //undefined error
-        // case 69xxx:
-        //     throw $e;//TODO
-        //     break;
+        // Database connection refused/query error
+        case ERRORCODES::server_error['database_connection_error']:
+            throw $e; // TODO
+            break;
+
+        // Database prepare error
+        case ERRORCODES::server_error['database_prepare_error']:
+            throw $e; // TODO
+            break;
+
+        //user does not exist in database
+        case ERRORCODES::server_error['user_does_not_exist']:
+            throw $e;//TODO
+            break;
 
         // Catch-all for undefined error codes
         default:
