@@ -114,9 +114,11 @@ $params = [
     $description, 
     $price, 
     $category, 
-    $is_in_stock, 
-    $is_vegetarian, 
-    $is_halal
+    $is_available, 
+    $main, 
+    $side,
+    $dessert,
+    $drink,
 ];
 $menu_item_id = NyanDB::single_query($sql, $params);
 

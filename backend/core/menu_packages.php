@@ -24,6 +24,7 @@ class MenuPackages{
             FROM packages
             GROUP BY item_name
         );
+        AND is_available = 1;
         ";
         $results = NyanDB::single_query($sql, []);
         $result = mysqli_fetch_all($results, MYSQLI_ASSOC);
@@ -31,7 +32,7 @@ class MenuPackages{
         return $result;
     }
 
-    public static function display_latest_available_package_id(){
+    public static function get_latest_instock_package_ids(){
         $sql = "
         SELECT p.package_id
         FROM packages p
