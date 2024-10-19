@@ -46,6 +46,12 @@ function add_menu_item(){
     if(!($is_item_name_valid && $is_price_valid && $is_category_valid)){
         throw new Exception('wrong format', ERRORCODES::general_error['bad_request']);
     }
+    if(strlen($item_name) > 240){
+        throw new Exception('name too long', ERRORCODES::general_error['bad_request']);
+    }
+    if(strlen($description) > 480){
+        throw new Exception('description too long', ERRORCODES::general_error['bad_request']);
+    }
     ////verify the image(if applicable)
     if (isset($_FILES['image'])) {
         $file_mime = mime_content_type($_FILES['image']['tmp_name']);

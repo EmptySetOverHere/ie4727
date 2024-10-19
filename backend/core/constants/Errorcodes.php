@@ -36,6 +36,9 @@ class ERRORCODES
         "invalid_file_format" => 69005,
     ];
 
+    public const api_add_package = [
+        "invalid_file_format" => 69005,
+    ];
 
 
 

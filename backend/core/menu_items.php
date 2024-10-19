@@ -31,6 +31,22 @@ class MenuItems{
         return $result;
     }
 
+    public static function get_menu_item_by_id($menu_item_id){
+        $sql = "
+        SELECT *
+        FROM menu_items
+        WHERE menu_item_id = ?
+        "
+        ;
+        $results = NyanDB::single_query($sql, [$menu_item_id]);
+        if(!empty($result)){
+            return null;
+        }
+        $result = $results->fetch_assoc();
+        $results->free();
+        return $result ?? null;
+    }
+
     public static function get_associated_image_src($menu_item_id){
         $sql = "
         SELECT *
@@ -42,6 +58,15 @@ class MenuItems{
         $result = $results->fetch_assoc();
         $results->free();
         return new Image($result[image_name], $result[image_data], $result[image_type]);
+    }
+
+    public static function set_availablility(int $menu_item_id, bool $is_in_stock){
+        $sql = "
+            UPDATE menu_items
+            SET is_in_stock = ?
+            WHERE item_id = ?
+        ";
+        NyanDB::single_query($sql, [$is_available, $item_id]);
     }
 }
 
