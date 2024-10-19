@@ -3,7 +3,7 @@
 function add_menu_item(){
     require_once '../core/NyanDB.php';
     require_once '../core/Image.php';
-    require_once '../core/Errorcodes.php'; 
+    require_once '../core/constants/Errorcodes.php';
 
     ////check that session user_id
     if (session_status() === PHP_SESSION_NONE){
@@ -46,6 +46,7 @@ function add_menu_item(){
     if(!($is_item_name_valid && $is_price_valid && $is_category_valid)){
         throw new Exception('wrong format', ERRORCODES::general_error['bad_request']);
     }
+    ////verify the image(if applicable)
     if (isset($_FILES['image'])) {
         $file_mime = mime_content_type($_FILES['image']['tmp_name']);
         $allowed_mimes = ['image/jpeg', 'image/png', 'image/gif'];

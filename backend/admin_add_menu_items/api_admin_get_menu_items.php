@@ -2,32 +2,15 @@
 
 require_once '../core/constants/Errorcodes.php';
 
-//expected inputs:
-// $item_name     = $_POST['item_name'];
-// $description   = $_POST['description'];
-// $price         = (string)$_POST['price'];
-// $category      = $_POST['category'];
-// $is_in_stock   = isset($_POST['is_in_stock']);
-// $is_vegetarian = isset($_POST['is_vegetarian']);
-// $is_halal      = isset($_POST['is_halal']);
-// if (!isset($_FILES['image'])){
-//     return true;
-// }
-
 try {
-    require_once 'add_menu_item_execution.php';
+    require_once 'admin_get_menu_items_execution.php';
     add_menu_item();
-    null;//defines what happens if execution successful here 
+    $result = null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            throw $e;//TODO
-            break;
-        
-        //user not allowed, insufficient permissions
-        case ERRORCODES::server_error['invalid_credentials']:
             throw $e;//TODO
             break;
 

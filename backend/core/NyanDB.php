@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Errorcodes.php';
+require_once 'constants/Errorcodes.php';
 
 class NyanDB 
 {

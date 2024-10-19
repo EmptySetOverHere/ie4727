@@ -1,6 +1,8 @@
 <?php
 
 function update_auth(){
+    require_once '../core/constants/Errorcodes.php';
+    
     if (session_status() === PHP_SESSION_NONE){
         throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
     }

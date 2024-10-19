@@ -3,7 +3,7 @@
 function get_user_preferences(){
     require_once '../core/NyanDB.php';
     require_once '../core/Image.php';
-    require_once '../core/Errorcodes.php'; 
+    require_once '../core/constants/Errorcodes.php';
 
     ////check that session user_id
     if (session_status() === PHP_SESSION_NONE){

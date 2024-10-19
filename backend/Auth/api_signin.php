@@ -1,6 +1,6 @@
 <?php
 
-require_once '../core/Errorcodes.php';
+require_once '../core/constants/Errorcodes.php';
 
 try {
     require_once 'signin_execution.php';

@@ -1,8 +1,10 @@
 <?php
 
-require '../core/Image.php';
-require '../core/NyanDB.php';
+require_once '../core/Image.php';
+require_once '../core/NyanDB.php';
+require_once '../core/menu_items.php';
 
+var_dump(MenuItems::get_latest_menu_items());
 /////i named my input field 'space' in this example
 // var_dump($_FILES['space']);
 
