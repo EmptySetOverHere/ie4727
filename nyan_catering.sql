@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2024 at 12:01 PM
+-- Generation Time: Oct 19, 2024 at 12:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `nyan_catering`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `order_id` int(11) NOT NULL,
+  `app_experience_rating` tinyint(4) NOT NULL CHECK (`app_experience_rating` between 1 and 5),
+  `wait_time_rating` tinyint(4) NOT NULL CHECK (`wait_time_rating` between 1 and 5),
+  `food_quality_rating` tinyint(4) NOT NULL CHECK (`food_quality_rating` between 1 and 5),
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `comments` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -73,6 +88,33 @@ CREATE TABLE `menu_item_images` (
   `image_name` varchar(255) NOT NULL,
   `image_data` mediumblob NOT NULL,
   `image_type` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_datetime` datetime DEFAULT current_timestamp(),
+  `delivery_datetime` datetime DEFAULT NULL,
+  `delivery_address` varchar(255) DEFAULT NULL,
+  `total_spending` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `order_item_id` int(11) NOT NULL,
+  `package_id` int(11) NOT NULL,
+  `packages_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -151,6 +193,12 @@ CREATE TABLE `user_preferences` (
 --
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `imagetest`
 --
 ALTER TABLE `imagetest`
@@ -167,6 +215,19 @@ ALTER TABLE `menu_items`
 --
 ALTER TABLE `menu_item_images`
   ADD PRIMARY KEY (`menu_item_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`order_item_id`,`package_id`),
+  ADD KEY `package_id` (`package_id`);
 
 --
 -- Indexes for table `packages`
@@ -209,6 +270,12 @@ ALTER TABLE `menu_items`
   MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
@@ -219,6 +286,16 @@ ALTER TABLE `packages`
 --
 ALTER TABLE `user_auths`
   MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
