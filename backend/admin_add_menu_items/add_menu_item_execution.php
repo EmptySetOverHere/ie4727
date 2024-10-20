@@ -7,7 +7,7 @@ function add_menu_item(){
 
     ////check that session user_id
     if (session_status() === PHP_SESSION_NONE){
-        throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
+        session_start();
     }
     if(!isset($_SESSION['user_id'])){
         throw new Exception('user not logged in', ERRORCODES::general_error['bad_request']);

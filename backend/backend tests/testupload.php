@@ -31,6 +31,18 @@ require_once '../core/menu_items.php';
 
 // $results->free();
 
+// echo date('H:i:s, jS F Y');
+// $sql = "
+// INSERT into timetest (time_stuff)
+// VALUES ( ? )
+// ";
+// $results = NyanDB::single_query($sql,[date('Y-m-d H:i:s')]);
+// // $result = $results->fetch_assoc();
+
+$time_ting = new DateTime('2024-10-20 10:07', new DateTimeZone('Asia/Singapore'));
+// echo new Date('Y-m-d H:i:s');
+echo $time_ting->format('Y-m-d H:i:s');
+
 echo "done. nyan.";
 
 ?>

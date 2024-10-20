@@ -4,7 +4,7 @@ function signup(){
     require_once '../core/constants/Errorcodes.php';
     
     if (session_status() === PHP_SESSION_NONE){
-        throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
+        Session_start();
     }
     require_once '../core/NyanDB.php'; //import class definition
 
@@ -66,16 +66,18 @@ function signup(){
     null;//TODO
 
 
-
+    
     ////insert new user
     $hashed_password = password_hash($password, PASSWORD_ARGON2ID);
+    $time_now = NyanDateTime::now();
     $sql = "
     INSERT INTO user_auths (email, phone_number, hashed_password, account_creation_time, last_login_time) 
-    VALUES (?, ?, ?, NOW(), NOW());
+    VALUES (?, ?, ?, ?, ?);
     ";
     //if insert operation fails the NyanDB class will handle it by throwing a query error
     //also assigns the last inserted user_id to the variable $user_id
-    $user_id = NyanDB::single_query($sql, [$email, $phone_number, $hashed_password]);
+    $params = [$email, $phone_number, $hashed_password, $time_now, $time_now];
+    $user_id = NyanDB::single_query($sql, $params);
 
 
     

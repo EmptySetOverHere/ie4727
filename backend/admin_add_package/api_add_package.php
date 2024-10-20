@@ -3,20 +3,24 @@
 require_once '../core/constants/Errorcodes.php';
 
 //expected inputs:
-// $item_name     = $_POST['item_name'];
-// $description   = $_POST['description'];
-// $price         = (string)$_POST['price'];
-// $category      = $_POST['category'];
-// $is_in_stock   = isset($_POST['is_in_stock']);
-// $is_vegetarian = isset($_POST['is_vegetarian']);
-// $is_halal      = isset($_POST['is_halal']);
-// if (!isset($_FILES['image'])){
-//     return true;
-// }
+// $is_bad_request = !(
+//     isset($_POST['item_name']) && 
+//     isset($_POST['description']) && 
+//     isset($_POST['category']) &&
+//     isset($_POST['main']) &&
+//     isset($_POST['side']) &&
+//     isset($_POST['dessert']) &&
+//     isset($_POST['drink'])
+// );
+// $is_available  = isset($_POST['is_available']);
+
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 
 try {
     require_once 'add_package_execution.php';
-    add_menu_item();
+    add_package();
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();
@@ -27,7 +31,7 @@ try {
             break;
         
         //user not allowed, insufficient permissions
-        case ERRORCODES::server_error['invalid_credentials']:
+        case ERRORCODES::general_error['invalid_credentials']:
             throw $e;//TODO
             break;
 

@@ -2,6 +2,22 @@
 
 require_once '../core/constants/Errorcodes.php';
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
+//required inputs:
+// $_SESSION['user_id']
+// 
+// $name                     = $_POST['name'] ?? null;
+// $address                  = $_POST['address'] ?? null;
+// $preferred_payment_method = $_POST['preferred_payment_method'] ?? null;
+// $is_notify_by_sms         = isset($_POST['is_notify_by_sms']);
+// $is_notify_by_sms         = isset($_POST['is_notify_by_sms']);
+// $is_notify_by_email       = isset($_POST['is_notify_by_email']);
+// $is_notify_by_whatsapp    = isset($_POST['is_notify_by_whatsapp']);
+// $is_notify_by_telegram    = isset($_POST['is_notify_by_telegram']);
+
 try {
     require_once 'update_profile_execution.php';
     update_profile();

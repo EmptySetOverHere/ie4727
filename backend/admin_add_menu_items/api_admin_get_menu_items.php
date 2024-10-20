@@ -2,9 +2,13 @@
 
 require_once '../core/constants/Errorcodes.php';
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
 try {
     require_once 'admin_get_menu_items_execution.php';
-    add_menu_item();
+    admin_get_menu_items(); //TODO
     $result = null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();

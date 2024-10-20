@@ -20,7 +20,7 @@ class ERRORCODES
     public const general_error = [
         "bad_request" => 69300,
         "invalid_credentials" => 69301,
-
+        "missing_timezone" => 69302,
     ];
 
     public const api_signup = [
@@ -38,6 +38,11 @@ class ERRORCODES
 
     public const api_add_package = [
         "invalid_file_format" => 69005,
+    ];
+
+    public const api_new_order = [
+        "order_quantity_too_large" => 69006,
+        'package_not_available'=> 69007,
     ];
 
 

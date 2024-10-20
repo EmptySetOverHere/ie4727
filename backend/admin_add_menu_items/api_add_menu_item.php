@@ -2,6 +2,10 @@
 
 require_once '../core/constants/Errorcodes.php';
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
 //expected inputs:
 // $item_name     = $_POST['item_name'];
 // $description   = $_POST['description'];
@@ -27,7 +31,7 @@ try {
             break;
         
         //user not allowed, insufficient permissions
-        case ERRORCODES::server_error['invalid_credentials']:
+        case ERRORCODES::general_error['invalid_credentials']:
             throw $e;//TODO
             break;
 

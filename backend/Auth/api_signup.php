@@ -2,6 +2,16 @@
 
 require_once '../core/constants/Errorcodes.php';
 
+// $is_bad_request = !(
+//     isset($_POST['email']) && 
+//     isset($_POST['phone_number']) && 
+//     isset($_POST['password'])
+// );
+
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
 try {
     require_once 'signup_execution.php';
     signup();

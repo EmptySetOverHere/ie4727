@@ -4,7 +4,7 @@ function update_auth(){
     require_once '../core/constants/Errorcodes.php';
     
     if (session_status() === PHP_SESSION_NONE){
-        throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
+        session_start();
     }
     require_once '../core/NyanDB.php'; //import class definition
 
@@ -38,7 +38,8 @@ function update_auth(){
     SET email = ?, phone_number, = ? hashed_password = ?
     WHERE user_id = ?;
     ";
-    NyanDB::single_query($sql, [$email, $phone_number, $hashed_password, $_SESSION['user_id']]);
+    $params = [$email, $phone_number, $hashed_password, $_SESSION['user_id']];
+    NyanDB::single_query($sql, $params);
     //database errors will be raised by NyanDB
 
 

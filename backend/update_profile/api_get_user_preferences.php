@@ -2,6 +2,14 @@
 
 require_once '../core/constants/Errorcodes.php';
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
+//required inputs:
+// $_SESSION['user_id'] thats all i should make this a getter file
+//this file is probably useless TODO
+
 try {
     require_once 'get_user_preferences_execution.php';
     $result = get_user_preferences(); // $result is an assoc array containing the relevant information

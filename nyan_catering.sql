@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2024 at 12:21 PM
+-- Generation Time: Oct 20, 2024 at 03:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -100,10 +100,17 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_datetime` datetime DEFAULT current_timestamp(),
-  `delivery_datetime` datetime DEFAULT NULL,
-  `delivery_address` varchar(255) DEFAULT NULL,
-  `total_spending` decimal(10,2) NOT NULL
+  `start_datetime` datetime NOT NULL,
+  `end_datetime` datetime NOT NULL,
+  `delivery_address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `order_datetime`, `start_datetime`, `end_datetime`, `delivery_address`) VALUES
+(4, 0, '2024-10-20 13:15:52', '2024-11-16 10:07:00', '2024-12-15 20:05:00', 'bob\'s house');
 
 -- --------------------------------------------------------
 
@@ -116,6 +123,14 @@ CREATE TABLE `order_items` (
   `package_id` int(11) NOT NULL,
   `packages_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `package_id`, `packages_number`) VALUES
+(4, 1, 4),
+(4, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -136,6 +151,14 @@ CREATE TABLE `packages` (
   `drink` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`package_id`, `item_name`, `description`, `price`, `category`, `is_available`, `main`, `side`, `dessert`, `drink`) VALUES
+(1, 'fake package', 'bpb', 1.00, 'buffet', 1, 5, 6, 8, 9),
+(2, 'other fake package', 'idk', 0.01, 'bento', 1, 7, 6, 8, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +171,25 @@ CREATE TABLE `package_images` (
   `image_data` mediumblob NOT NULL,
   `image_type` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetest`
+--
+
+CREATE TABLE `timetest` (
+  `autoincrementkey` int(11) NOT NULL,
+  `time_stuff` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `timetest`
+--
+
+INSERT INTO `timetest` (`autoincrementkey`, `time_stuff`) VALUES
+(1, '2008-06-05 00:00:00'),
+(2, '2024-10-20 08:07:20');
 
 -- --------------------------------------------------------
 
@@ -169,7 +211,7 @@ CREATE TABLE `user_auths` (
 --
 
 INSERT INTO `user_auths` (`user_id`, `email`, `phone_number`, `hashed_password`, `account_creation_time`, `last_login_time`) VALUES
-(0, 'bob@sg.sg', 88888888, '$argon2id$v=19$m=65536,t=4,p=1$L3pReDdVTWsxZmJ2WnZHRg$kludBRfB7OGEEQIn3PE9QZW6BlBM4LV41EchrCPWJ8s', '2024-10-13 01:54:48', '2024-10-13 21:52:20');
+(0, 'bob@sg.sg', 88888888, '$argon2id$v=19$m=65536,t=4,p=1$L3pReDdVTWsxZmJ2WnZHRg$kludBRfB7OGEEQIn3PE9QZW6BlBM4LV41EchrCPWJ8s', '2024-10-13 01:54:48', '2024-10-20 18:51:11');
 
 -- --------------------------------------------------------
 
@@ -242,6 +284,12 @@ ALTER TABLE `package_images`
   ADD PRIMARY KEY (`package_image_id`);
 
 --
+-- Indexes for table `timetest`
+--
+ALTER TABLE `timetest`
+  ADD PRIMARY KEY (`autoincrementkey`);
+
+--
 -- Indexes for table `user_auths`
 --
 ALTER TABLE `user_auths`
@@ -273,13 +321,19 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `timetest`
+--
+ALTER TABLE `timetest`
+  MODIFY `autoincrementkey` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_auths`

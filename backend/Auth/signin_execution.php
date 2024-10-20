@@ -2,9 +2,10 @@
 
 function signin(){
     require_once '../core/constants/Errorcodes.php';
+    require_once '../core/NyanDateTime.php';
     
     if (session_status() === PHP_SESSION_NONE){
-        throw new Exception('unregistered session', ERRORCODES::general_error['bad_request']);
+        Session_start();
     }
     require_once '../core/NyanDB.php'; //import class definition
 
@@ -61,10 +62,10 @@ function signin(){
     ////update last_login_time
     $sql = "
     UPDATE user_auths
-    SET last_login_time = NOW()
+    SET last_login_time = ? 
     WHERE user_id = ?;
     ";
-    NyanDB::single_query($sql, [$result['user_id']]);
+    NyanDB::single_query($sql, [NyanDateTime::now(),$result['user_id']]);
 
 
     

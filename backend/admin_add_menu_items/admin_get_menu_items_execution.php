@@ -1,6 +1,11 @@
 <?php
 
 function admin_get_menu_items(){
+
+    if (session_status() === PHP_SESSION_NONE){
+        session_start();
+    }
+
     require_once '../core/get_menu_items.php';
     // require_once '../core/NyanDB.php';
     // require_once '../core/Image.php';
