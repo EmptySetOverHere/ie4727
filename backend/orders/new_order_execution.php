@@ -144,7 +144,12 @@ function new_order(){
     $sql = rtrim($sql,", ") . ";";
     NyanDB::single_query($sql, $params);
 
-//done
+
+
+    ////done adding order to database, finishing touches
+    unset($_SESSION['cart']);
+
+    return true;
 }
 
 ?>

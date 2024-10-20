@@ -6,7 +6,7 @@
 - **Variables**: Use `lower_snake_case` (e.g., `$username_count`).
 - **Constants**: Use `UPPER_SNAKE_CASE` (e.g., `MAX_USERS`).
 - **Filenames**: Use `lower_snake_case` (e.g., `user_account.php`).
-    - **HTTP request handler Files**: Use `api_[action].php` (e.g., `api_create_user.php`).
+    - **HTTP request handler files**: Use `api_[action].php` (e.g., `api_create_user.php`).
 
 ## HTML/CSS
 - **HTML Elements**: Use `lower_snake_case` or `kebab-case` for IDs, classes and names(e.g., `user_profile`, `main-header`).
