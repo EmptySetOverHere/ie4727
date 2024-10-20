@@ -3,7 +3,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 @media screen and (min-width: 1076px)  {
@@ -11,6 +11,7 @@
         width: 100%;
         height: 100%;
         background-color: var(--main-background);
+        overflow: hidden;
     }
     
     .main-outline {
@@ -20,11 +21,19 @@
         width: 100%;
         margin-left: auto;
         margin-right: auto;
+        overflow: hidden;
+    }
+
+    .secondary-outline {
+        /* margin should be set to the same as height of the navibar */
+        padding-top: var(--navi-bar-height); 
     }
 
     .nav-bar-outline {
         position: fixed;
         width: 100%;
+        z-index: 1000;
+        background-color: var(--main-background);
     }
 
     .navi-bar-container {
@@ -33,14 +42,14 @@
         align-items: center;
         height: 70px;
         margin: 20px;
-    }
 
-    .navi-bar-container > * {
-        display: inline-block;
-    }
+        & > * {
+            display: inline-block;
+        }
 
-    .navi-bar-container > .spacer {
-        margin-left: auto;
+        & > .spacer {
+            margin-left: auto;
+        }
     }
 
     .cater-icon-name-container {
@@ -53,23 +62,23 @@
         overflow: hidden;
         color: white;
         padding: 10px;
-    }
 
-    .cater-icon-name-container > * {
-        display: inline-block;
+        & > * {
+            display: inline-block;
+        }  
     } 
 
     .cater-icon {
         height: inherit;
         margin-right: 10px;   
+
+        & > img {
+            width: 100px;
+            height: 100%;
+            object-fit: cover;
+        }
     }
     
-    .cater-icon > img {
-        width: 100px;
-        height: 100%;
-        object-fit: cover;
-    }
-
     .cater-name {
         font-size: x-large;
         margin-left: 10px;
@@ -84,28 +93,22 @@
         position: relative;
         align-items: center;
         overflow-x: scroll;
-        scrollbar-width: none;;
-    }
+        scrollbar-width: none;
 
-    .navi-link-container::-webkit-scrollbar {
-        display: none;
-    }
-        
-    .navi-links-container > * {
-        display: inline-block;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
     }
     
-    .navi-link-container {
-        margin-right: 50px;
-    }
-
     .navi-link-container > a {
+        margin-left: min(20px);
         text-decoration: none;
         color: white;
         font-size: large;
         font-weight: bolder;
     }
-
+    
     .welcome-message-container {
         width: 200px;
         height: inherit;
@@ -127,6 +130,12 @@
         font-weight: bolder;
         border-radius: 35px;
         background-color: white;
+        cursor: pointer;
+    }
+
+    .sign-in-sign-up {
+        text-decoration: none;
+        color: black;
     }
 
     footer {
@@ -156,5 +165,9 @@
     #dummy-content {
         min-height: 3000px;
     }
+}
+
+@media screen and (min-width: 100px) and (max-width: 1075px)  {
+    
 }
 

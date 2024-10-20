@@ -19,7 +19,7 @@ $content = ob_get_clean(); //Stop the buffer and pass the collected html to page
 (new PageTemplate())
     ->set_footer()
     // ->set_content($content)
-    ->set_header("", STYLES)
+    ->set_header(STYLES)
     ->set_navibar(NAV_LINKS, $usernane="guest")
     ->set_outline(SCRIPTS)
     ->render();

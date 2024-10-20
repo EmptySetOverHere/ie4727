@@ -1,21 +1,24 @@
 <?php 
-
 const PROJECT_TITLE = "Nyan CATering";
 
 const NAV_LINKS = [
     "HOME" => "home_page.php",
-    "GITHUB" => "https://github.com",
-    "GOOGLE" => "https://google.com",
-    "BING" => ""
+    "MENU" => "menu_page.php",
+    "ORDERS" => "order_page.php",
+    "ACCOUNT" => "account_setting_page.php",
 ];
 
-const STYLES = [
+const HOME_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
+    "./styles/home_page.css",
 ];
 
-const SCRIPTS = [
-    "./scipts/templates.js", //This must be specified by default
+const HOME_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./scripts/home_page.js", 
 ];
 
 const DEFAULT_USERNAME = "guest";
+
+const SLIDE_SHOW_IMAGE_DIRECTORY = "./assets/slide_show_images";
 ?>

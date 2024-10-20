@@ -1,7 +1,8 @@
 <?php
+require_once "./utilities/config.php";
+
 class PageTemplate
 {
-
     // private static int $instance = 0;
     private ?string $content = null;
     private string $header_title;
@@ -16,11 +17,6 @@ class PageTemplate
 
     public function __construct()
     {
-        // if (self::$instance > 0) {
-        //     throw new Exception("Page template should only be rendered once");
-        // }
-        // self::$instance += 1;
-
         $this->content = <<<HTML
             <div id="dummy-content"></div>
         HTML;
@@ -32,7 +28,7 @@ class PageTemplate
         return $this;
     }
 
-    public function set_header(string $title, array $style_files): self
+    public function set_header(array $style_files, string $title = PROJECT_TITLE, ): self
     {
         $this->header_title = $title;
         $this->header = <<<HTML
@@ -69,7 +65,9 @@ class PageTemplate
                     <div class="nav-bar-outline">
                         $NAVIBAR_PLACEHOLDER
                     </div>
+                    <div class="secondary-outline">
                         $CONTENT_PLACEHOLDER
+                    </div>
                     <div>
                         $FOOTER_PLACEHOLDER    
                     </div>
@@ -89,7 +87,6 @@ class PageTemplate
         HTML;
 
         return $this;
-
     }
 
 
@@ -146,9 +143,9 @@ class PageTemplate
         }
 
         $this->navibar .= <<<HTML
-            <button class="sign-in-up-container">
-                <a class="sign-in-sign-up">
-                    Sign-in
+            <button class="sign-in-up-container" onclick="">
+                <a class="sign-in-sign-up" href="./sign_in_page.php">
+                    Sign In
                 </a>
             </button>
             </nav>
