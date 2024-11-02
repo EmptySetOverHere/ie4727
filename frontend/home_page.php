@@ -63,13 +63,6 @@ ob_start(); //start buffer to collect generated html lines
         </div>
     </div>
 </div>
-<script>
-    const scrolling = document.querySelector('.partners-container-inner');
-    const scrolling_parent = scrolling.parentElement;
-    const clone = scrolling.cloneNode(true);
-
-    scrolling_parent.appendChild(clone); // Append the cloned content for seamless scroll
-</script>
 
 <?php
 $content = ob_get_clean(); //Stop the buffer and pass the collected html to page template

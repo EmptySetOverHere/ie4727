@@ -20,3 +20,13 @@
 })();
 
 
+(function () {
+    const scrolling = document.querySelector('.partners-container-inner');
+    const scrolling_parent = scrolling.parentElement;
+    const clone = scrolling.cloneNode(true);
+    
+    scrolling_parent.appendChild(clone); 
+})();
+
+
+

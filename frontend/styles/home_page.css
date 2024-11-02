@@ -2,7 +2,7 @@
     .home-page-container {
         position: relative;
         width: 100%;
-        height: min(1500px);
+        height: 180vh;
         display: flex;
         flex-direction: column;
         padding-top: var(--navi-bar-height);
