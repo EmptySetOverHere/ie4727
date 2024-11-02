@@ -16,12 +16,12 @@ function signin(){
         isset($_POST['password']) &&
         (
             (isset($_POST['email']) && isset($_POST['phone_number'])) || 
-            isset($_POST['email/phone_number'])
+            isset($_POST['email-phone_number'])
         )
     );
     $is_bad_request ? throw new Exception('bad request', ERRORCODES::general_error['bad_request']) : null;
-    $email        = $_POST['email'] ?? $_POST['email/phone_number'];
-    $phone_number = $_POST['phone_number'] ?? $_POST['email/phone_number'];
+    $email        = $_POST['email'] ?? $_POST['email-phone_number'];
+    $phone_number = $_POST['phone_number'] ?? $_POST['email-phone_number'];
     $password     = $_POST['password'];
     // print_r ([$email,$phone_number,$password]);
 

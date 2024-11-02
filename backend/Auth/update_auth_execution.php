@@ -8,8 +8,8 @@ function update_auth(){
     }
     require_once '../core/NyanDB.php'; //import class definition
 
-    ////check that session has a user_id
-    isset($_SESSION['user_id'])? null : throw new Exception('user not logged in', ERRORCODES::general_error['invalid_credentials']);
+    ////check that session has a user_id and set it
+    $user_id = isset($_SESSION['user_id'])?  $_SESSION['user_id'] : throw new Exception('user not logged in', ERRORCODES::general_error['invalid_credentials']);
 
 
 
@@ -25,6 +25,36 @@ function update_auth(){
     $password     = $_POST['password'];
 
 
+    ////check phone number is not taken by another user
+    $sql = "
+    SELECT user_id
+    FROM user_auths
+    WHERE user_id <> ? AND phone_number = ?;
+    ";
+    $params = [$user_id, $phone_number];
+    $results = NyanDB::single_query($sql, $params);
+    $result = $results->fetch_assoc();
+    $results->free();
+    if(!empty($result)){
+        throw new Exception($error_message,ERRORCODES::api_update_auth['phone_number_already_exists']);
+        exit(); //exit just in case lol 
+    }
+
+    ////check email is not taken by another user
+    $sql = "
+    SELECT user_id
+    FROM user_auths
+    WHERE user_id <> ? AND email = ?;
+    ";
+    $params = [$user_id, $email];
+    $results = NyanDB::single_query($sql, $params);
+    $result = $results->fetch_assoc();
+    $results->free();
+    if(!empty($result)){
+        throw new Exception($error_message,ERRORCODES::api_update_auth['email_already_exists']);
+        exit(); //exit just in case lol 
+    }
+
 
     ////verify legitimate phone number/email by sending sms or email
     //TODO
@@ -38,7 +68,7 @@ function update_auth(){
     SET email = ?, phone_number, = ? hashed_password = ?
     WHERE user_id = ?;
     ";
-    $params = [$email, $phone_number, $hashed_password, $_SESSION['user_id']];
+    $params = [$email, $phone_number, $hashed_password, $user_id];
     NyanDB::single_query($sql, $params);
     //database errors will be raised by NyanDB
 

@@ -12,10 +12,25 @@ $username = aquire_username_or_default(DEFAULT_USERNAME);
 ob_start(); //start buffer to collect generated html lines
 ?>
 
-<div class='centered-items account-setting-content-container' style="height: 200px; align-items: center;">
-    <div class="centered-items">Welcome, <?=$username?></div>
-    <br>
+<div class='centered-items account-setting-content-container' style="padding: 20px;">
+    <div class="grouped-settings-container">
+        <div class="section-header">Login Information</div>
+        <div class="section-divider"></div>
+        <form id="update-auth-form" action="../backend/auth/api_update_auth.php">
 
+        </form>
+        <br>
+    </div>
+    <br>
+    <div class="grouped-settings-container">
+        <div class="section-header">Delivery Details</div>
+        <br>
+    </div>
+    <br>
+    <div class="grouped-settings-container">
+        <div class="section-header">Notification Preferences</div>
+        <br>
+    </div>
 </div>
 
 <!-- TODO: write your inner html content here -->

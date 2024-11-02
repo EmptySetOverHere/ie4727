@@ -6,11 +6,20 @@
 
     --navi-bar-height: 110px;
 
-    --main-background:      #161415;
-    --main-background-mid :   #191818;
-    --main-background-ligher: #1B1B1B;
-    --navi-bar-background:  #EFC69B;
-    --nyan-cat-background:  #043264;
+    --main-background-dark:          #040404;
+    --main-background:               #161415;
+    --main-background-mid :          #1D1C1D;
+    --main-background-ligher:        #242324;
+    --accent-1:                      #3248D6;
+    --accent-1-light:                #3C59F9;
+    --accent-2:                      #9B9B9B;
+    --accent-2-light:                #B8B8B8;
+    --accent-3:                      #E6937A;
+    --accent-4-pink:                 #FF6EC7;
+    --accent-4-pink-glow:            #FF3DA1;
+    --accent-4-pink-glow-shadow:     rgba(255, 110, 199, 0.6);
+    /* --navi-bar-background:    #EFC69B; */
+    --nyan-cat-background:    #053160;
     
     --border-radius: 5px;
 }

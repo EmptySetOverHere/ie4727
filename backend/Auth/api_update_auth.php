@@ -27,6 +27,14 @@ try {
             throw $e;//TODO
             break;
 
+        case ERRORCODES::api_update_auth['email_already_exists']:
+            throw $e;//TODO
+            break;
+
+        case ERRORCODES::api_update_auth['phone_number_already_exists']:
+            throw $e;//TODO
+            break;
+
         //user does not exist in database
         case ERRORCODES::server_error['user_does_not_exist']:
             throw $e;//TODO

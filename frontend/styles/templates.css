@@ -17,7 +17,6 @@
     .main-outline {
         display: flex;
         flex-direction: column;
-        min-width: 800px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
@@ -129,7 +128,7 @@
         font-size: larger;
         font-weight: bolder;
         border-radius: 35px;
-        background-color: white;
+        background-color: var(--accent-2-light);
         cursor: pointer;
     }
 
@@ -168,11 +167,12 @@
 /* } */
 
 @media screen and (max-width: 500px)  {
-    .navi-bar-container {
+    /* .navi-bar-container {
         
-    }
+    } */
 }
 
 .centered-items {
     align-items: center;
+    text-align: center;
 }

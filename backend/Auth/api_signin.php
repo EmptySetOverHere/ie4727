@@ -3,7 +3,7 @@
 require_once '../core/constants/Errorcodes.php';
 
 // input parameters:
-// $_POST['email/phone_number']
+// $_POST['email-phone_number']
 // $_POST['password']
 
 if (session_status() === PHP_SESSION_NONE){
