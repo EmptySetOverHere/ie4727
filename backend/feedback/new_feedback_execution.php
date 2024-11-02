@@ -54,10 +54,41 @@ foreach ($feedbacks as $feedback){
         throw new Exception('feedback value must be 1-5', ERRORCODES::general_error['bad_request']);
     }    
 }
-//check that the orderID is valid and the userID corresponds to the orderID
-$sql = //TODO
+//assigns values
+$order_id =  $_POST['order_id'];
+$app_experience_rating = (int) $_POST['app_experience_rating'];
+$wait_time_rating = (int) $_POST['wait_time_rating'];
+$food_quality_rating = (int) $_POST['food_quality_rating'];
 
-//TODO
+
+
+///check that the orderID is valid and the userID corresponds to the orderID
+$sql = "
+SELECT user_id, order_id
+FROM orders 
+WHERE user_id = ? AND order_id = ?
+LIMIT 1;
+";
+$results = NyanDB::single_query($sql, [$user_id, $order_id]);
+$result = $results->fetch_assoc();
+$results->free();
+if(!empty($result)){
+    $error_message = 'invalid orderiD';
+    throw new Exception($error_message,EERRORCODES::general_error['bad_request']);
+    exit(); //exit just in case lol 
+}
+
+
+
+////make a post request to submit values
+$comments = isset($_POST['comments']) ?  $_POST['comments'] : null;
+$sql = "
+INSERT INTO feedback (order_id, app_experience_rating, wait_time_rating, food_quality_rating, comments)
+VALUES (?, ?, ?, ?, ?);
+";
+$params = [$order_id, $app_experience_rating, $wait_time_rating, $food_quality_rating, $comments];
+$results = NyanDB::single_query($sql, $params);
+
 ////finished execution 
 
 ?>
