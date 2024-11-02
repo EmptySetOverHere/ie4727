@@ -64,7 +64,11 @@
     align-self: flex-start;
     font-size: 0.9em;
     color: #AAAAAA;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+}
+
+.password-section label {
+    
 }
 
 .sign-in-page-container-inner button {
@@ -107,6 +111,10 @@
 .email-phone-switch-container {
     display: flex;
     flex-direction: row;
+}
+
+.flex-placeholder {
+    flex: 1
 }
 
 .submit-button-container {
