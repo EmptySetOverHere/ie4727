@@ -61,14 +61,20 @@
 }
 
 .sign-in-page-container-inner label {
+    display: block;
     align-self: flex-start;
+    margin-bottom: 5px;
     font-size: 0.9em;
     color: #AAAAAA;
-    margin-bottom: 7px;
 }
 
-.password-section label {
-    
+.sign-in-page-container-inner #sign-in-with {
+    color: #AAAAAA;
+}
+
+.sign-in-page-container-inner #sign-in-with:hover {
+    color: blueviolet;
+    transition: color 0.3s;
 }
 
 .sign-in-page-container-inner button {

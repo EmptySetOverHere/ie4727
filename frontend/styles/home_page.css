@@ -1,11 +1,10 @@
-@media screen and (min-width: 1076px)  {
+/* @media screen and (min-width: 1076px)  { */
     .home-page-container {
         position: relative;
         width: 100%;
         height: 180vh;
         display: flex;
         flex-direction: column;
-        padding-top: var(--navi-bar-height);
         background-color: transparent;
 
         & > .front-layer {
@@ -145,4 +144,4 @@
         from { transform: translateX(0); }
         to { transform: translateX(-100%); }
     }
-}
+/* } */

@@ -19,31 +19,26 @@ try {
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            throw $e; // TODO
+            $_SESSION["sign-in-error-msg"] = "Bad Request"; 
             break;
-
-        // Email/phone number does not exist yet
+            // Email/phone number does not exist yet
         case ERRORCODES::api_signin['user_does_not_exist']:
-            throw $e; // TODO
+            $_SESSION["sign-in-error-msg"] = "User does not exist"; 
             break;
 
         // Wrong password
         case ERRORCODES::api_signin['wrong_password']:
-            throw $e; // TODO
+            $_SESSION["sign-in-error-msg"] = "Wrong password"; 
             break;
-        
-
-        
         // Database connection refused/query error
         case ERRORCODES::server_error['database_connection_error']:
-            throw $e; // TODO
+            $_SESSION["sign-in-error-msg"] = "Database connection error"; 
             break;
-
+            
         // Database prepare error
         case ERRORCODES::server_error['database_prepare_error']:
-            throw $e; // TODO
+            $_SESSION["sign-in-error-msg"] = "Database prepare error"; 
             break;
-
         // //undefined error
         // case 69xxx:
         //     throw $e;//TODO
@@ -57,6 +52,8 @@ try {
             else throw $e;
         break;
     }
+
+    header("Location: ../../frontend/sign_in_page.php");
 }
 
 ?>
