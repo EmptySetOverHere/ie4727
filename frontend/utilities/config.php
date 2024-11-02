@@ -17,6 +17,7 @@ const HOME_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
     "./scripts/home_page.js", 
 ];
+
 const SIGN_IN_PAGE_STYLE = [
     "./styles/templates.css", //This must be specified by default
     "./styles/sign_in_page.css",
@@ -25,6 +26,16 @@ const SIGN_IN_PAGE_STYLE = [
 const SIGN_IN_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
     "./scripts/sign_in_page.js", 
+];
+
+const ACCOUNT_SETTING_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/account_setting_page.css",
+];
+
+const ACCOUNT_SETTING_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./account_setting_page.js",
 ];
 
 const DEFAULT_USERNAME = "guest";

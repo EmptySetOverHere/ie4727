@@ -6,10 +6,11 @@
 
     --navi-bar-height: 70px;
 
-    --main-background: rgb(22,20,21);
+    --main-background:      #161415;
+    --main-background-mid :   #191818;
     --main-background-ligher: #1B1B1B;
-    --navi-bar-background: #EFC69B;
-    --nyan-cat-background: #043264;
+    --navi-bar-background:  #EFC69B;
+    --nyan-cat-background:  #043264;
     
     --border-radius: 5px;
 }
