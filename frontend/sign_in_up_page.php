@@ -59,7 +59,7 @@ ob_start(); //start buffer to collect generated html lines
                     <input type="password" name="password" id="password" placeholder="******" required>
                 </div>
                 <div class="submit-button-container">
-                    <button class="unselectable" type="submit"><?= $button_text ?></button>
+                    <button class="unselectable" type="submit" id="submit-button"><?= $button_text ?></button>
                 </div>
                 <div class="no-have-account-container">
                     <span class="unselectable" id="no-have-account" onclick="go_to_sign_in_up()" required><?= $no_have_account_text ?></span>
@@ -122,40 +122,106 @@ ob_start(); //start buffer to collect generated html lines
             sign_in_up_with.setAttribute("data-method", "email");
             sign_in_up_with.innerHTML = "<?= $switch_method_text_prefix ?> " + "with phone number";
         }
-
+        
         return method;
     }
-
+    
     <?php } ?>
 
-    <?php if(!filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
-        function check_email(email_str) {
-            const email_reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            const address_max_length = 255;
-            const address_min_length = 6;
+    <?php if(
+            filter_var($in_or_up, FILTER_VALIDATE_BOOL) && 
+            isset($_GET["sign-up-error-msg"]) && 
+            isset($_GET["sign-up-error-code"]) 
+        ) 
+    { ?>
+        window.onload = function () {
+            const req_params = new URLSearchParams(window.location.search);
+            alert(req_params.get("sign-up-error-msg"));
+        } 
+    <?php } ?> 
 
-            if (
-                address_max_length < email_str.length ||
-                email_str.length < address_min_length ||
-                !email_reg.test(email_str)
-            ) {
-                return SignInError.INVALID_EMAIL;
+    
+    <?php if(!filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
+        (function () {
+            const email_input = document.getElementById("email");
+            const phone_input = document.getElementById("phone");
+            const form = document.getElementById("sign-in-up-form");
+            const password_input = document.getElementById("password");
+            const sign_up_button = document.getElementById("submit-button");
+        
+            function check_email(email_str) {
+                const email_reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                const address_max_length = 255;
+                const address_min_length = 6;
+                
+                if (address_max_length < email_str.length) {
+                    alert("Email should not be longer than 255 characters");
+                    email_input.classList.add("error");
+                    return false;
+                } 
+
+                if (email_str.length < address_min_length) {
+                    alert("Email should not be shorter than 6 characters");
+                    email_input.classList.add("error");
+                    return false;
+                }
+
+                if (!email_reg.test(email_str)) {
+                    alert("Wrong email format");
+                    email_input.classList.add("error");
+                    return false;
+                }
+
+                return true;
             }
 
-            return SignInError.NO_ERROR;
-        }
+            function check_phone_number(phone_number) {
+                const phone_reg = /^[\d]{8,14}$/;
+                
+                if (!phone_reg.test(phone_number)) {
+                    alert("Wrong phone format");
+                    phone_input.classList.add("error");
+                    return false;    
+                }
 
-        function handle_submit(e) {
-            const formID = "sign-in-up-form";
-            const form = document.getElementById("sign-in-up-form");
-            const sign_in_data =  new FormData(form);
+                return true;
+            }
 
-            const email = sign_in_data.get("email");
-            const password = sign_in_data.get("password");
+            function check_password(password) {
+                const password_reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-            let err = check_email(email);
-        }
+                if (!password_reg.test(password)) {
+                    alert("Password must meet the following criteria:\n" +
+                        "- At least 8 characters\n" +
+                        "- At least one uppercase letter (A-Z)\n" +
+                        "- At least one lowercase letter (a-z)\n" +
+                        "- At least one number (0-9)\n" +
+                        "- At least one special character (e.g., @, $, !, %, *, ?, &)");
+                    password_input.classList.add("error");
+                    password_input.addEventListener("focus", function() {
+                        password_input.classList.remove("error");
+                    });
+                        
+                    return false;
+                }
+            return true;
+            }
 
+            function handle_submit(e) {
+                e.preventDefault();
+                if (
+                    check_email(email_input.value) && 
+                    check_password(password_input.value) && 
+                    check_phone_number(phone_input.value)
+                ) {
+                    form.submit();
+                } 
+            }
+
+            sign_up_button.onclick = handle_submit;
+
+        })();
+        
     <?php } ?>
         
     <?php if(isset($_GET["sign-in-error-msg"]) && isset($_GET["sign-in-error-code"]) && isset($_GET["last-sign-in-method"]) && isset($_GET["in-or-up"])) { ?>
@@ -176,7 +242,6 @@ ob_start(); //start buffer to collect generated html lines
             const email_input = document.getElementById("email");
             const phone_input = document.getElementById("phone");
             const password_input = document.getElementById("password");
-
 
             const error_code = req_params.get("sign-in-error-code");
             const error_msg = req_params.get("sign-in-error-msg");

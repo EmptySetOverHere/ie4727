@@ -23,8 +23,6 @@ function signup(){
 
     // print_r ([$email,$phone_number,$password])
 
-
-
     ////verify email formats, phone number and password.
     $is_valid_email = (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email)<=254);
     $phone_number_reg = '/^[\d]{8,14}$/';
@@ -39,8 +37,6 @@ function signup(){
         throw new Exception("password missing", ERRORCODES::general_error['bad_request']);
     }
 
-
-
     ////retrieve database phone nnumber/email/password
     $sql = "
     SELECT user_id, email, phone_number, hashed_password
@@ -52,13 +48,8 @@ function signup(){
     $result = $results->fetch_assoc();
     $results->free();
     if(!empty($result)){
-        if(password_verify($password , $result['hashed_password'])){
-            require 'api_signin.php';
-            exit();
-        }
-        $error_message = ($email == $result['email'] ? '1' : '0') . ($phone_number == $result['phone_number'] ? '1' : '0');
-        throw new Exception($error_message,ERRORCODES::api_signup['email_or_phone_exists']);
-        exit(); //exit just in case lol 
+        $error_message = "Account already exists. Please Sign in.";
+        throw new Exception($error_message, ERRORCODES::api_signup['email_or_phone_exists']);
     }
 
     ////send confirmation email 
@@ -89,6 +80,7 @@ function signup(){
 
     ////signup successful, redirecting to relevant screen should be done outside this file
     $_SESSION['user_id'] = $user_id;
+    header("Location: ../../frontend/account_setting_page.php?sign-up-success=true");
     // echo $_SESSION['user_id'];
 }
 ?>
