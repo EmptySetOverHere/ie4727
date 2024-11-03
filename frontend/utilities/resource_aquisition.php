@@ -24,10 +24,9 @@ function aquire_username_or_default($default_username): string | null {
     $result = $result->fetch_assoc();
     if($result["username"] === null) {
         return $default_username;
-    } else {
-        throw var_dump($result);
     } 
 
+    $_SESSION["username"] = $result["username"]; 
     return $_SESSION["username"]; 
 }
 ?>
