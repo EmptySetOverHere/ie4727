@@ -5,11 +5,14 @@
     --min-pc-screen-width: 1076px;
 
     --navi-bar-height: 110px;
+    --footer-min-height: 300px;
+    --content-min-height: calc(100vh - var(--navi-bar-height) - var(--footer-min-height));
 
     --main-background-dark:          #040404;
     --main-background:               #161415;
     --main-background-mid :          #1D1C1D;
     --main-background-ligher:        #242324;
+    --inner-container-colour:        #1A1A1A;
     --accent-1:                      #3248D6;
     --accent-1-glow:                 rgba(50, 72, 214, 0.6);
     --accent-1-light:                #3C59F9;
