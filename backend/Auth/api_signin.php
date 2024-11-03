@@ -53,7 +53,7 @@ try {
         break;
     }
 
-    header("Location: ../../frontend/sign_in_page.php");
+    header("Location: ../../frontend/home_page.php");
 }
 
 ?>

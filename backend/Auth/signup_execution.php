@@ -2,6 +2,7 @@
 
 function signup(){
     require_once '../core/constants/Errorcodes.php';
+    require_once "..\core\NyanDateTime.php";
     
     if (session_status() === PHP_SESSION_NONE){
         Session_start();
@@ -86,7 +87,7 @@ function signup(){
     INSERT INTO user_preferences (user_id, is_notify_by_sms, is_notify_by_email, is_notify_by_whatsapp, is_notify_by_telegram)
     VALUES (?,FALSE, TRUE, FALSE, FALSE);
     ";
-    NyanDB::single_query($sql, [$_SESSION['user_id']]);
+    NyanDB::single_query($sql, [$user_id]);
 
 
 
