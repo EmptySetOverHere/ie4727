@@ -1,6 +1,7 @@
 <?php
 
 require_once "../backend/core/menu_items.php";
+require_once "../backend/core/Image.php";
 require_once "./components/templates.php";
 require_once "./utilities/config.php";
 require_once "./utilities/resource_aquisition.php";
@@ -16,6 +17,13 @@ $offset                   = ($offset<0) ?  (string)0 : (string)$offset;
 $total_relevant_entries   = MenuItems::get_latest_valid_menu_items_count($menu_item_name_filter);
 $displayitems             = MenuItems::get_latest_valid_menu_items($offset, MENU_ITEMS_PER_PAGE, $menu_item_name_filter);
 
+$imageSources = [];
+foreach ($displayitems as $menuItem) {
+    $menu_item_id = $menuItem['menu_item_id'];
+    $imageSource = MenuItems::get_associated_image_src($menu_item_id);
+    $imageSources[$menu_item_id] = $imageSource; // Store the result indexed by menu_item_id
+}
+
 ob_start(); // Start buffer to collect generated HTML lines
 
 echo PageTemplate::getJavascriptAlertMessage();
@@ -26,11 +34,11 @@ echo PageTemplate::getJavascriptAlertMessage();
         <div class="section-divider"></div>
         <form id="add-menu-item-form" method="post" action="../backend/admin_add_package/api_add_package.php" enctype="multipart/form-data">
             <div class="text-input-container">
-                <label for="item_name">Package Name <?=var_dump($displayitems);?></label>
+                <label for="item_name">Package Name</label>
                 <input type="text" name="item_name" id="item_name">
             </div>
             <div class="text-input-container" >
-                <label for="description">Description <?=var_dump($total_relevant_entries);?></label>
+                <label for="description">Description</label>
                 <textarea type="description" name="description" id="description"></textarea>
             </div>
             <div class="text-input-container">
@@ -89,23 +97,24 @@ echo PageTemplate::getJavascriptAlertMessage();
 
         <div class="menu-item-container">
             <div class="info-row">
+                <?php foreach ($displayitems as $menuItem){
+                    $image_data   = MenuItems::get_associated_image_src($menuItem['menu_item_id']);
+                    $img_src      = $image_data??'./assets/image-placeholder.svg';
+                    $description  = $menuItem['description'];
+
+                    ?>
                 <div class="info-item">
-                    <img src="./assets/image-placeholder.svg" alt="Menu Item" class="menu-item-image">
-                    <p><strong>Menu Item ID:</strong> <span id="menu_item_id">1</span></p>
-                    <p><strong>Name:</strong> <span id="item_name">Example Item</span></p>
-                    <p><strong>Description:</strong> <span id="description">Delicious example item description.</span></p>
+                    <img src=<?=$img_src?> alt="Menu Item" class="menu-item-image">
+                    <div style="text-align: start;">
+                        <p><strong>Menu Item ID:  <?=$menuItem['menu_item_id']?></strong>               <span id="menu_item_id"></span></p>
+                        <p><strong>Description:   <?=$menuItem['description']?></strong>                 <span id="description"></span></p>
+                        <p><strong>Price:         <?=$menuItem['price']?></strong>                             <span id="price"></span></p>
+                        <p><strong>Category:      <?=$menuItem['category']?></strong>                       <span id="description"></span></p>
+                        <p><strong>is vegetarian: <?=$menuItem['is_vegetarian']?'yes':'no';?></strong> <span id="description"></span></p>
+                        <p><strong>is_halal:      <?=$menuItem['is_halal']?'yes':'no'?></strong>            <span id="description"></span></p>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <img src="./assets/image-placeholder.svg" alt="Menu Item" class="menu-item-image">
-                    <p><strong>Price:</strong> <span id="price">$10.00</span></p>
-                    <p><strong>Category:</strong> <span id="category">Main</span></p>
-                </div>
-                <div class="info-item">
-                    <img src="./assets/image-placeholder.svg" alt="Menu Item" class="menu-item-image">
-                    <p><strong>In Stock:</strong> <span id="is_in_stock">Yes</span></p>
-                    <p><strong>Vegetarian:</strong> <span id="is_vegetarian">No</span></p>
-                    <p><strong>Halal:</strong> <span id="is_halal">Yes</span></p>
-                </div>
+                <?php }?>
             </div>
         </div>
 

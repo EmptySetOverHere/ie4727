@@ -91,7 +91,10 @@ class MenuItems{
         $results = NyanDB::single_query($sql, [$menu_item_id]);
         $result = $results->fetch_assoc();
         $results->free();
-        return new Image($result['image_name'], $result['image_data'], $result['image_type']);
+        if(empty($result)){
+            return null;}
+        $image = new Image($result['image_name'], $result['image_data'], $result['image_type']);
+        return $image.getsrc();
     }
 
     public static function set_availablility(int $menu_item_id, bool $is_in_stock){
