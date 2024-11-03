@@ -77,7 +77,7 @@ ob_start(); //start buffer to collect generated html lines
                     </tr>
                     <tr>
                         <td><label for="is_notify_by_telegram">Telegram</label></td>
-                        <td><input type="checkbox" name="is_notify_by_telegram" id="is_notify_by_telegram"></td>
+                        <td><input type="checkbox" name="is_notify_by_telegram" id="preferred_payment_method"></td>
                     </tr>
                 </table>
             </div>

@@ -3,19 +3,18 @@
 .account-setting-content-container{
     padding: 20px;
     width: 100%;
+    min-height: var(--content-min-height);
     flex: 1;
     margin-left: auto;
     margin-right: auto;
     padding-top: 40px;
     min-width: 320px;
     background-color: var(--main-background-dark);
-    min-height: 900px;
 }
 
 .grouped-settings-container{
     border-radius: 15px;
-    background-color: #1A1A1A;
-    /* background-color: var(--accent-1); */
+    background-color: var(--inner-container-colour);
     border: 1px solid var(--text-field-grey-border);
     padding: 10px;
     margin: 10px;

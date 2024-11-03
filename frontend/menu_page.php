@@ -5,22 +5,46 @@ require_once "./utilities/resource_aquisition.php";
 
 session_status() === PHP_SESSION_NONE ? session_start(): null;
 
+function generate_menu_page():string{
+    $display_category=$_GET['display_category']??'buffet';
+    $current_page=$_GET['current_page']??'1';
+    ob_start(); //start buffer to collect generated html lines
+    ?>
+    
+    <div class="main-content-container">
+        <!-- for buffet -->
+        <div>
+            <button 
+                class='display-category-toggle-container' <?=$display_category=='buffet'?'disabled':'';?>
+                onclick="redirectback(display_category='buffet')">
+                <label>Buffet</label>
+            </button>
+            <!-- for bento -->
+            <button 
+                class='display-category-toggle-container' <?=$display_category=='bento'?'disabled':'';?>
+                onclick="redirectback(display_category='bento')">
+                <label>Bento</label>
+            </button>
+        </div>
+
+    </div>
+    <script>
+        function redirectback(display_category = <?=$display_category?>){
+            window.location.href = "menu_page.php?display_category=" + display_category;
+        }
+    </script>
+    
+    <?php
+    return ob_get_clean(); //Stop the buffer and pass the collected html to page template
+}
+
 $username = aquire_username_or_default(DEFAULT_USERNAME);
-
-ob_start(); //start buffer to collect generated html lines
-?>
-
-<!-- TODO: write your inner html content here -->
-<!-- the entire html content will be treated as a string later  -->
-
-<?php
-$content = ob_get_clean(); //Stop the buffer and pass the collected html to page template
 
 (new PageTemplate())
     ->set_footer()
-    // ->set_content($content)
-    ->set_header(STYLES)
+    ->set_content(generate_menu_page())
+    ->set_header(MENU_PAGE_STYLES)
     ->set_navibar(NAV_LINKS, $username)
-    ->set_outline(SCRIPTS)
+    ->set_outline(MENU_PAGE_SCRIPTS)
     ->render();
 ?>

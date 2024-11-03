@@ -14,7 +14,7 @@ ob_start(); // Start buffer to collect generated HTML lines
     <div class="grouped-input-container">
         <div class="section-header">Add Menu Item</div>
         <div class="section-divider"></div>
-        <form id="add-menu-item-form" action="../backend/admin_add_menu_items/api_add_menu_item.php">
+        <form id="add-menu-item-form" method="post" action="../backend/admin_add_menu_items/api_add_menu_item.php">
             <div class="text-input-container">
                 <label for="item_name">Item Name</label>
                 <input type="text" name="item_name" id="item_name">
@@ -28,8 +28,8 @@ ob_start(); // Start buffer to collect generated HTML lines
                 <input type="text" name="price" id="price">
             </div>
             <div class="text-input-container">
-                <label for="Type">Type</label>
-                <select id="Type" name="Type" required>
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
                     <option value="main">Main</option>
                     <option value="side">Side</option>
                     <option value="dessert">Dessert</option>

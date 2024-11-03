@@ -15,7 +15,7 @@
     justify-content: center;
     width: 90%;
     padding: 40px 30px;
-    background-color: #1A1A1A;
+    background-color: var(--inner-container-colour);
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(4, 4, 4, 0.8);
     border: 1px solid #333333;

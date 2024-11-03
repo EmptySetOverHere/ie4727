@@ -9,7 +9,6 @@ const NAV_LINKS = [
 
 const _ADMIN_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
-    "./styles/account_setting_page.css",
     "./styles/_admin_pages_input_styles.css",
 ];
 
@@ -50,6 +49,16 @@ const ACCOUNT_SETTING_PAGE_STYLES = [
 const ACCOUNT_SETTING_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
     "./account_setting_page.js",
+];
+
+const MENU_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/menu_page_styles.css",
+];
+
+const MENU_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./menu_page_page.js",
 ];
 
 const DEFAULT_USERNAME = "guest";
