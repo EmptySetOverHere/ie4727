@@ -11,6 +11,7 @@
     --main-background-mid :          #1D1C1D;
     --main-background-ligher:        #242324;
     --accent-1:                      #3248D6;
+    --accent-1-glow:                 rgba(50, 72, 214, 0.6);
     --accent-1-light:                #3C59F9;
     --accent-2:                      #9B9B9B;
     --accent-2-light:                #B8B8B8;
@@ -18,8 +19,11 @@
     --accent-4-pink:                 #FF6EC7;
     --accent-4-pink-glow:            #FF3DA1;
     --accent-4-pink-glow-shadow:     rgba(255, 110, 199, 0.6);
+    --text-field-gray:               #333333;
+    --text-field-grey-border:        #555555;
+    --text-label-color:              #AAAAAA;
     /* --navi-bar-background:    #EFC69B; */
-    --nyan-cat-background:    #053160;
+    --nyan-cat-background:           #053160;
     
     --border-radius: 5px;
 }

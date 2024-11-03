@@ -13,7 +13,6 @@ if (session_status() === PHP_SESSION_NONE){
 // $address                  = $_POST['address'] ?? null;
 // $preferred_payment_method = $_POST['preferred_payment_method'] ?? null;
 // $is_notify_by_sms         = isset($_POST['is_notify_by_sms']);
-// $is_notify_by_sms         = isset($_POST['is_notify_by_sms']);
 // $is_notify_by_email       = isset($_POST['is_notify_by_email']);
 // $is_notify_by_whatsapp    = isset($_POST['is_notify_by_whatsapp']);
 // $is_notify_by_telegram    = isset($_POST['is_notify_by_telegram']);

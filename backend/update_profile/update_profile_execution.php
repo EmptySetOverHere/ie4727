@@ -16,7 +16,6 @@ function update_profile(){
 
 
     ////assign HTTP request values
-
     $name                     = $_POST['name'] ?? null;
     $address                  = $_POST['address'] ?? null;
     $preferred_payment_method = $_POST['preferred_payment_method'] ?? null;
