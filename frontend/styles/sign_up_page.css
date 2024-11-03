@@ -1,5 +1,5 @@
 
- .sign-in-page-container {
+.sign-in-page-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,7 +74,6 @@
 
 .sign-in-page-container-inner #sign-in-with:hover {
     color: blueviolet;
-    cursor: pointer;
     transition: color 0.3s;
 }
 
@@ -130,27 +129,6 @@
     justify-content: center;
 }
 
-.no-account-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#no-account {
-    color: #AAAAAA;
-}
-
-#no-account:hover {
-    color: blueviolet;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.unselectable {
-    user-select: none; 
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none;
-}
 
 .neon-divider {
     width: 60%;

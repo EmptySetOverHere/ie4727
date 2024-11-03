@@ -37,27 +37,27 @@ ob_start(); //start buffer to collect generated html lines
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="partners-show-container">
-            <div class="partners-section-title">Our Partners</div>
-            <div class="partners-scrolling-widget">
-                <div class="partners-container-inner">
-                    <div class="partner">
-                        <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
-                        <div class="description"><span>Partner 1</span></div>
-                    </div>
-                    <div class="partner">
-                        <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
-                        <div class="description"><span>Partner 2</span></div>
-                    </div>
-                    <div class="partner">
-                        <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
-                        <div class="description"><span>Partner 3</span></div>
-                    </div>
-                    <div class="partner">
-                        <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
-                        <div class="description"><span>Partner 4</span></div>
-                    </div>
+    <div class="partners-show-container">
+        <div class="partners-section-title">Our Partners</div>
+        <div class="partners-scrolling-widget">
+            <div class="partners-container-inner">
+                <div class="partner">
+                    <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
+                    <div class="description"><span>Partner 1</span></div>
+                </div>
+                <div class="partner">
+                    <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
+                    <div class="description"><span>Partner 2</span></div>
+                </div>
+                <div class="partner">
+                    <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
+                    <div class="description"><span>Partner 3</span></div>
+                </div>
+                <div class="partner">
+                    <div class="icon"><img src="./assets/cat-space.gif" alt=""></div>
+                    <div class="description"><span>Partner 4</span></div>
                 </div>
             </div>
         </div>

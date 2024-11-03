@@ -8,30 +8,39 @@ session_status() === PHP_SESSION_NONE ? session_start() : null;
 aquire_username_or_default(DEFAULT_USERNAME);
 
 
+if(isset($_SESSION["last-sign-in-method"])) {
+    $sign_in_method = $_SESSION["last-sign-in-method"];
+} else {
+    $sign_in_method = "email";
+}
+
 ob_start(); //start buffer to collect generated html lines
 ?>
 
 <div class="sign-in-page-container">
-    <form id="sign-in-form" action="" method="post" onsubmit="">
+    <form id="sign-in-form" action="..\backend\Auth\api_signin.php" method="post">
         <div class="left-sign-container">
             <div class="sign-in-page-container-inner">
                 <div class="title-section">
-                    <span>Welcome Back</span>
+                    <span class="unselectable">Welcome Back</span>
                 </div>
                 <div class="email-phone-number-section">
                     <div class="email-phone-switch-container">
-                        <label for="email">Email</label>
+                        <label class="unselectable" id="email-label" for="email">Email</label>
                         <div class="flex-placeholder"></div>
-                        <span id="sign-in-with" onclick="">sign in with phone number</span>
+                        <span class="unselectable" id="sign-in-with" data-method="email" onclick="switch_sign_in_method()">sign in with phone number</span>
                     </div>
-                    <input type="text" name="email" id="email">
+                    <input type="text" name="email" id="email" placeholder="example@site.com" required>
                 </div>
                 <div class="password-section">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" placeholder="******" required>
                 </div>
                 <div class="submit-button-container">
-                    <button type="submit">Sign In</button>
+                    <button class="unselectable" type="submit">Sign In</button>
+                </div>
+                <div class="no-account-container">
+                    <span class="unselectable" id="no-account" onclick="go_to_sign_up()" required>Do not have an account?</span>
                 </div>
             </div>
         </div>
@@ -42,17 +51,57 @@ ob_start(); //start buffer to collect generated html lines
 
 <script>
 
-
     const email_phone_number_section = document.querySelector(".email-phone-number-section");
-    const sign_in_with = email_phone_number_section.closest(".sign-in-with");
+    const sign_in_with = document.getElementById("sign-in-with");
+    const no_account_container = document.getElementById("no-account");
 
-    const SignInError = {
-        INVALID_EMAIL: "Invalid e-mail",
-        // INVALID_EMAIL_LENGTH: "The maximum length of an e-mail address should not be longer than 255 characters",
-        INVALID_PHONE_NUMBER_FORMAT: "Invalid phone number",
-        INVALID_PASSWORD: "Invalid Password",
-        NO_ERROR: "",
-    };
+    function go_to_sign_up(e) {
+        window.location.assign("./sign_up_page.php");
+    }
+
+    function switch_sign_in_method(e) {
+        const method = sign_in_with.getAttribute("data-method");
+
+        if(method === "email") {
+            const email_input = document.getElementById("email");
+            const email_label = document.getElementById("email-label");
+            
+            email_label.innerHTML = "Phone Number"; 
+            email_label.setAttribute("for", "phone");
+            email_label.setAttribute("id", "phone-label");
+            email_input.setAttribute("name", "phone");
+            email_input.setAttribute("type", "tel");
+            email_input.setAttribute("id", "phone");
+            email_input.setAttribute("placeholder", "+65 93948788");
+            
+            sign_in_with.setAttribute("data-method", "phone");
+            sign_in_with.innerHTML = "sign in with email";
+            
+        } else if (method === "phone") {
+            const phone_input = document.getElementById("phone");
+            const phone_label = document.getElementById("phone-label");
+            
+            phone_label.innerHTML = "Email"; 
+            phone_label.setAttribute("for", "email");
+            phone_label.setAttribute("id", "email-label");
+            phone_input.setAttribute("name", "email");
+            phone_input.setAttribute("type", "text");
+            phone_input.setAttribute("id", "email");
+            phone_input.setAttribute("placeholder", "example@site.com");
+
+            sign_in_with.setAttribute("data-method", "email");
+            sign_in_with.innerHTML = "sign in with phone number";
+        }
+    }
+
+
+    // const SignInError = {
+    //     INVALID_EMAIL: "Invalid e-mail",
+    //     // INVALID_EMAIL_LENGTH: "The maximum length of an e-mail address should not be longer than 255 characters",
+    //     INVALID_PHONE_NUMBER_FORMAT: "Invalid phone number",
+    //     INVALID_PASSWORD: "Invalid Password",
+    //     NO_ERROR: "",
+    // };
 
 // Dealing with redirects
 
