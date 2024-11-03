@@ -94,7 +94,7 @@ $content = ob_get_clean(); //Stop the buffer and pass the collected html to page
     ->set_footer()
     ->set_content($content)
     ->set_header(_ADMIN_PAGE_STYLES)
-    ->set_navibar(ADMIN_NAV_LINKS, $username="admin")
+    ->set_navibar(NAV_LINKS, $username="admin")
     ->set_outline(HOME_PAGE_SCRIPTS)
     ->render();
 ?>

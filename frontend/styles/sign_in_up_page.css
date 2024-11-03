@@ -39,7 +39,7 @@
     padding: 12px 15px;
     margin-bottom: 15px;
     background-color: #333333;
-    border: 1px solid #555555;
+    border: 1.5px solid #555555;
     border-radius: 5px;
     color: #FFFFFF;
     font-size: 1em;
@@ -55,7 +55,13 @@
 }
 
 .sign-in-up-page-container-inner input:focus {
-    border-color: var(--accent-4-pink);
+    border-color: var(--accent-4-pink) !important; 
+    box-shadow: 0 0 8px rgba(255, 110, 199, 0.5);
+    outline: none;
+}
+
+.sign-in-up-page-container-inner input.error {
+    border-color: red;
     box-shadow: 0 0 8px rgba(255, 110, 199, 0.5);
     outline: none;
 }
@@ -145,12 +151,6 @@
     transition: color 0.3s;
 }
 
-.unselectable {
-    user-select: none; 
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none;
-}
 
 .neon-divider {
     width: 60%;

@@ -55,6 +55,7 @@ try {
             else throw $e;
         break;
     }
+    header("Location: ../../frontend/home_page.php");
 }
 
 ?>

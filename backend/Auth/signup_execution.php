@@ -61,11 +61,8 @@ function signup(){
         exit(); //exit just in case lol 
     }
 
-
-
     ////send confirmation email 
     null;//TODO
-
 
     
     ////insert new user
@@ -81,7 +78,6 @@ function signup(){
     $user_id = NyanDB::single_query($sql, $params);
 
 
-    
     ////insert new user's user_preference
     $sql = "
     INSERT INTO user_preferences (user_id, is_notify_by_sms, is_notify_by_email, is_notify_by_whatsapp, is_notify_by_telegram)

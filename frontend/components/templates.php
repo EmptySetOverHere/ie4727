@@ -95,7 +95,7 @@ class PageTemplate
         // appending restaurant icon and name       
         
         $this->navibar = <<<HTML
-            <nav class="navi-bar-container">
+            <nav class="navi-bar-container unselectable">
                 <div class="cater-icon-name-container">
                     <div class="cater-icon">
                         <img src="./assets/cat-space.gif" alt="NyanCat">
@@ -143,7 +143,7 @@ class PageTemplate
             HTML;
         }
 
-        if ($username === null || $username === DEFAULT_USERNAME) {
+        if ($username === null) {
             $this->navibar .= <<<HTML
                 <button class="sign-in-up-container">
                     <a class="sign-in-sign-up" href="./sign_in_up_page.php">
@@ -153,9 +153,12 @@ class PageTemplate
                 </nav>
             HTML;
         } else {
-            // <button class="account-avatar-container">
-            //     <a href="./" target="_blank" rel="noopener noreferrer"></a>
-            // </button>
+            $this->navibar .= <<<HTML
+                    <button class="account-avatar-container" onclick="avatar_onclick()">
+                        <img src="./assets/cat-avatar.png" alt="">
+                    </button>
+                </nav>
+            HTML;
         }
 
         return $this;

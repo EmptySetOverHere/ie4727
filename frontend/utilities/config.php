@@ -5,19 +5,6 @@ const NAV_LINKS = [
     "HOME" => "home_page.php",
     "MENU" => "menu_page.php",
     "ORDERS" => "order_page.php",
-    "ACCOUNT" => "account_setting_page.php",
-];
-
-const NAV_LINKS_NOT_SIGNED_IN = [
-    "HOME" => "home_page.php",
-    "MENU" => "menu_page.php",
-    "ORDERS" => "order_page.php",
-];
-
-const ADMIN_NAV_LINKS = [
-    "HOME" => "home_page.php",
-    "MENU" => "menu_page.php",
-    "ORDERS" => "order_page.php",
 ];
 
 const _ADMIN_PAGE_STYLES = [

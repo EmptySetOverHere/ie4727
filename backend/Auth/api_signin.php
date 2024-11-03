@@ -1,6 +1,7 @@
 <?php
 
 require_once '../core/constants/Errorcodes.php';
+require_once 'signin_execution.php';
 
 // input parameters:
 // $_POST['email-phone_number']
@@ -11,33 +12,58 @@ if (session_status() === PHP_SESSION_NONE){
 }
 
 try {
-    require_once 'signin_execution.php';
     signin();
-    null;//defines what happens if execution successful here 
+    //defines what happens if execution successful here
+    header("Location: ../../frontend/home_page.php"); 
 } catch (Exception $e) {
+    $header_prefix = "Location: ../../frontend/sign_in_up_page.php?in-or-up=true";
     $error_code = $e->getCode();
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            $_SESSION["sign-in-error-msg"] = "Bad Request"; 
+            $error_msg = "sign-in-error-msg=" . $e->getMessage();
+            $error_code = "sign-in-error-code=" . $error_code;
+            $method = "last-sign-in-method=" . $last_sign_in_method;
+            header($header_prefix . "&" . $error_msg . "&" . $error_code . "&" . $method);
             break;
+        
             // Email/phone number does not exist yet
-        case ERRORCODES::api_signin['user_does_not_exist']:
-            $_SESSION["sign-in-error-msg"] = "User does not exist"; 
+        case ERRORCODES::api_signin["phone_number_does_not_exist"]:
+            $error_msg = "sign-in-error-msg=" . $e->getMessage();
+            $error_code = "sign-in-error-code=" . $error_code;
+            $method = "last-sign-in-method=" . $last_sign_in_method;
+            header($header_prefix . "&" . $error_msg . "&" . $error_code . "&" . $method);
             break;
 
-        // Wrong password
-        case ERRORCODES::api_signin['wrong_password']:
-            $_SESSION["sign-in-error-msg"] = "Wrong password"; 
+        case ERRORCODES::api_signin["email_does_not_exist"]:
+            $error_msg = "sign-in-error-msg=" . $e->getMessage();
+            $error_code = "sign-in-error-code=" . $error_code;
+            $method = "last-sign-in-method=" . $last_sign_in_method;
+            header($header_prefix . "&" . $error_msg . "&" . $error_code . "&" . $method);
             break;
+
+        case ERRORCODES::api_signin['user_does_not_exist']:
+            $error_msg = "sign-in-error-msg=" . $e->getMessage();
+            $error_code = "sign-in-error-code=" . $error_code;
+            $method = "last-sign-in-method=" . $last_sign_in_method;
+            header($header_prefix . "&" . $error_msg . "&" . $error_code . "&" . $method);
+            break;
+
+        case ERRORCODES::api_signin["wrong_password"]:
+            $error_msg = "sign-in-error-msg=" . $e->getMessage();
+            $error_code = "sign-in-error-code=" . $error_code;
+            $method = "last-sign-in-method=" . $last_sign_in_method;
+            header($header_prefix . "&" . $error_msg . "&" . $error_code . "&" . $method);
+            break;
+
         // Database connection refused/query error
         case ERRORCODES::server_error['database_connection_error']:
-            $_SESSION["sign-in-error-msg"] = "Database connection error"; 
+            throw $e;
             break;
             
         // Database prepare error
         case ERRORCODES::server_error['database_prepare_error']:
-            $_SESSION["sign-in-error-msg"] = "Database prepare error"; 
+            throw $e;
             break;
         // //undefined error
         // case 69xxx:
@@ -49,11 +75,9 @@ try {
             if($error_code>= 69000 && $error_code<=69999){
                 throw new Exception($e->getMessage(),0);
             }
-            else throw $e;
+
         break;
     }
-
-    header("Location: ../../frontend/home_page.php");
 }
 
 ?>
