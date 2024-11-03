@@ -120,6 +120,18 @@
     }
 }
 
+.sign-out-button-container {
+    min-width: 265px;
+    width: 50%;
+    display: inline-block; 
+    padding: 10px;
+    margin: 10px;
+}
+
+.sign-out-button-container .submit-button-container {
+    max-width: 700px;
+}
+
 .notification-preference-title{
     color: var(--text-label-color);
     line-height: 2em;

@@ -122,7 +122,6 @@ class PageTemplate
                     <a href="$content">$category</a>
                 HTML;
             }
-
             $this->navibar .= "</div>";
         }
 

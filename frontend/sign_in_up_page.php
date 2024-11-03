@@ -66,8 +66,6 @@ ob_start(); //start buffer to collect generated html lines
                 </div>
             </div>
         </div>
-        <div class="right-background-container">
-        </div>
     </form>
 </div>
 
