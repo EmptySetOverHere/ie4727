@@ -67,11 +67,13 @@ ob_start(); //start buffer to collect generated html lines
 <?php
 $content = ob_get_clean(); //Stop the buffer and pass the collected html to page template
 
+$navibar_links = isset($_SESSION['user_id']) ? NAV_LINKS : NAV_LINKS_NOT_SIGNED_IN;
+
 (new PageTemplate())
     ->set_footer()
     ->set_content($content)
     ->set_header(HOME_PAGE_STYLES)
-    ->set_navibar(NAV_LINKS, $usernane="guest")
+    ->set_navibar($navibar_links, $username="guest")
     ->set_outline(HOME_PAGE_SCRIPTS)
     ->render();
 ?>
