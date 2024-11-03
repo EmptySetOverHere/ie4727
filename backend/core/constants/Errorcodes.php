@@ -14,14 +14,12 @@ class ERRORCODES
         "database_connection_error" => 69601,
         "database_prepare_error" => 69602,
         "user_does_not_exist" => 69603,
-        
     ];
 
     public const general_error = [
         "bad_request" => 69300,
         "invalid_credentials" => 69301,
         "missing_timezone" => 69302,
-        
     ];
 
     public const api_signup = [
@@ -29,8 +27,10 @@ class ERRORCODES
     ];
 
     public const api_signin = [
-        "user_does_not_exist" => 69003,
-        "wrong_password" => 69004,
+        "user_does_not_exist" => 69002,
+        "email_does_not_exist" => 69003,
+        "phone_number_does_not_exist" => 69004,
+        "wrong_password" => 69005,
     ];
 
     public const api_update_auth = [
@@ -50,9 +50,6 @@ class ERRORCODES
         "order_quantity_too_large" => 69006,
         'package_not_available'=> 69007,
     ];
-
-
-
 
 }
 

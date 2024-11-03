@@ -6,6 +6,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.unselectable {
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none;
+}
+
 /* @media screen and (min-width: 800px)  { */
     .screen-adjuster {
         width: 100%;
@@ -128,13 +135,35 @@
         font-size: larger;
         font-weight: bolder;
         border-radius: 35px;
-        background-color: var(--accent-2-light);
+        border: none;
+        background-color: white;
         cursor: pointer;
     }
 
     .sign-in-sign-up {
         text-decoration: none;
         color: black;
+    }
+
+    .account-avatar-container {
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+    }
+
+    .account-avatar-container img {
+        width: calc(70px * 2);
+    }
+
+    .account-avatar-container:hover {
+        box-shadow: 0 0 13px 7px rgba(229, 225, 191, 0.3);
+        transition: box-shadow 0.3s;
     }
 
     footer {
