@@ -20,7 +20,7 @@ $content = ob_get_clean(); //Stop the buffer and pass the collected html to page
     ->set_footer()
     // ->set_content($content)
     ->set_header(STYLES)
-    ->set_navibar(NAV_LINKS, $username="guest")
+    ->set_navibar(NAV_LINKS, $username)
     ->set_outline(SCRIPTS)
     ->render();
 ?>
