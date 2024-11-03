@@ -45,12 +45,12 @@ ob_start(); //start buffer to collect generated html lines
                             <span class="unselectable" id="sign-in-up-with" data-method="email" onclick="switch_sign_in_method()"><?= $switch_method_text_prefix ?> with phone number</span>
                         <?php } ?>
                     </div>
-                    <input type="email" name="email" id="email" placeholder="example@site.com" required>
+                    <input type="email" name="email" id="email" placeholder="example@domain.com" required>
                 </div>
-                <?php if(filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
+                <?php if(!filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
                     <div class="email-phone-number-section">
                         <label class="unselectable" id="phone-label" for="phone">Phone Number</label>
-                        <input type="tel" name="phone" id="phone" placeholder="+65 93948788" required>
+                        <input type="tel" name="phone_number" id="phone" placeholder="+65 93948788" required>
                     </div>
                 <?php } ?>
                 <div class="password-section">
@@ -92,7 +92,7 @@ ob_start(); //start buffer to collect generated html lines
             email_label.innerHTML = "Phone Number"; 
             email_label.setAttribute("for", "phone");
             email_label.setAttribute("id", "phone-label");
-            email_input.setAttribute("name", "phone");
+            email_input.setAttribute("name", "phone_number");
             email_input.setAttribute("type", "tel");
             email_input.setAttribute("id", "phone");
             email_input.setAttribute("placeholder", "+65 93948788");

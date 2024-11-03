@@ -37,7 +37,7 @@ class NyanDateTime extends DateTime {
     }
 
     public static function now(): string {
-        return (new NyanDateTime())->value;
+        return (new NyanDateTime())->value();
     }
 }
 ?>
