@@ -87,6 +87,13 @@ ob_start(); //start buffer to collect generated html lines
         </div>
         <br>
     </div>
+    <div class="sign-out-button-container">
+        <form action="../backend/Auth/api_logout.php" method="GET" id="sign-out-form">
+            <div class="submit-button-container">
+                <button type="submit" id="sign-out-button">Sign Out</button>
+            </div>
+        </form>
+    </div>
 </div>
 <script>
     function submit(form_id, verification_function = null){
@@ -98,6 +105,7 @@ ob_start(); //start buffer to collect generated html lines
         alert('nyan');
         return true //TODO
     }
+
 </script>
 
 <?php
