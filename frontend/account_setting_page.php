@@ -65,19 +65,19 @@ ob_start(); //start buffer to collect generated html lines
                 <table>
                     <tr>
                         <td><label for="is_notify_by_sms">SMS</label></td>
-                        <td><input type="checkbox" name="is_notify_by_sms" id="preferred_payment_method"></td>
+                        <td><input type="checkbox" name="is_notify_by_sms" id="is_notify_by_sms"></td>
                     </tr>
                     <tr>
-                        <td><label for="is_notify_by_sms">Email</label></td>
-                        <td><input type="checkbox" name="is_notify_by_sms" id="preferred_payment_method"></td>
+                        <td><label for="is_notify_by_email">Email</label></td>
+                        <td><input type="checkbox" name="is_notify_by_email" id="is_notify_by_email"></td>
                     </tr>
                     <tr>
-                        <td><label for="is_notify_by_sms">Whatsapp</label></td>
-                        <td><input type="checkbox" name="is_notify_by_sms" id="preferred_payment_method"></td>
+                        <td><label for="is_notify_by_whatsapp">Whatsapp</label></td>
+                        <td><input type="checkbox" name="is_notify_by_whatsapp" id="is_notify_by_whatsapp"></td>
                     </tr>
                     <tr>
-                        <td><label for="is_notify_by_sms">Telegram</label></td>
-                        <td><input type="checkbox" name="is_notify_by_sms" id="preferred_payment_method"></td>
+                        <td><label for="is_notify_by_telegram">Telegram</label></td>
+                        <td><input type="checkbox" name="is_notify_by_telegram" id="is_notify_by_telegram"></td>
                     </tr>
                 </table>
             </div>

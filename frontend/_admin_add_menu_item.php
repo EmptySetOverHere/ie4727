@@ -56,7 +56,9 @@ ob_start(); // Start buffer to collect generated HTML lines
             <div class="text-input-container">
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image">
-                <img id="preview" src="" alt="Image Preview" style="display: none; height: 320px; width: 320px;">
+                <div class="image-container">
+                    <img id="preview" src="./assets/image-placeholder.svg" alt="Image Preview">
+                </div>
             </div>
         </form>
         <div class="submit-button-container">
@@ -73,7 +75,7 @@ ob_start(); // Start buffer to collect generated HTML lines
             reader.onload = function(e) {
                 const img = document.getElementById('preview');
                 img.src = e.target.result;
-                img.style.display = 'block'; // Show the image
+                img.style.display = 'block';
             };
             reader.readAsDataURL(file);
         }
