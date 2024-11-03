@@ -47,10 +47,12 @@ ob_start(); //start buffer to collect generated html lines
                     </div>
                     <input type="email" name="email" id="email" placeholder="example@site.com" required>
                 </div>
-                <div class="email-phone-number-section">
-                    <label class="unselectable" id="phone-label" for="phone">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" placeholder="+65 93948788" required>
-                </div>
+                <?php if(filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
+                    <div class="email-phone-number-section">
+                        <label class="unselectable" id="phone-label" for="phone">Phone Number</label>
+                        <input type="tel" name="phone" id="phone" placeholder="+65 93948788" required>
+                    </div>
+                <?php } ?>
                 <div class="password-section">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="******" required>

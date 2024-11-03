@@ -143,7 +143,7 @@ class PageTemplate
             HTML;
         }
 
-        if ($username === null) {
+        if ($username === null || $username === DEFAULT_USERNAME) {
             $this->navibar .= <<<HTML
                 <button class="sign-in-up-container">
                     <a class="sign-in-sign-up" href="./sign_in_up_page.php">
