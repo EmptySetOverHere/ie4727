@@ -19,7 +19,7 @@ ob_start(); //start buffer to collect generated html lines
         <form id="update-auth-form" action="../backend/auth/api_update_auth.php">
             <div class="text-input-container">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email">
+                <input type="email" name="email" id="email">
             </div>
             <div class="text-input-container">
                 <label for="phone_number">Phone Number</label>
@@ -54,6 +54,9 @@ ob_start(); //start buffer to collect generated html lines
             <div class="text-input-container">
                 <label for="preferred_payment_method">Payment Method</label>
                 <input type="text" name="preferred_payment_method" id="preferred_payment_method">
+            </div>
+            <div class="notification-preference-title">
+                Notification Preferences
             </div>
             <div class="checkbox-input-container">
                 <table>
