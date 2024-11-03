@@ -141,4 +141,30 @@
     }
 }
 
+.menu-item-container{
+    text-align: center; 
+    margin: 20px;
+
+    .info-row {
+        display: flex;
+        justify-content: space-around;
+
+        .menu-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            flex: 1;
+            margin: 0 10px;
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    }
+}
+
 

@@ -1,40 +1,41 @@
-<?php 
+<?php
 require_once "./components/templates.php";
 require_once "./utilities/config.php";
 require_once "./utilities/resource_aquisition.php";
 
-session_status() === PHP_SESSION_NONE ? session_start(): null;
+session_status() === PHP_SESSION_NONE ? session_start() : null;
 
-function generate_menu_page():string{
-    $display_category=$_GET['display_category']??'buffet';
-    $current_page=$_GET['current_page']??'1';
+function generate_menu_page(): string
+{
+    $display_category = $_GET['display_category'] ?? 'buffet';
+    $current_page = $_GET['current_page'] ?? '1';
     ob_start(); //start buffer to collect generated html lines
-    ?>
-    
+?>
+
     <div class="main-content-container">
         <!-- for buffet -->
         <div>
-            <button 
-                class='display-category-toggle-container' <?=$display_category=='buffet'?'disabled':'';?>
-                onclick="redirectback(display_category='buffet')">
+            <button
+                class='display-category-toggle-container' <?= $display_category == 'buffet' ? 'disabled' : ''; ?>
+                onclick="redirect_back(display_category='buffet')">
                 <label>Buffet</label>
             </button>
             <!-- for bento -->
-            <button 
-                class='display-category-toggle-container' <?=$display_category=='bento'?'disabled':'';?>
-                onclick="redirectback(display_category='bento')">
+            <button
+                class='display-category-toggle-container' <?= $display_category == 'bento' ? 'disabled' : ''; ?>
+                onclick="redirect_back(display_category='bento')">
                 <label>Bento</label>
             </button>
         </div>
 
     </div>
     <script>
-        function redirectback(display_category = <?=$display_category?>){
+        function redirect_back(display_category = <?= $display_category ?>) {
             window.location.href = "menu_page.php?display_category=" + display_category;
         }
     </script>
-    
-    <?php
+
+<?php
     return ob_get_clean(); //Stop the buffer and pass the collected html to page template
 }
 
