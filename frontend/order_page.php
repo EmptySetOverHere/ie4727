@@ -5,7 +5,8 @@ require_once "./utilities/resource_aquisition.php";
 
 session_status() === PHP_SESSION_NONE ? session_start(): null;
 
-aquire_username_or_default(DEFAULT_USERNAME);
+$username = aquire_username_or_default(DEFAULT_USERNAME);
+
 
 ob_start(); //start buffer to collect generated html lines
 ?>

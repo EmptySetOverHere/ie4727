@@ -48,7 +48,7 @@ function signin(){
     }
 
     if(empty($password)){
-        throw new Exception("Wrong password", ERRORCODES::api_signin["wrong_password"]);
+        throw new Exception("Password can not be empty", ERRORCODES::api_signin["wrong_password"]);
     }
 
     ////retrieve database phone nnumber/email/password
@@ -65,7 +65,7 @@ function signin(){
         throw new Exception("Email does not exist", ERRORCODES::api_signin["email_does_not_exist"]);
     }
 
-    if ($result["phone_number"] && isset($_POST["phone_number"])) {
+    if ($result["phone_number"] === null && isset($_POST["phone_number"])) {
         throw new Exception("Phone number does not exist", ERRORCODES::api_signin["phone_number_does_not_exist"]);
     }
 

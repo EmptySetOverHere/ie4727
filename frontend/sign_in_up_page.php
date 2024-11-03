@@ -161,66 +161,49 @@ ob_start(); //start buffer to collect generated html lines
     <?php if(isset($_GET["sign-in-error-msg"]) && isset($_GET["sign-in-error-code"]) && isset($_GET["last-sign-in-method"]) && isset($_GET["in-or-up"])) { ?>
         (function () {
             const req_params = new URLSearchParams(window.location.search);
-            let method = sign_in_up_with.getAttribute("data-method");
+            let method = document.getElementById("sign-in-up-with").getAttribute("data-method");
 
             const SignInError = {
                 INVALID_EMAIL: "69003",
                 INVALID_PHONE: "69004",
                 INVALID_PASSWORD: "69005",
-            }
+            };
 
             if (req_params.get("last-sign-in-method") !== method) {
                 method = switch_sign_in_method(null);
             }
 
-            // Set custom validity based on error codes
             const email_input = document.getElementById("email");
             const phone_input = document.getElementById("phone");
             const password_input = document.getElementById("password");
 
-            if (req_params.get("sign-in-error-code") === SignInError.INVALID_EMAIL) {
+
+            const error_code = req_params.get("sign-in-error-code");
+            const error_msg = req_params.get("sign-in-error-msg");
+
+            if (error_code === SignInError.INVALID_EMAIL && email_input) {
                 email_input.classList.add("error");
-                email_input.setCustomValidity(req_params.get("sign-in-error-msg"));
+                email_input.addEventListener("focus", function() {
+                    email_input.classList.remove("error");
+                });
             }
 
-            if (req_params.get("sign-in-error-code") === SignInError.INVALID_PHONE) {
+            if (error_code === SignInError.INVALID_PHONE && phone_input) {
                 phone_input.classList.add("error");
-                phone_input.setCustomValidity(req_params.get("sign-in-error-msg"));
+                phone_input.addEventListener("focus", function() {
+                    phone_input.classList.remove("error");
+                });
             }
 
-            if (req_params.get("sign-in-error-code") === SignInError.INVALID_PASSWORD) {
+            if (error_code === SignInError.INVALID_PASSWORD && password_input) {
                 password_input.classList.add("error");
-                password_input.setCustomValidity(req_params.get("sign-in-error-msg"));
+                password_input.addEventListener("focus", function() {
+                    password_input.classList.remove("error");
+                });
             }
 
-            // Clear custom validity on focus to allow resubmission attempts
-            email_input.addEventListener("focus", function () {
-                email_input.classList.remove("error");
-                email_input.setCustomValidity("");
-            }, { once: true });
-
-            phone_input.addEventListener("focus", function () {
-                phone_input.classList.remove("error");
-                phone_input.setCustomValidity("");
-            }, { once: true });
-
-            password_input.addEventListener("focus", function () {
-                password_input.classList.remove("error");
-                password_input.setCustomValidity("");
-            }, { once: true });
-
-            const form = document.getElementById("sign-in-up-form");
-            form.addEventListener("submit", function (event) {
-                email_input.setCustomValidity("");
-                phone_input.setCustomValidity("");
-                password_input.setCustomValidity("");
-
-                if (!form.checkValidity()) {
-                    event.preventDefault(); // Prevent submission if the form is still invalid
-                    form.reportValidity(); // Show any validation errors
-                }
-        });
-})();
+            window.onload = function () { alert(error_msg); }
+        })();
 
     <?php } ?>
 </script>
