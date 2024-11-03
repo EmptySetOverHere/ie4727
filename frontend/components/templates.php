@@ -92,7 +92,8 @@ class PageTemplate
 
     public function set_navibar(array $links, ?string $username = null)
     {
-        // appending restaurant icon and name        
+        // appending restaurant icon and name       
+        
         $this->navibar = <<<HTML
             <nav class="navi-bar-container">
                 <div class="cater-icon-name-container">
@@ -142,14 +143,20 @@ class PageTemplate
             HTML;
         }
 
-        $this->navibar .= <<<HTML
-            <button class="sign-in-up-container" onclick="">
-                <a class="sign-in-sign-up" href="./sign_in_up_page.php">
-                    Sign In
-                </a>
-            </button>
-            </nav>
-        HTML;
+        if ($username === null) {
+            $this->navibar .= <<<HTML
+                <button class="sign-in-up-container">
+                    <a class="sign-in-sign-up" href="./sign_in_up_page.php">
+                        Sign In
+                    </a>
+                </button>
+                </nav>
+            HTML;
+        } else {
+            // <button class="account-avatar-container">
+            //     <a href="./" target="_blank" rel="noopener noreferrer"></a>
+            // </button>
+        }
 
         return $this;
     }

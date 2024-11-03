@@ -41,9 +41,15 @@ ob_start(); //start buffer to collect generated html lines
                     <div class="email-phone-switch-container">
                         <label class="unselectable" id="email-label" for="email">Email</label>
                         <div class="flex-placeholder"></div>
-                        <span class="unselectable" id="sign-in-up-with" data-method="email" onclick="switch_sign_in_up_method()"><?= $switch_method_text_prefix ?> with phone number</span>
+                        <?php if(filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
+                            <span class="unselectable" id="sign-in-up-with" data-method="email" onclick="switch_sign_in_method()"><?= $switch_method_text_prefix ?> with phone number</span>
+                        <?php } ?>
                     </div>
                     <input type="email" name="email" id="email" placeholder="example@site.com" required>
+                </div>
+                <div class="email-phone-number-section">
+                    <label class="unselectable" id="phone-label" for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" placeholder="+65 93948788" required>
                 </div>
                 <div class="password-section">
                     <label for="password">Password</label>
@@ -72,7 +78,9 @@ ob_start(); //start buffer to collect generated html lines
         window.location.assign("./sign_in_up_page.php?in-or-up=" + !in_or_up);
     }
 
-    function switch_sign_in_up_method(e) {
+    <?php if(filter_var($in_or_up, FILTER_VALIDATE_BOOL)) { ?>
+
+    function switch_sign_in_method(e) {
         const method = sign_in_up_with.getAttribute("data-method");
 
         if(method === "email") {
@@ -108,6 +116,8 @@ ob_start(); //start buffer to collect generated html lines
             sign_in_up_with.innerHTML = "<?= $switch_method_text_prefix ?> " + "with phone number";
         }
     }
+
+    <?php } ?>
 
     // const SignInError = {
     //     INVALID_EMAIL: "Invalid e-mail",
