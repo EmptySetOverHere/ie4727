@@ -8,6 +8,12 @@ const NAV_LINKS = [
     "ACCOUNT" => "account_setting_page.php",
 ];
 
+const NAV_LINKS_NOT_SIGNED_IN = [
+    "HOME" => "home_page.php",
+    "MENU" => "menu_page.php",
+    "ORDERS" => "order_page.php",
+];
+
 const HOME_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
     "./styles/home_page.css",

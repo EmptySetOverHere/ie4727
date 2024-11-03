@@ -7,7 +7,10 @@ session_status() === PHP_SESSION_NONE ? session_start(): null;
 
 $username = aquire_username_or_default(DEFAULT_USERNAME);
 
-// $_POST['is_']
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+// require_once '../backend/update_profile/get_user_preferences.php';
+// $user_preferences = get_user_preferences();
+
 
 ob_start(); //start buffer to collect generated html lines
 ?>
@@ -35,14 +38,14 @@ ob_start(); //start buffer to collect generated html lines
             </div>
         </form>
         <div class="submit-button-container">
-            <button type="submit">Update</button>
+            <button type="submit" onclick="submit('update-auth-form', verify_auth)">Update</button>
         </div>
     </div>
     <br>
     <div class="grouped-settings-container">
         <div class="section-header">Account Preferences</div>
         <div class="section-divider"></div>
-        <form id="update-preferences-form">
+        <form id="update-preferences-form" action="../backend/update_profile/api_update_profile.php">
             <div class="text-input-container">
                 <label for="prefered_name">Prefered Name</label>
                 <input type="text" name="prefered_name" id="prefered_name">
@@ -80,11 +83,22 @@ ob_start(); //start buffer to collect generated html lines
             </div>
         </form>
         <div class="submit-button-container">
-            <button type="submit">Update</button>
+            <button type="submit" onclick="submit('update-preferences-form')">Update</button>
         </div>
         <br>
     </div>
 </div>
+<script>
+    function submit(form_id, verification_function = null){
+        if (verification_function === null || verification_function()) {
+            document.getElementById(form_id).submit();
+        }
+    }
+    function verify_auth(){
+        alert('nyan');
+        return true //TODO
+    }
+</script>
 
 <!-- TODO: write your inner html content here -->
 <!-- the entire html content will be treated as a string later  -->
@@ -96,7 +110,7 @@ $content = ob_get_clean(); //Stop the buffer and pass the collected html to page
     ->set_footer()
     ->set_content($content)
     ->set_header(ACCOUNT_SETTING_PAGE_STYLES)
-    ->set_navibar(NAV_LINKS, $usernane="guest")
+    ->set_navibar(NAV_LINKS, $username="guest")
     ->set_outline(ACCOUNT_SETTING_PAGE_SCRIPTS)
     ->render();
 ?>
