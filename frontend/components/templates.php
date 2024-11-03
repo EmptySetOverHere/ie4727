@@ -208,5 +208,14 @@ class PageTemplate
         $page = $this->header . $body;
         echo $page;
     }
+
+    public static function getJavascriptAlertMessage(): string {
+        if (isset($_GET['alert_msg'])) {
+            // Use json_encode to safely format the message for JavaScript
+            $message = json_encode($_GET['alert_msg']);
+            return "<script>alert($message);</script>";
+        }
+        return ''; // Return an empty string if no alert message is set
+    }
 }
 ?>
