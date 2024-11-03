@@ -21,6 +21,17 @@
     width: 265px;
     min-height: 40px;
     background-color: var(--inner-container-colour);
+    align-items: center;
+    justify-content: center;
+
+    label {
+        display: block;
+        align-self: center;
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 2em;
+        color: var(--accent-1);
+    }
 
     &:hover {
         cursor: pointer;
