@@ -15,7 +15,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 ob_start(); //start buffer to collect generated html lines
 ?>
 
-<div class='centered-items account-setting-content-container' style="padding: 20px;">
+<div class='centered-items account-setting-content-container'>
     <div class="grouped-settings-container">
         <div class="section-header">Login Information</div>
         <div class="section-divider"></div>
@@ -99,9 +99,6 @@ ob_start(); //start buffer to collect generated html lines
         return true //TODO
     }
 </script>
-
-<!-- TODO: write your inner html content here -->
-<!-- the entire html content will be treated as a string later  -->
 
 <?php
 $content = ob_get_clean(); //Stop the buffer and pass the collected html to page template

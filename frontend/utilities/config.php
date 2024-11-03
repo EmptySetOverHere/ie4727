@@ -20,6 +20,12 @@ const ADMIN_NAV_LINKS = [
     "ORDERS" => "order_page.php",
 ];
 
+const _ADMIN_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/account_setting_page.css",
+    "./styles/_admin_pages_input_styles.css",
+];
+
 const HOME_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
     "./styles/home_page.css",
