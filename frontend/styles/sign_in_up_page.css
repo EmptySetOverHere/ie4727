@@ -1,5 +1,5 @@
 
- .sign-in-page-container {
+ .sign-in-up-page-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
     padding: 20px;
 }
 
-.sign-in-page-container-inner {
+.sign-in-up-page-container-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +34,7 @@
     min-width: 550px;
 }
 
-.sign-in-page-container-inner input {
+.sign-in-up-page-container-inner input {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 15px;
@@ -46,21 +46,21 @@
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.sign-in-page-container-inner > div {
+.sign-in-up-page-container-inner > div {
     width: 100%;
 }
 
-.sign-in-page-container-inner input::placeholder {
+.sign-in-up-page-container-inner input::placeholder {
     color: #999999;
 }
 
-.sign-in-page-container-inner input:focus {
+.sign-in-up-page-container-inner input:focus {
     border-color: var(--accent-4-pink);
     box-shadow: 0 0 8px rgba(255, 110, 199, 0.5);
     outline: none;
 }
 
-.sign-in-page-container-inner label {
+.sign-in-up-page-container-inner label {
     display: block;
     align-self: flex-start;
     margin-bottom: 5px;
@@ -68,17 +68,17 @@
     color: #AAAAAA;
 }
 
-.sign-in-page-container-inner #sign-in-with {
+.sign-in-up-page-container-inner #sign-in-up-with {
     color: #AAAAAA;
 }
 
-.sign-in-page-container-inner #sign-in-with:hover {
+.sign-in-up-page-container-inner #sign-in-up-with:hover {
     color: blueviolet;
     cursor: pointer;
     transition: color 0.3s;
 }
 
-.sign-in-page-container-inner button {
+.sign-in-up-page-container-inner button {
     margin-top: 20px;
     width: 50%;
     padding: 15px;
@@ -93,25 +93,25 @@
     box-shadow: 0 0 10px rgba(255, 110, 199, 0.3);
 }
 
-.sign-in-page-container-inner button:hover {
+.sign-in-up-page-container-inner button:hover {
     background: var(--accent-4-pink-glow);
     box-shadow: 0 0 15px var(--accent-4-pink-glow-shadow);
 }
 
-.sign-in-page-container-inner .additional-text {
+.sign-in-up-page-container-inner .additional-text {
     margin-top: 20px;
     font-size: 0.9em;
     color: #888888;
     text-align: center;
 }
 
-.sign-in-page-container-inner .additional-text a {
+.sign-in-up-page-container-inner .additional-text a {
     color: var(--accent-4-pink);
     text-decoration: none;
     font-weight: bold;
 }
 
-.sign-in-page-container-inner .additional-text a:hover {
+.sign-in-up-page-container-inner .additional-text a:hover {
     text-decoration: underline;
 }
 
@@ -130,16 +130,16 @@
     justify-content: center;
 }
 
-.no-account-container {
+.no-have-account-container {
     margin-top: 20px;
     text-align: center;
 }
 
-#no-account {
+#no-have-account {
     color: #AAAAAA;
 }
 
-#no-account:hover {
+#no-have-account:hover {
     color: blueviolet;
     cursor: pointer;
     transition: color 0.3s;
@@ -161,7 +161,7 @@
 }
 
 @media (max-width: 500px) {
-    .sign-in-page-container-inner {
+    .sign-in-up-page-container-inner {
         padding: 30px 20px;
     }
 
@@ -169,8 +169,8 @@
         font-size: 1.5em;
     }
 
-    .sign-in-page-container-inner input, 
-    .sign-in-page-container-inner button {
+    .sign-in-up-page-container-inner input, 
+    .sign-in-up-page-container-inner button {
         font-size: 0.9em;
     }
 }

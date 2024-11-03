@@ -144,7 +144,7 @@ class PageTemplate
 
         $this->navibar .= <<<HTML
             <button class="sign-in-up-container" onclick="">
-                <a class="sign-in-sign-up" href="./sign_in_page.php">
+                <a class="sign-in-sign-up" href="./sign_in_up_page.php">
                     Sign In
                 </a>
             </button>

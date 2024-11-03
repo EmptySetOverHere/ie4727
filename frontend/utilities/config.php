@@ -20,13 +20,12 @@ const HOME_PAGE_SCRIPTS = [
 
 const SIGN_IN_PAGE_STYLE = [
     "./styles/templates.css", //This must be specified by default
-    "./styles/sign_in_page.css",
+    "./styles/sign_in_up_page.css",
 ];
-
 
 const SIGN_IN_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
-    "./scripts/sign_in_page.js", 
+    "./scripts/sign_in_up_page.js", 
 ];
 
 const SIGN_UP_PAGE_STYLE = [

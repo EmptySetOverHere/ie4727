@@ -7,40 +7,53 @@ session_status() === PHP_SESSION_NONE ? session_start() : null;
 
 aquire_username_or_default(DEFAULT_USERNAME);
 
-
-if(isset($_SESSION["last-sign-in-method"])) {
-    $sign_in_method = $_SESSION["last-sign-in-method"];
+if(isset($_GET["in-or-up"])) {
+    $in_or_up = $_GET["in-or-up"]; // sign in -> true sign up -> false 
 } else {
-    $sign_in_method = "email";
+    $in_or_up = "true";
+}
+
+if(filter_var($in_or_up, FILTER_VALIDATE_BOOL)) {
+    $title_section_text = "Welcome Back";
+    $switch_method_text_prefix = "sign in";
+    $button_text = "Sign In";
+    $no_have_account_text = "Do not have an account? Join Us";
+    $backend_handler = "api_signin.php";
+} else {
+    $title_section_text = "Join Us Now";
+    $switch_method_text_prefix = "sign up";
+    $button_text = "Sign Up";
+    $no_have_account_text = "Already have an account?";
+    $backend_handler = "api_signup.php";
 }
 
 ob_start(); //start buffer to collect generated html lines
 ?>
 
-<div class="sign-in-page-container">
-    <form id="sign-in-form" action="..\backend\Auth\api_signin.php" method="post">
+<div class="sign-in-up-page-container">
+    <form id="sign-in-up-form" action="..\backend\Auth\<?= $backend_handler ?>" method="post">
         <div class="left-sign-container">
-            <div class="sign-in-page-container-inner">
+            <div class="sign-in-up-page-container-inner">
                 <div class="title-section">
-                    <span class="unselectable">Welcome Back</span>
+                    <span class="unselectable"><?= $title_section_text ?></span>
                 </div>
                 <div class="email-phone-number-section">
                     <div class="email-phone-switch-container">
                         <label class="unselectable" id="email-label" for="email">Email</label>
                         <div class="flex-placeholder"></div>
-                        <span class="unselectable" id="sign-in-with" data-method="email" onclick="switch_sign_in_method()">sign in with phone number</span>
+                        <span class="unselectable" id="sign-in-up-with" data-method="email" onclick="switch_sign_in_up_method()"><?= $switch_method_text_prefix ?> with phone number</span>
                     </div>
-                    <input type="text" name="email" id="email" placeholder="example@site.com" required>
+                    <input type="email" name="email" id="email" placeholder="example@site.com" required>
                 </div>
                 <div class="password-section">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="******" required>
                 </div>
                 <div class="submit-button-container">
-                    <button class="unselectable" type="submit">Sign In</button>
+                    <button class="unselectable" type="submit"><?= $button_text ?></button>
                 </div>
-                <div class="no-account-container">
-                    <span class="unselectable" id="no-account" onclick="go_to_sign_up()" required>Do not have an account?</span>
+                <div class="no-have-account-container">
+                    <span class="unselectable" id="no-have-account" onclick="go_to_sign_in_up()" required><?= $no_have_account_text ?></span>
                 </div>
             </div>
         </div>
@@ -50,17 +63,17 @@ ob_start(); //start buffer to collect generated html lines
 </div>
 
 <script>
-
     const email_phone_number_section = document.querySelector(".email-phone-number-section");
-    const sign_in_with = document.getElementById("sign-in-with");
+    const sign_in_up_with = document.getElementById("sign-in-up-with");
     const no_account_container = document.getElementById("no-account");
-
-    function go_to_sign_up(e) {
-        window.location.assign("./sign_up_page.php");
+    
+    function go_to_sign_in_up(e) {
+        const in_or_up = <?= $in_or_up ?>;  
+        window.location.assign("./sign_in_up_page.php?in-or-up=" + !in_or_up);
     }
 
-    function switch_sign_in_method(e) {
-        const method = sign_in_with.getAttribute("data-method");
+    function switch_sign_in_up_method(e) {
+        const method = sign_in_up_with.getAttribute("data-method");
 
         if(method === "email") {
             const email_input = document.getElementById("email");
@@ -73,9 +86,10 @@ ob_start(); //start buffer to collect generated html lines
             email_input.setAttribute("type", "tel");
             email_input.setAttribute("id", "phone");
             email_input.setAttribute("placeholder", "+65 93948788");
+            email_input.value = "";
             
-            sign_in_with.setAttribute("data-method", "phone");
-            sign_in_with.innerHTML = "sign in with email";
+            sign_in_up_with.setAttribute("data-method", "phone");
+            sign_in_up_with.innerHTML = "<?= $switch_method_text_prefix ?> " + "with email";
             
         } else if (method === "phone") {
             const phone_input = document.getElementById("phone");
@@ -88,12 +102,12 @@ ob_start(); //start buffer to collect generated html lines
             phone_input.setAttribute("type", "text");
             phone_input.setAttribute("id", "email");
             phone_input.setAttribute("placeholder", "example@site.com");
+            phone_input.value = "";
 
-            sign_in_with.setAttribute("data-method", "email");
-            sign_in_with.innerHTML = "sign in with phone number";
+            sign_in_up_with.setAttribute("data-method", "email");
+            sign_in_up_with.innerHTML = "<?= $switch_method_text_prefix ?> " + "with phone number";
         }
     }
-
 
     // const SignInError = {
     //     INVALID_EMAIL: "Invalid e-mail",
@@ -160,8 +174,8 @@ ob_start(); //start buffer to collect generated html lines
     // }
 
     // function handle_submit(e) {
-    //     const formID = "sign-in-form";
-    //     const form = document.getElementById("sign-in-form");
+    //     const formID = "sign-in-up-form";
+    //     const form = document.getElementById("sign-in-up-form");
     //     const sign_in_data =  new FormData(form);
 
     //     const email = sign_in_data.get("email");
