@@ -9,12 +9,13 @@ session_status() === PHP_SESSION_NONE ? session_start(): null;
 aquire_username_or_default(DEFAULT_USERNAME);   
 
 ob_start(); // Start buffer to collect generated HTML lines
+echo PageTemplate::getJavascriptAlertMessage();
 ?>
 <div class='centered-items main-content-container'>
     <div class="grouped-input-container">
         <div class="section-header">Add Menu Item</div>
         <div class="section-divider"></div>
-        <form id="add-menu-item-form" method="post" action="../backend/admin_add_menu_items/api_add_menu_item.php">
+        <form id="add-menu-item-form" method="post" action="../backend/admin_add_menu_items/api_add_menu_item.php" enctype="multipart/form-data">
             <div class="text-input-container">
                 <label for="item_name">Item Name</label>
                 <input type="text" name="item_name" id="item_name">

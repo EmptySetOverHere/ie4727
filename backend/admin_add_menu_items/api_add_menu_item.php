@@ -21,41 +21,45 @@ if (session_status() === PHP_SESSION_NONE){
 try {
     require_once 'add_menu_item_execution.php';
     add_menu_item();
-    null;//defines what happens if execution successful here 
+    header('Location: ../../frontend/_admin_add_menu_item_page.php');
+    exit();
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'bad request']);
+            header('Location: ../../frontend/_admin_add_menu_item_page.php?' . $params);
             break;
         
         //user not allowed, insufficient permissions
         case ERRORCODES::general_error['invalid_credentials']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'invalid credentials']);
+            header('Location: ../../frontend/home_page.php?' . $params);
             break;
 
         //file wrong format or too large
         case ERRORCODES::api_add_menu_item['invalid_file_format']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'invalid file format']);
+            header('Location: ../../frontend/_admin_add_menu_item_page.php?' . $params);
             break;
 
         // Database connection refused/query error
         case ERRORCODES::server_error['database_connection_error']:
-            throw $e; // TODO
-            break;
-
         // Database prepare error
         case ERRORCODES::server_error['database_prepare_error']:
-            throw $e; // TODO
+            $params = http_build_query(['alert_msg'=>'server error']);
+            header('Location: ../../frontend/home_page.php?' . $params);
             break;
 
         // Catch-all for undefined error codes
         default:
-            if($error_code>= 69000 && $error_code<=69999){
-                throw new Exception($e->getMessage(),0);
-            }
-            else throw $e;
+            // if($error_code>= 69000 && $error_code<=69999){
+            //     throw new Exception($e->getMessage(),0);
+            // }
+            $params = http_build_query(['alert_msg'=>'uncaught error in api add menu items: '. $e->getMessage()]);
+            header('Location: ../../frontend/home_page.php?' . $params);
+            break;
         break;
     }
 }

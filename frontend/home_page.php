@@ -8,6 +8,7 @@ session_status() === PHP_SESSION_NONE ? session_start(): null;
 $username = aquire_username_or_default(DEFAULT_USERNAME);   
 
 ob_start(); //start buffer to collect generated html lines
+echo PageTemplate::getJavascriptAlertMessage();
 ?>
 
 <div class="home-page-container">
