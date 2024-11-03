@@ -46,7 +46,7 @@ function generate_menu_page():string{
     ->set_footer()
     ->set_content(generate_menu_page())
     ->set_header(MENU_PAGE_STYLES)
-    ->set_navibar(NAV_LINKS, $username="guest")
+    ->set_navibar(NAV_LINKS, $username)
     ->set_outline(MENU_PAGE_SCRIPTS)
     ->render();
 ?>
