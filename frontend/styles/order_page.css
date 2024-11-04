@@ -1,0 +1,112 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 40% 40%;
+    gap: 30px;
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Order List (Left Column) */
+.order-list {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.order-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-item {
+    background-color: #d3d9df;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.order-item p {
+    margin: 5px 0;
+}
+
+.order-item button {
+    margin: 5px 5px 0 0;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Order Details (Right Column) */
+.order-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #d3d9df;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.order-details h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-detail-content {
+    display: none;
+}
+
+.order-detail-content.active {
+    display: block;
+}
+
+.order-detail-content p, .order-detail-content ul {
+    margin: 10px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+.rate-button, .order-again-button {
+    margin: 10px 5px 0 0;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
