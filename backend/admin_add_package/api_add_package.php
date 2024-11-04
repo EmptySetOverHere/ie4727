@@ -21,33 +21,36 @@ if (session_status() === PHP_SESSION_NONE){
 try {
     require_once 'add_package_execution.php';
     add_package();
-    null;//defines what happens if execution successful here 
+    $params = http_build_query(['alert_msg'=>'insert successful']);
+    header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
+    exit();
 } catch (Exception $e) {
     $error_code = $e->getCode();
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'bad request']);
+            header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
             break;
         
         //user not allowed, insufficient permissions
         case ERRORCODES::general_error['invalid_credentials']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'invalid_credentials']);
+            header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
             break;
 
         //file wrong format or too large
         case ERRORCODES::api_add_package['invalid_file_format']:
-            throw $e;//TODO
+            $params = http_build_query(['alert_msg'=>'invalid_file_format']);
+            header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
             break;
 
         // Database connection refused/query error
         case ERRORCODES::server_error['database_connection_error']:
-            throw $e; // TODO
-            break;
-
         // Database prepare error
         case ERRORCODES::server_error['database_prepare_error']:
-            throw $e; // TODO
+            $params = http_build_query(['alert_msg'=>'server error']);
+            header('Location: ../../frontend/home_page.php?' . $params);
             break;
 
         // Catch-all for undefined error codes

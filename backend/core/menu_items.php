@@ -94,7 +94,7 @@ class MenuItems{
         if(empty($result)){
             return null;}
         $image = new Image($result['image_name'], $result['image_data'], $result['image_type']);
-        return $image.getsrc();
+        return $image->getsrc();
     }
 
     public static function set_availablility(int $menu_item_id, bool $is_in_stock){

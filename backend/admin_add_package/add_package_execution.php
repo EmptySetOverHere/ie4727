@@ -107,7 +107,7 @@ function add_package(){
         drink
     ) 
     VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?
+        ?, ?, ?, ?, ?, ?, ?, ?, ?
     );
     ";
     $params = [
@@ -121,6 +121,12 @@ function add_package(){
         $dessert,
         $drink,
     ];
+    echo !$is_available;
+    echo '<br><br><br>';
+    print_r($sql);
+    echo '<br><br><br>';
+    print_r($params);
+    echo '<br><br><br>';
     $menu_item_id = NyanDB::single_query($sql, $params);
 }
 

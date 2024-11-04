@@ -21,7 +21,8 @@ if (session_status() === PHP_SESSION_NONE){
 try {
     require_once 'add_menu_item_execution.php';
     add_menu_item();
-    header('Location: ../../frontend/_admin_add_menu_item_page.php');
+    $params = http_build_query(['alert_msg'=>'insert successful']);
+    header('Location: ../../frontend/_admin_add_menu_item_page.php?' . $params);
     exit();
 } catch (Exception $e) {
     $error_code = $e->getCode();
