@@ -28,6 +28,13 @@ function generate_menu_page(): string
             </button>
         </div>
 
+        <div >
+        <div class="menu-container">
+    <h1>Our Full Menu</h1>
+
+</div>
+        </div>
+
     </div>
     <script>
         function redirect_back(display_category = <?= $display_category ?>) {

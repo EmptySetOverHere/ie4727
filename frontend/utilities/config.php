@@ -58,7 +58,27 @@ const MENU_PAGE_STYLES = [
 
 const MENU_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
-    "./menu_page_page.js",
+    "./scripts/menu_page_page.js",
+];
+
+const CHECKOUT_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/checkout_page.css",
+];
+
+const CHECKOUT_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./scripts/checkout_page.js",
+];
+
+const ORDER_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/order_page.css",
+];
+
+const ORDER_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./scripts/order_page.js",
 ];
 
 const DEFAULT_USERNAME = "guest";
