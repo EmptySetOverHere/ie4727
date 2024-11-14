@@ -33,7 +33,7 @@ foreach ($displayitems as $menuItem) {
 
 ob_start(); // Start buffer to collect generated HTML lines
 
-echo PageTemplate::getJavascriptAlertMessage();
+
 ?>
 <div class='centered-items main-content-container'>
     <div class="grouped-input-container">
@@ -149,7 +149,7 @@ echo PageTemplate::getJavascriptAlertMessage();
     
 </div>
 <script>
-    var selected = null
+    var selected = null;
     function toggle_highlight(index) {
         if (selected !== null) {
             var elementid = "menu-item-display-" + selected
@@ -229,6 +229,10 @@ echo PageTemplate::getJavascriptAlertMessage();
     function change_page(change_amount){
         offset = <?= $offset ?> + change_amount * <?=MENU_ITEMS_PER_PAGE?>;
         redirect_back(offset);
+    }
+    $error_message = "<?=PageTemplate::getJavascriptAlertMessage()?>";
+    if($error_message){
+        alert($error_message);
     }
 </script>
 

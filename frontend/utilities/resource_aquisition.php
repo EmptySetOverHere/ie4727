@@ -19,7 +19,7 @@ function aquire_username_or_default($default_username): string | null {
 
     if($result->num_rows > 1 || $result->num_rows === 0) {
         throw "More than one users are sharing the same user_id";
-    }  
+    }
     
     $result = $result->fetch_assoc();
     if($result["username"] === null) {

@@ -29,8 +29,9 @@ try {
     switch($error_code){
         // Invalid HTTP parameters format
         case ERRORCODES::general_error['bad_request']:
-            $params = http_build_query(['alert_msg'=>'bad request']);
-            header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
+            throw $e;
+            // $params = http_build_query(['alert_msg'=>'bad request']);
+            // header('Location: ../../frontend/_admin_add_package_page.php?' . $params);
             break;
         
         //user not allowed, insufficient permissions

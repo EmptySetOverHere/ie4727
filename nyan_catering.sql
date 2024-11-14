@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2024 at 04:52 PM
+-- Generation Time: Nov 14, 2024 at 05:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,6 +66,17 @@ CREATE TABLE `menu_items` (
   `is_halal` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`menu_item_id`, `item_name`, `description`, `price`, `category`, `is_in_stock`, `is_vegetarian`, `is_halal`) VALUES
+(5, 'bob\'s liver', 'fresh organ harvested', 69.00, 'main', 1, 0, 0),
+(6, 'bob\'s liver', 'its new and uppriced, now a side', 96.00, 'side', 1, 0, 1),
+(7, 'shaun\'s liver', 'why the liver obsession man?', 69.00, 'main', 1, 1, 1),
+(8, 'shaun\'s liver', 'i guess this is how it is now.', 96.00, 'dessert', 1, 0, 1),
+(9, 'ya needa loan?', 'this is a drink, 555.55 dollabuckaroos', 555.55, 'drink', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -94,6 +105,13 @@ CREATE TABLE `orders` (
   `delivery_address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `order_datetime`, `start_datetime`, `end_datetime`, `delivery_address`) VALUES
+(4, 0, '2024-10-20 13:15:52', '2024-11-16 10:07:00', '2024-12-15 20:05:00', 'bob\'s house');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +123,14 @@ CREATE TABLE `order_items` (
   `package_id` int(11) NOT NULL,
   `packages_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `package_id`, `packages_number`) VALUES
+(4, 1, 4),
+(4, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -124,6 +150,15 @@ CREATE TABLE `packages` (
   `dessert` int(11) NOT NULL,
   `drink` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`package_id`, `item_name`, `description`, `price`, `category`, `is_available`, `main`, `side`, `dessert`, `drink`) VALUES
+(1, 'fake package', 'bpb', 1.00, 'buffet', 1, 5, 6, 8, 9),
+(2, 'other fake package', 'idk', 0.01, 'bento', 1, 7, 6, 8, 9),
+(3, 'fake package from ui', 'pls appear', 0.00, 'buffet', 1, 9, 9, 9, 9);
 
 -- --------------------------------------------------------
 
@@ -177,7 +212,7 @@ CREATE TABLE `user_auths` (
 --
 
 INSERT INTO `user_auths` (`user_id`, `email`, `phone_number`, `hashed_password`, `account_creation_time`, `last_login_time`) VALUES
-(0, 'admin@a.com', 91234567, '$argon2id$v=19$m=65536,t=4,p=1$TmhKWS4vUEZrTXEwV3M0cQ$J0Z2ruY1BUFbTZSsUiD7w9HTrh23rHnjJdki4qpGLEA', '2024-11-03 08:51:41', '2024-11-03 08:51:46');
+(0, 'admin@a.com', 91234567, '$argon2id$v=19$m=65536,t=4,p=1$dmpYZEY1N0IueHpBdy8xUA$W8Obh0VLzvFOejuxhZzzrkTYTBOyJ1HsCUUk2aiO5YY', '2024-11-14 09:05:55', '2024-11-14 09:44:07');
 
 -- --------------------------------------------------------
 
@@ -201,7 +236,7 @@ CREATE TABLE `user_preferences` (
 --
 
 INSERT INTO `user_preferences` (`user_id`, `name`, `address`, `preferred_payment_method`, `is_notify_by_sms`, `is_notify_by_email`, `is_notify_by_whatsapp`, `is_notify_by_telegram`) VALUES
-(0, 'admin', NULL, NULL, 0, 1, 0, 0);
+(0, NULL, NULL, NULL, 0, 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -248,11 +283,7 @@ ALTER TABLE `order_items`
 -- Indexes for table `packages`
 --
 ALTER TABLE `packages`
-  ADD PRIMARY KEY (`package_id`),
-  ADD KEY `packages_main_fk` (`main`),
-  ADD KEY `packages_side_fk` (`side`),
-  ADD KEY `packages_dessert_fk` (`dessert`),
-  ADD KEY `packages_drink_fk` (`drink`);
+  ADD PRIMARY KEY (`package_id`);
 
 --
 -- Indexes for table `package_images`
@@ -286,25 +317,25 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT for table `imagetest`
 --
 ALTER TABLE `imagetest`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `timetest`
@@ -316,41 +347,19 @@ ALTER TABLE `timetest`
 -- AUTO_INCREMENT for table `user_auths`
 --
 ALTER TABLE `user_auths`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `menu_item_images`
---
-ALTER TABLE `menu_item_images`
-  ADD CONSTRAINT `menu_item_images_fk` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`menu_item_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`);
-
---
--- Constraints for table `packages`
---
-ALTER TABLE `packages`
-  ADD CONSTRAINT `packages_dessert_fk` FOREIGN KEY (`dessert`) REFERENCES `menu_items` (`menu_item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packages_drink_fk` FOREIGN KEY (`drink`) REFERENCES `menu_items` (`menu_item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packages_main_fk` FOREIGN KEY (`main`) REFERENCES `menu_items` (`menu_item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packages_side_fk` FOREIGN KEY (`side`) REFERENCES `menu_items` (`menu_item_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_preferences`
---
-ALTER TABLE `user_preferences`
-  ADD CONSTRAINT `fk_user_preferences_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_auths` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*test comment*/
