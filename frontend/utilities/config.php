@@ -14,12 +14,10 @@ const _ADMIN_PAGE_STYLES = [
 
 const HOME_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
-    "./styles/home_page.css",
 ];
 
 const HOME_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
-    "./scripts/home_page.js", 
 ];
 
 const SIGN_IN_PAGE_STYLE = [
