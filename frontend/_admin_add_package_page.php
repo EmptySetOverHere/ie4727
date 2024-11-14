@@ -37,7 +37,7 @@ echo PageTemplate::getJavascriptAlertMessage();
 ?>
 <div class='centered-items main-content-container'>
     <div class="grouped-input-container">
-        <div class="section-header">Select menu items to add to Package</div>
+        <div class="section-header">Select menu items to add to Package (below)</div>
         <div class="sub-header" style= 'display: inline; margin-right: 5px'>filtering for:</div>
         <input type="text" name="name_filter_input_field" id="name_filter_input_field">
         <div class="submit-button-container">
@@ -59,12 +59,12 @@ echo PageTemplate::getJavascriptAlertMessage();
                     onclick="toggle_highlight(<?=$index?>)">
                     <img src=<?=$img_src?> alt="Menu Item" class="menu-item-image">
                     <div style="text-align: start;">
-                        <p><strong>Menu Item ID:  <?=$menuItem['menu_item_id']?></strong>               <span id="menu_item_id"></span></p>
-                        <p><strong>Description:   <?=$menuItem['description']?></strong>                 <span id="description"></span></p>
-                        <p><strong>Price:         <?=$menuItem['price']?></strong>                             <span id="price"></span></p>
-                        <p><strong>Category:      <?=$menuItem['category']?></strong>                       <span id="description"></span></p>
-                        <p><strong>is vegetarian: <?=$menuItem['is_vegetarian']?'yes':'no';?></strong> <span id="description"></span></p>
-                        <p><strong>is_halal:      <?=$menuItem['is_halal']?'yes':'no'?></strong>            <span id="description"></span></p>
+                        <p><strong>Menu Item ID:  <?=$menuItem['menu_item_id']?></strong>                       <span id="menu_item_id<?=$index?>"></span></p>
+                        <p><strong>Description:   <?=$menuItem['description']?></strong>                        <span id="description<?=$index?>"></span></p>
+                        <p><strong>Price:         <?=$menuItem['price']?></strong>                              <span id="price<?=$index?>"></span></p>
+                        <p><strong>Category:      <?=$menuItem['category']?></strong>                           <span id="category<?=$index?>"></span></p>
+                        <p><strong>is vegetarian: <?=$menuItem['is_vegetarian']?'yes':'no';?></strong>          <span id="is_vegetarian<?=$index?>"></span></p>
+                        <p><strong>is_halal:      <?=$menuItem['is_halal']?'yes':'no'?></strong>                <span id="is_halal<?=$index?>"></span></p>
                     </div>
                 </div>
                 <?php }?>
@@ -140,7 +140,10 @@ echo PageTemplate::getJavascriptAlertMessage();
             <br>
         </form>
         <div class="submit-button-container">
-            <button type="submit" onclick="submit('add-package-form',verify_package_values)">Insert</button>
+            <button onclick="redirect_back()">Save</button>
+        </div>
+        <div class="submit-button-container">
+            <button type="submit" onclick="submit('add-package-form', verify_package_values)">Insert</button>
         </div>
     </div>
     
@@ -186,7 +189,7 @@ echo PageTemplate::getJavascriptAlertMessage();
         }
     });
     function submit(form_id, verification_function = null){
-        alert('aubmission start');
+        alert('submission start');
         if (verification_function === null || verification_function()) {
             document.getElementById(form_id).submit();
             return;
@@ -194,10 +197,10 @@ echo PageTemplate::getJavascriptAlertMessage();
         alert('incomplete form');
     }
     function verify_package_values(){
-        word_regex = /^-?\w+$/
+        word_regex = /^-?[\w\s]+$/;
         if(!word_regex.test(document.getElementById('item_name').value))  {return false;}
         if(!word_regex.test(document.getElementById('description').value))  {return false;}
-        int_regex = /^-?\d+$/
+        int_regex = /^-?\d+$/;
         if(!int_regex.test(document.getElementById('main').value))  {return false;}
         if(!int_regex.test(document.getElementById('side').value))  {return false;}
         if(!int_regex.test(document.getElementById('dessert').value)){return false;}
