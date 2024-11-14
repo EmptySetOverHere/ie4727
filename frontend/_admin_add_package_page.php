@@ -189,6 +189,7 @@ ob_start(); // Start buffer to collect generated HTML lines
         }
     });
     function submit(form_id, verification_function = null){
+        alert('submission start');
         if (verification_function === null || verification_function()) {
             document.getElementById(form_id).submit();
             return;
@@ -228,6 +229,10 @@ ob_start(); // Start buffer to collect generated HTML lines
     function change_page(change_amount){
         offset = <?= $offset ?> + change_amount * <?=MENU_ITEMS_PER_PAGE?>;
         redirect_back(offset);
+    }
+    $error_message = "<?=PageTemplate::getJavascriptAlertMessage()?>";
+    if($error_message){
+        alert($error_message);
     }
 </script>
 

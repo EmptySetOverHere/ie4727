@@ -110,7 +110,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `order_datetime`, `start_datetime`, `end_datetime`, `delivery_address`) VALUES
-(4, 0, '2024-10-20 13:15:52', '2024-11-16 10:07:00', '2024-12-15 20:05:00', 'bobs house');
+(4, 0, '2024-10-20 13:15:52', '2024-11-16 10:07:00', '2024-12-15 20:05:00', 'bob\'s house');
 
 -- --------------------------------------------------------
 
@@ -363,4 +363,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*testcommit*/
