@@ -12,9 +12,6 @@ foreach($_POST as $package_id=>$quantity){
     }
 }
 
-// var_dump($_SESSION);
-var_dump(MenuItems::get_total_price(4,8,11,16));
-
 function generate_menu_page(): string
 {
     $display_category = $_GET['display_category'] ?? 'buffet';
