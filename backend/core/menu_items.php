@@ -82,6 +82,33 @@ class MenuItems{
         return $result ?? null;
     }
 
+// ,$side_item_id, $dessert_item_id, $drink_item_id
+//$itemids = [$main_item_id, $side_item_id, $dessert_item_id, $drink_item_id];
+    public static function get_item_price($menu_item_id){
+        $sql = "
+        SELECT price
+        FROM menu_items
+        WHERE menu_item_id = ?
+        ";
+        $results = NyanDB::single_query($sql, [$menu_item_id]);
+        if(!empty($result)){
+            return null;
+        }
+        $result = $results->fetch_assoc();
+        $results->free();
+        $result['price'];
+        return $result['price'];
+    }
+
+    public static function get_total_price($main_item_id, $side_item_id, $dessert_item_id, $drink_item_id){
+        $output = 0.00;
+        $output += MenuItems::get_item_price($main_item_id);
+        $output += MenuItems::get_item_price($side_item_id);
+        $output += MenuItems::get_item_price($dessert_item_id);
+        $output += MenuItems::get_item_price($drink_item_id);
+        return $output;
+    }
+
     public static function get_associated_image_src($menu_item_id){
         $sql = "
         SELECT *

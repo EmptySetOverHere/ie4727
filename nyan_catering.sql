@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2024 at 02:40 PM
+-- Generation Time: Nov 15, 2024 at 03:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,12 +139,12 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`package_id`, `item_name`, `description`, `price`, `category`, `is_available`, `main`, `side`, `dessert`, `drink`) VALUES
-(1, 'Classic Comfort', 'Grilled Chicken Breast, Roasted Vegetables, Chocolate Cake, and Lemonade. A perfect combination of savory and sweet.', 0.00, 'buffet', 1, 1, 5, 9, 13),
-(2, 'The Gourmet Feast', 'Beef Wellington, Caesar Salad, Cheesecake, and Sparkling Water. A rich and indulgent meal with refreshing sides.', 0.00, 'buffet', 1, 2, 7, 10, 16),
-(3, 'Vegetarian Delight', 'Vegetarian Lasagna, Mashed Potatoes, Fruit Tart, and Iced Tea. A fulfilling and satisfying vegetarian meal.', 0.00, 'buffet', 1, 3, 6, 12, 14),
-(4, 'Seafood Splendor', 'Shrimp Scampi, Rice Pilaf, Lemon Meringue Pie, and Coffee. Light, fresh, and flavorful with a sweet finish.', 0.00, 'buffet', 1, 4, 8, 11, 15),
-(5, 'Classic Bento', 'A balanced, comforting meal with savory chicken, flavorful veggies, and a sweet treat to finish.', 0.00, 'bento', 1, 1, 5, 9, 13),
-(6, 'Gourmet Bento', 'A sophisticated selection featuring rich beef, refreshing salad, and a sweet cheesecake for dessert.', 0.00, 'bento', 1, 2, 7, 9, 16);
+(1, 'Classic Comfort', 'A perfect combination of savory and sweet.', 22.99, 'buffet', 1, 1, 5, 9, 13),
+(2, 'The Gourmet Feast', 'A rich and indulgent meal with refreshing sides.', 33.99, 'buffet', 1, 2, 7, 10, 16),
+(3, 'Vegetarian Delight', 'A fulfilling and satisfying vegetarian meal.', 23.99, 'buffet', 1, 3, 6, 12, 14),
+(4, 'Seafood Splendor', 'Light, fresh, and flavorful with a sweet finish.', 27.99, 'buffet', 1, 4, 8, 11, 15),
+(5, 'Classic Bento', 'A balanced, comforting meal with savory chicken, flavorful veggies, and a sweet treat to finish.', 22.99, 'bento', 1, 1, 5, 9, 13),
+(6, 'Gourmet Bento', 'A sophisticated selection featuring rich beef, refreshing salad, and a sweet cheesecake for dessert.', 33.99, 'bento', 1, 2, 7, 10, 16);
 
 -- --------------------------------------------------------
 

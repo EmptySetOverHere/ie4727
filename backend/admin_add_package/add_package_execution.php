@@ -104,6 +104,7 @@ function add_package(){
 
 
     ////query the table
+    $price = MenuItems::get_total_price($main, $side, $dessert, $drink);
     $sql = "
     INSERT INTO packages (			
         item_name, 

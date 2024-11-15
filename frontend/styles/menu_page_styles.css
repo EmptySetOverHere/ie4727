@@ -10,6 +10,11 @@
     background-color: var(--main-background-dark);
     align-items: center;
     text-align: center;
+
+    .title-our-menu {
+        color: var(--accent-5-green);
+        font-size: 2.5em;
+    }
 }
 
 .display-category-toggle-container{

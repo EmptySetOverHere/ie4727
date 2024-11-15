@@ -13,6 +13,7 @@ foreach($_POST as $package_id=>$quantity){
 }
 
 // var_dump($_SESSION);
+var_dump(MenuItems::get_total_price(4,8,11,16));
 
 function generate_menu_page(): string
 {
@@ -43,7 +44,7 @@ function generate_menu_page(): string
 ?>
 
     <div class="main-content-container">
-        <h1>Our Menu</h1>        
+        <h1 class="title-our-menu">Our Menu</h1>        
         <div>
             <!-- for buffet -->
             <button
@@ -68,7 +69,7 @@ function generate_menu_page(): string
                     <div class="package-item-unit-container">
                         <h3><?php echo htmlspecialchars($item['item_name']); ?></h3>
                         <div class="package-description"><?php echo htmlspecialchars($item['description']); ?></div>
-                        <div class="package-price">$<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="package-price">$<?php echo number_format($item['price'], 2); ?> /pax</div>
                         <div class='package-main-name'><b>Main: </b><?php echo htmlspecialchars($item['main_name']); ?></div>
                         <div class='package-side-name'><b>Side: </b><?php echo htmlspecialchars($item['side_name']); ?></div>
                         <div class='package-dessert-name'><b>Dessert: </b><?php echo htmlspecialchars($item['dessert_name']); ?></div>
