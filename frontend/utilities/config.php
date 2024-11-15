@@ -51,15 +51,6 @@ const ACCOUNT_SETTING_PAGE_SCRIPTS = [
     "./account_setting_page.js",
 ];
 
-const MENU_PAGE_STYLES = [
-    "./styles/templates.css", //This must be specified by default
-    "./styles/menu_page_styles.css",
-];
-
-const MENU_PAGE_SCRIPTS = [
-    "./scripts/templates.js", //This must be specified by default
-    "./scripts/menu_page_page.js",
-];
 
 const CHECKOUT_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
@@ -79,6 +70,16 @@ const ORDER_PAGE_STYLES = [
 const ORDER_PAGE_SCRIPTS = [
     "./scripts/templates.js", //This must be specified by default
     "./scripts/order_page.js",
+];
+
+const FEEDBACK_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/feedback_page.css",
+];
+
+const FEEDBACK_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./scripts/feedback_page.js",
 ];
 
 const DEFAULT_USERNAME = "guest";

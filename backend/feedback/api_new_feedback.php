@@ -1,6 +1,7 @@
 <?php
 
 require_once '../core/constants/Errorcodes.php';
+require_once '../orders/api_new_order.php';
 
 if (session_status() === PHP_SESSION_NONE){
     session_start();
@@ -14,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE){
 
 try {
     require_once 'new_feedback_execution.php';
-    new_order();
+    // new_order();
     null;//defines what happens if execution successful here 
 } catch (Exception $e) {
     $error_code = $e->getCode();

@@ -19,15 +19,15 @@ if(isset($_SESSION['user_id'])){
 
 
 ////check for user timezone is valid and exists
-if(!isset($_SESSION['timezone'])){
-    throw new Exception('missing timezone', ERRORCODES::general_error['missing_timezone']);
-}
-try{
-    new DateTimeZone($_SESSION['timezone']);
-    $timezone = $_SESSION['timezone'];
-} catch (Exception $e) {
-    throw new Exception('invalid timezone', ERRORCODES::general_error['missing_timezone']);
-}
+// if(!isset($_SESSION['timezone'])){
+//     throw new Exception('missing timezone', ERRORCODES::general_error['missing_timezone']);
+// }
+// try{
+//     new DateTimeZone($_SESSION['timezone']);
+//     $timezone = $_SESSION['timezone'];
+// } catch (Exception $e) {
+//     throw new Exception('invalid timezone', ERRORCODES::general_error['missing_timezone']);
+// }
 
 
 
@@ -74,7 +74,7 @@ $result = $results->fetch_assoc();
 $results->free();
 if(!empty($result)){
     $error_message = 'invalid orderiD';
-    throw new Exception($error_message,EERRORCODES::general_error['bad_request']);
+    throw new Exception($error_message, ERRORCODES::general_error['bad_request']);
     exit(); //exit just in case lol 
 }
 
