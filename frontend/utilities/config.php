@@ -12,6 +12,15 @@ const _ADMIN_PAGE_STYLES = [
     "./styles/_admin_pages_input_styles.css",
 ];
 
+const MENU_PAGE_STYLES = [
+    "./styles/templates.css", //This must be specified by default
+    "./styles/menu_page_styles.css",
+];
+const MENU_PAGE_SCRIPTS = [
+    "./scripts/templates.js", //This must be specified by default
+    "./scripts/menu_page_page.js",
+];
+
 const HOME_PAGE_STYLES = [
     "./styles/templates.css", //This must be specified by default
     "./styles/home_page.css",

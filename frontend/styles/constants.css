@@ -22,6 +22,9 @@
     --accent-4-pink:                 #FF6EC7;
     --accent-4-pink-glow:            #FF3DA1;
     --accent-4-pink-glow-shadow:     rgba(255, 110, 199, 0.6);
+    --accent-5-green:                #28A745;
+    --accent-5-green-glow:           rgba(0, 255, 0, 0.6);
+    --accent-5-green-light:          #A5D6A7;
     --text-field-gray:               #333333;
     --text-field-grey-border:        #555555;
     --text-label-color:              #AAAAAA;

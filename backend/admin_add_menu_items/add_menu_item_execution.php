@@ -19,6 +19,7 @@ function add_menu_item(){
 
 
     ////assign HTTP request values
+    $is_file_submitted = (isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['size'] != 0 && isset($_FILES['image']['tmp_name']));
     $is_bad_request = !(
         isset($_POST['item_name']) && 
         isset($_POST['description']) && 
@@ -53,7 +54,9 @@ function add_menu_item(){
         throw new Exception('description too long', ERRORCODES::general_error['bad_request']);
     }
     ////verify the image(if applicable)
-    if (isset($_FILES['image'])) {
+
+    if ($is_file_submitted) {
+        var_dump( $_FILES['image']);
         $file_mime = mime_content_type($_FILES['image']['tmp_name']);
         $allowed_mimes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($file_mime, $allowed_mimes)) {
@@ -93,8 +96,10 @@ function add_menu_item(){
     ];
     $menu_item_id = NyanDB::single_query($sql, $params);
 
+
+
     ////if no image submitted, function finished execution
-    if (!isset($_FILES['image'])){
+    if (!$is_file_submitted){
         return true;
     }
 

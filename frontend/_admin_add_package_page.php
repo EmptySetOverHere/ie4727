@@ -53,8 +53,7 @@ ob_start(); // Start buffer to collect generated HTML lines
                     $image_data   = MenuItems::get_associated_image_src($menuItem['menu_item_id']);
                     $img_src      = $image_data??'./assets/image-placeholder.svg';
                     $description  = $menuItem['description'];
-
-                    ?>
+                ?>
                 <div class="info-item" id="menu-item-display-<?= $index; ?>" style="background-color: #9B9B9B;"
                     onclick="toggle_highlight(<?=$index?>)">
                     <img src=<?=$img_src?> alt="Menu Item" class="menu-item-image">
@@ -131,7 +130,7 @@ ob_start(); // Start buffer to collect generated HTML lines
                 </table>
             </div>
             <div class="text-input-container">
-                <label for="image">Image</label>
+                <label for="image">Image(optional)</label>
                 <input type="file" name="image" id="image">
                 <div class="image-container">
                     <img id="preview" src="./assets/image-placeholder.svg" alt="Image Preview">
@@ -198,7 +197,7 @@ ob_start(); // Start buffer to collect generated HTML lines
     function verify_package_values(){
         word_regex = /^-?[\w\s]+$/;
         if(!word_regex.test(document.getElementById('item_name').value))  {return false;}
-        if(!word_regex.test(document.getElementById('description').value))  {return false;}
+        if(document.getElementById('description').value == "")  {return false;}
         int_regex = /^-?\d+$/;
         if(!int_regex.test(document.getElementById('main').value))  {return false;}
         if(!int_regex.test(document.getElementById('side').value))  {return false;}
