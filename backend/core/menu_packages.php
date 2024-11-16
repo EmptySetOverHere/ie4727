@@ -71,7 +71,24 @@ class MenuPackages{
             }
         }
 
-        return $output;
+        return MenuPackages::format_result($output,'package_id');
+    }
+
+    public static function get_package_information_by_id($package_id){
+        $sql = "
+        SELECT * 
+        FROM packages 
+        WHERE package_id = ?
+        ";
+        $results = NyanDB::single_query($sql, [$package_id]);
+        $result = $results->fetch_assoc();
+        $results->free();
+        $package_info = $result;
+        $package_info['main_name']    = MenuItems::get_menu_item_by_id($package_info['main'])['item_name'];
+        $package_info['side_name']    = MenuItems::get_menu_item_by_id($package_info['side'])['item_name'];
+        $package_info['dessert_name'] = MenuItems::get_menu_item_by_id($package_info['dessert'])['item_name'];
+        $package_info['drink_name']   = MenuItems::get_menu_item_by_id($package_info['drink'])['item_name'];
+        return $package_info;
     }
 
     public static function get_associated_image_src($package_id){

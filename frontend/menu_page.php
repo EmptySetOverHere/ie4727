@@ -9,22 +9,25 @@ session_status() === PHP_SESSION_NONE ? session_start() : null;
 foreach($_POST as $package_id=>$quantity){
     if($quantity != 0){
         $_SESSION['cart'][$package_id] = $quantity;
+    } else {
+        unset($_SESSION['cart'][$package_id]);
+    }
+    if(isset($_GET['proceed_to_checkout'])){
+        header("Location: checkout_page.php");
     }
 }
+
 
 function generate_menu_page(): string
 {
     $display_category = $_GET['display_category'] ?? 'buffet';
+
     // $current_page = $_GET['current_page'] ?? '1';
     $display_items = [
         'bento' => [],
         'buffet' => [],
     ];
-    // var_dump(MenuPackages::get_latest_packages()); 
-    // echo '<br>';
-    // echo '<br>';
-    // var_dump(MenuPackages::get_latest_instock_package_ids());
-    // var_dump(MenuPackages::get_latest_instock_package_information());
+
     $latest_packages = MenuPackages::get_latest_instock_package_information();
 
     foreach($latest_packages as $package){
@@ -35,6 +38,18 @@ function generate_menu_page(): string
             $display_items['bento'][$package['package_id']] = $package;
         }
     }
+
+    $othercart_is_empty = true;
+    foreach($_SESSION['cart'] as $package_id=>$quantity){
+        // var_dump($latest_packages[$package_id]);
+        $type_this_package_is = $latest_packages[$package_id]['category'];
+        // var_dump($type_this_package_is);
+        if($quantity !=0 && $type_this_package_is != $display_category){
+            $othercart_is_empty = false;
+        }
+    }
+    // var_dump($othercart_is_empty);
+
     // var_dump($display_items);
 
     ob_start(); //start buffer to collect generated html lines
@@ -79,7 +94,7 @@ function generate_menu_page(): string
                             </div>
                             <div class="popup-buttons">
                                 <button class="add-to-cart-btn"
-                                    onclick="update_cart(<?=$package_id?>)">
+                                    onclick="update_cart()">
                                     Update Cart
                                 </button>
                                 <button class="cancel-btn"     
@@ -93,25 +108,23 @@ function generate_menu_page(): string
             </div>
         </form>
         
-        <a href="checkout_page.php">
-            <div class="cart-container">
-                <div class="cart-img-container">
-                    <img src="./assets/green_shop-pict-cart.png" alt="checkout-button">
-                    <span class="cart-text">Checkout</span>
-                </div>
+        <div class="cart-container" onclick="proceed_to_checkout()">
+            <div class="cart-img-container">
+                <img src="./assets/green_shop-pict-cart.png" alt="checkout-button">
+                <span class="cart-text">Checkout</span>
             </div>
-        </a>
+        </div>
 
     </div>
 
     <script>
         function redirect_back(display_category = <?= $display_category ?>) {
-            window.location.replace("menu_page.php?display_category=" + display_category)
+            update_cart(display_category);
         }
 
-        function update_cart() {
+        function update_cart(display_category = '<?= $display_category ?>') {
             const cart_form = document.getElementById('cart-form');
-            cart_form.action = 'menu_page.php?display_category=' + '<?= $display_category ?>';
+            cart_form.action = 'menu_page.php?display_category=' + display_category;
             cart_form.submit();
         }
 
@@ -126,6 +139,31 @@ function generate_menu_page(): string
             let newValue = parseInt(input.value) + change;
             newValue = Math.max(0, Math.min(999, newValue));
             input.value = newValue;
+        }
+
+        function proceed_to_checkout(){
+            if(<?=$othercart_is_empty?'true':'false'?> && isFormEmpty()){
+                alert('cart is empty');
+                return;
+            }
+            const cart_form = document.getElementById('cart-form');
+            cart_form.action = 'menu_page.php?display_category=' + '<?= $display_category ?>'+'&proceed_to_checkout=true';
+            cart_form.submit();
+        }
+
+        function isFormEmpty() {
+            const cart_form = document.getElementById('cart-form');
+            array = []
+            for (let element of cart_form.elements) {
+                // Skips buttons or other non-input elements
+                if (element.type !== "submit" && element.type !== "button" && element.type !== "reset") {
+                    array += element.value;
+                    if(element.value != 0){
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
     </script>
