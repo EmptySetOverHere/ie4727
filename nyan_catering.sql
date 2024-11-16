@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2024 at 03:24 PM
+-- Generation Time: Nov 16, 2024 at 04:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -196,7 +196,7 @@ CREATE TABLE `user_auths` (
 --
 
 INSERT INTO `user_auths` (`user_id`, `email`, `phone_number`, `hashed_password`, `account_creation_time`, `last_login_time`) VALUES
-(0, 'admin@a.com', 91234567, '$argon2id$v=19$m=65536,t=4,p=1$dmpYZEY1N0IueHpBdy8xUA$W8Obh0VLzvFOejuxhZzzrkTYTBOyJ1HsCUUk2aiO5YY', '2024-11-14 09:05:55', '2024-11-15 11:14:35');
+(0, 'admin@a.com', 91234567, '$argon2id$v=19$m=65536,t=4,p=1$dmpYZEY1N0IueHpBdy8xUA$W8Obh0VLzvFOejuxhZzzrkTYTBOyJ1HsCUUk2aiO5YY', '2024-11-14 09:05:55', '2024-11-16 03:20:58');
 
 -- --------------------------------------------------------
 
@@ -220,7 +220,7 @@ CREATE TABLE `user_preferences` (
 --
 
 INSERT INTO `user_preferences` (`user_id`, `name`, `address`, `preferred_payment_method`, `is_notify_by_sms`, `is_notify_by_email`, `is_notify_by_whatsapp`, `is_notify_by_telegram`) VALUES
-(0, 'Hu Xiao', NULL, NULL, 0, 1, 0, 0);
+(0, 'Hu Xiao', 'NTU Ave EEE Dpt #S2-B7-07', '1234 5678 9012 3456', 0, 1, 0, 0);
 
 --
 -- Indexes for dumped tables

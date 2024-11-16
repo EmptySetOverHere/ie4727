@@ -65,6 +65,7 @@ h2 {
     }
 
     .input-date,
+    .input-time,
     .input-disable {
         width: 100%;
         padding: 10px;
