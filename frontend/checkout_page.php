@@ -110,7 +110,7 @@ ob_start(); //start buffer to collect generated html lines
     </section>
 </div>
     
-<form id="checkout-form" action="#" method="post">
+<form id="checkout-form" action="../backend/orders/api_new_order.php" method="post">
     <div class="container">
             <h2>Checkout</h2>
 
@@ -122,7 +122,7 @@ ob_start(); //start buffer to collect generated html lines
                 </div>
                 <div class="input-group">
                     <label for="address">Address</label>
-                    <input class="input-disable" type="text" id="address" name="address" value='<?=$address??''?>' readonly>
+                    <input class="input-disable" type="text" id="address" name="delivery_address" value='<?=$address??''?>' readonly>
                 </div>
             </section>
 
@@ -176,17 +176,42 @@ ob_start(); //start buffer to collect generated html lines
     function place_order(){
         is_category_buffet_in_this_order = <?=$is_category_buffet_in_this_order?'true':'false'?>;
         // alert(is_category_buffet_in_this_order);
-        alert('placing order');
+        // alert('placing order');
         ////check that the values user enters correct
-        verify_values(is_category_buffet_in_this_order);
+        var userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if(verify_user() && verify_values(is_category_buffet_in_this_order) && execute_payment_popup){
+            const checkout_form = document.getElementById('checkout-form');
+            checkout_form.action += '?timezone=' + userTimezone;
+
+            
+
+            checkout_form.submit();
+        }
     }
 
-    function verify_user(is_category_buffet_in_this_order){
-        alert(document.getElementById('full_name').value);
+    function verify_values(is_category_buffet_in_this_order){
+        var startDate = document.getElementById('start_date').value;
+        var startTime = document.getElementById('start_time').value;
+        var endDate = document.getElementById('end_date').value;
+        var endTime = document.getElementById('end_time').value;
+
+        if(is_category_buffet_in_this_order && (!endDate || !endTime)){
+            alert("Please fill in all the relevant date and time fields");
+            return false;
+        }
+        if(!startDate || !startTime){
+            alert("Please fill in all the relevant date and time fields");
+            return false;
+        }
+        return true;
+    }
+
+    function verify_user(){
+        // alert(document.getElementById('full_name').value);
         if(
             document.getElementById('full_name').value   == '' ||
             document.getElementById('address').value     == '' ||
-            document.getElementById('card_number').value == ''
+            document.getElementById('card_number').value == '' 
         ){
             var userChoice = confirm("Account settings incomplete. Would you like to proceed to account settings page?")
             if (userChoice){

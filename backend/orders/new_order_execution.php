@@ -19,6 +19,9 @@ function new_order(){
 
 
     ////check for user timezone is valid and exists
+    if(isset($_GET['timezone'])){
+        $_SESSION['timezone'] = $_GET['timezone'];
+    }
     if(!isset($_SESSION['timezone'])){
         throw new Exception('missing timezone', ERRORCODES::general_error['missing_timezone']);
     }

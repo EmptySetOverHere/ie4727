@@ -17,9 +17,6 @@ if (session_status() === PHP_SESSION_NONE){
 // $_SESSION['timezone'] = 'Asia/Singapore';
 // print_r($_SESSION['cart']);
 
-var_dump($_POST);
-throw 'bobobobob';
-
 try {
     require_once 'new_order_execution.php';
     new_order();
@@ -66,5 +63,6 @@ try {
         break;
     }
 }
+var_dump($_POST);
 
 ?>
