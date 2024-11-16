@@ -2,10 +2,18 @@
 require_once "./components/templates.php";
 require_once "./utilities/config.php";
 require_once "./utilities/resource_aquisition.php";
+require_once '../backend/core/constants/Errorcodes.php';
+require_once '../backend/core/NyanDateTime.php';
+require_once '../backend/core/menu_packages.php';
+require_once '../backend/core/NyanDB.php';
 
 session_status() === PHP_SESSION_NONE ? session_start(): null;
 
 $username = aquire_username_or_default(DEFAULT_USERNAME);
+
+$order_status = ["Cooking", "Completed", "Unsuccessful"];
+
+$sql = "SELECT * from ";
 
 
 ob_start(); //start buffer to collect generated html lines
@@ -76,7 +84,7 @@ ob_start(); //start buffer to collect generated html lines
     <table>
         <tr>
             <td>
-                <p>Total: </p>
+                <p>Sub Total: </p>
             </td>
             <td style="text-align: end;">$42.00</td>
         </tr>
@@ -100,10 +108,15 @@ ob_start(); //start buffer to collect generated html lines
         </tr>
     </table>
 
-    <button class="btn">Rate</button>
+    <form action="./feedback_page.php" method="get">
+        <input type="number" hidden>
+        <button class="btn" onclick="">Rate</button>
+    </form>
     <button class="btn" onclick="orderAgain()">Order Again</button>
 </div>
 </div>
+
+
 
 
 <?php

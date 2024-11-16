@@ -15,7 +15,22 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 ob_start(); //start buffer to collect generated html lines
 ?>
 
+
 <div class='centered-items account-setting-content-container'>
+    <section class="setting-page-title"><h1>Account Setting Page</h1></section>
+    
+    <div class="sign-out-button-container">
+        <div class="sign-out-button-container-inner">
+            <p>Want to switch account?</p>
+            <div class="flex-placeholder"></div>
+            <div class="submit-button-container sign-out-button">
+                <form action="../backend/Auth/api_logout.php" method="GET" id="sign-out-form">
+                    <button type="submit" id="sign-out-button">Sign Out</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="grouped-settings-container">
         <div class="section-header">Login Information</div>
         <div class="section-divider"></div>
@@ -87,13 +102,7 @@ ob_start(); //start buffer to collect generated html lines
         </div>
         <br>
     </div>
-    <div class="sign-out-button-container">
-        <form action="../backend/Auth/api_logout.php" method="GET" id="sign-out-form">
-            <div class="submit-button-container">
-                <button type="submit" id="sign-out-button">Sign Out</button>
-            </div>
-        </form>
-    </div>
+    
 </div>
 <script>
     function submit(form_id, verification_function = null){

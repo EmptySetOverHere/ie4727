@@ -121,16 +121,49 @@
 }
 
 .sign-out-button-container {
-    min-width: 265px;
-    width: 50%;
-    display: inline-block; 
-    padding: 10px;
-    margin: 10px;
+    min-width: 450px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.sign-out-button-container .submit-button-container {
-    max-width: 700px;
+.sign-out-button-container-inner {
+    border-radius: 15px;
+    background-color: var(--inner-container-colour);
+    border: 1px solid var(--text-field-grey-border);
+    margin: 10px;
+    padding: 20px 35px 20px 35px;
+
+    width: 50%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
 }
+
+.sign-out-button-container p {
+    display: inline-block;
+    color: #eeeeee;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.sign-out-button-container form {
+    display: inline-block;
+}
+
+.sign-out-button-container button {
+    min-width: 150px;
+    margin: 0;
+}
+
+.setting-page-title h1 {
+    color: #eee;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
 
 .notification-preference-title{
     color: var(--text-label-color);

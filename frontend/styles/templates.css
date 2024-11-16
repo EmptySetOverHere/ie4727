@@ -196,6 +196,10 @@
 /* } */
 
 
+.flex-placeholder {
+    flex: 1;
+}
+
 .centered-items {
     align-items: center;
     text-align: center;
