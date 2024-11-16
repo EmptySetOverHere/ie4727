@@ -14,10 +14,11 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 ob_start(); //start buffer to collect generated html lines
 ?>
+<div class="section-header">Account Settings</div>
 
 <div class='centered-items account-setting-content-container'>
     <div class="grouped-settings-container">
-        <div class="section-header">Login Information</div>
+        <div class="section-header">Update Login Information</div>
         <div class="section-divider"></div>
         <form id="update-auth-form" action="../backend/auth/api_update_auth.php">
             <div class="text-input-container">
@@ -43,7 +44,7 @@ ob_start(); //start buffer to collect generated html lines
     </div>
     <br>
     <div class="grouped-settings-container">
-        <div class="section-header">Account Preferences</div>
+        <div class="section-header">Update Account Preferences</div>
         <div class="section-divider"></div>
         <form id="update-preferences-form" action="../backend/update_profile/api_update_profile.php">
             <div class="text-input-container">

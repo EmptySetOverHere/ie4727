@@ -1,9 +1,9 @@
 <?php
 
+require_once '../core/NyanDB.php';
+require_once '../core/constants/Errorcodes.php';
+
 function get_user_preferences(){
-    require_once '../core/NyanDB.php';
-    require_once '../core/Image.php';
-    require_once '../core/constants/Errorcodes.php';
 
     ////check that session user_id
     if (session_status() === PHP_SESSION_NONE){
@@ -28,7 +28,7 @@ function get_user_preferences(){
     WHERE user_id = ?;
     ";
     $results = NyanDB::single_query($sql, [$_SESSION['user_id']]);
-    if(empty($result)){
+    if(!empty($result)){
         throw new Exception('user does not exist', ERRORCODES::server_error['user_does_not_exist']);
     }
     $result = $results->fetch_assoc();
