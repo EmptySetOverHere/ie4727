@@ -13,8 +13,9 @@ $username = aquire_username_or_default(DEFAULT_USERNAME);
 
 $order_status = ["Cooking", "Completed", "Unsuccessful"];
 
-$sql = "SELECT * from ";
+// $sql = "SELECT * FROM orders JOIN order_items ON ? = ?;";
 
+// $orders = NyanDB::single_query($sql, ["orders.order_id", "order_items.order_item_id"]);
 
 ob_start(); //start buffer to collect generated html lines
 ?>  
@@ -28,7 +29,7 @@ ob_start(); //start buffer to collect generated html lines
     <p>Order Type: Deliver</p>
     <p>Order Status: <span class="status cooking">Cooking</span></p>
     <button class="btn">Details</button>
-    <button class="btn">Rate</button>
+    <button class="btn" onclick="redirect_to_feedback_page()">Rate</button>
     </div>
     <div class="order-card" onclick="showOrderDetails(2)">
     <p>Order Time: August 24 2024, 1:49pm</p>
@@ -36,14 +37,14 @@ ob_start(); //start buffer to collect generated html lines
     <p>Order Type: Deliver</p>
     <p>Order Status: <span class="status completed">Completed</span></p>
     <button class="btn">Details</button>
-    <button class="btn">Rate</button>
+    <button class="btn" onclick="redirect_to_feedback_page()">Rate</button>
     </div>
     <div class="order-card" onclick="showOrderDetails(3)">
     <p>Order Time: August 23 2024, 2:23pm</p>
     <p>Order ID: 5431</p>
     <p>Order Type: Pick Up</p>
     <p>Order Status: <span class="status unsuccessful">Unsuccessful</span></p>
-    <button class="btn">Details</button>
+    <button class="btn" onclick="redirect_to_feedback_page()">Rate</button>
     <button class="btn disabled" disabled>Rate</button>
     </div>
 </div>
@@ -108,14 +109,17 @@ ob_start(); //start buffer to collect generated html lines
         </tr>
     </table>
 
-    <form action="./feedback_page.php" method="get">
-        <input type="number" hidden>
-        <button class="btn" onclick="">Rate</button>
-    </form>
+
+    <button class="btn" onclick="redirect_to_feedback_page()">Rate</button>
     <button class="btn" onclick="orderAgain()">Order Again</button>
 </div>
 </div>
 
+<script>
+    function redirect_to_feedback_page() {
+        window.location.assign("./feedback_page.php");
+    }
+</script>
 
 
 

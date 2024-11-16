@@ -84,10 +84,21 @@ class MenuPackages{
         $result = $results->fetch_assoc();
         $results->free();
         $package_info = $result;
-        $package_info['main_name']    = MenuItems::get_menu_item_by_id($package_info['main'])['item_name'];
-        $package_info['side_name']    = MenuItems::get_menu_item_by_id($package_info['side'])['item_name'];
-        $package_info['dessert_name'] = MenuItems::get_menu_item_by_id($package_info['dessert'])['item_name'];
-        $package_info['drink_name']   = MenuItems::get_menu_item_by_id($package_info['drink'])['item_name'];
+
+        $main_item    = MenuItems::get_menu_item_by_id($package_info['main']);
+        $side_item    = MenuItems::get_menu_item_by_id($package_info['side']);
+        $dessert_item = MenuItems::get_menu_item_by_id($package_info['dessert']);
+        $drink_item   = MenuItems::get_menu_item_by_id($package_info['drink']);
+
+        $package_info['main_name']    = $main_item['item_name'];
+        $package_info['side_name']    = $side_item['item_name'];
+        $package_info['dessert_name'] = $dessert_item['item_name'];
+        $package_info['drink_name']   = $drink_item['item_name'];
+        
+        $package_info['main_price']    = $main_item['price'];
+        $package_info['side_price']    = $side_item['price'];
+        $package_info['dessert_price'] = $dessert_item['price'];
+        $package_info['drink_price']   = $drink_item['price'];
         return $package_info;
     }
 
@@ -104,6 +115,7 @@ class MenuPackages{
         if (!$result){return null;}
         return new Image($result['image_name'], $result['image_data'], $result['image_type']);
     }
+
 
     public static function set_availablility(int $package_id, bool $is_available){
         $sql = "
