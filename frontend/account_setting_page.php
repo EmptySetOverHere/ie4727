@@ -14,9 +14,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 ob_start(); //start buffer to collect generated html lines
 ?>
-<div class="section-header">Account Settings</div>
-
-
 <div class='centered-items account-setting-content-container'>
     <section class="setting-page-title"><h1>Account Setting Page</h1></section>
     

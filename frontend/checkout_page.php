@@ -11,16 +11,19 @@ $username = aquire_username_or_default(DEFAULT_USERNAME);
 
 //var_dump($_SESSION['cart']);
 
+$is_category_buffet_in_this_order = false;
 $packages_ordered_info =[];
 foreach($_SESSION['cart'] as $package_id=>$quantity){
-    if($quantity != 0 && $quantity !='0'){
+    if($quantity != 0 && $quantity != '0'){
         $package_info = MenuPackages::get_package_information_by_id($package_id);
         $package_info['quantity_order'] = $quantity; 
         $packages_ordered_info[] = $package_info;
+        if($package_info['category'] == 'buffet'){
+            $is_category_buffet_in_this_order = true;
+        }
     }
 }
-$total_price = 0;
-
+// var_dump($is_category_buffet_in_this_order);
 // var_dump($packages_ordered_info);
 
 $is_user_logged_in = isset($_SESSION['user_id']);
@@ -51,8 +54,7 @@ if($is_user_logged_in){
         }
         $result = $results->fetch_assoc();
         $results->free();
-    
-    
+        
     
         ////successfully retreived $the user_preference information
         return $result;
@@ -63,6 +65,9 @@ if($is_user_logged_in){
     $address                   = $user_preferences['address'];
     $preferred_payment_method  = $user_preferences['preferred_payment_method'];
 }
+
+$total_price = 0;
+
 
 
 ob_start(); //start buffer to collect generated html lines
@@ -110,14 +115,14 @@ ob_start(); //start buffer to collect generated html lines
             <h2>Checkout</h2>
 
             <section class="section">
-                <h3>Shipping Information</h3>
+                <h3>User Information</h3>
                 <div class="input-group">
                     <label for="full-name">Full Name</label>
-                    <input class="input-disable" type="text" id="full-name" name="full_name" value='<?=$user_name?>' readonly>
+                    <input class="input-disable" type="text" id="full_name" name="full_name" value='<?=$user_name??''?>' readonly>
                 </div>
                 <div class="input-group">
                     <label for="address">Address</label>
-                    <input class="input-disable" type="text" id="address" name="address" value='<?=$address?>' readonly>
+                    <input class="input-disable" type="text" id="address" name="address" value='<?=$address??''?>' readonly>
                 </div>
             </section>
 
@@ -127,38 +132,82 @@ ob_start(); //start buffer to collect generated html lines
                 <br><br>
                 <div class="input-group">
                     <label for="card-number">Card Number</label>
-                    <input class="input-disable" type="text" id="card-number" name="card_number" value='<?=$preferred_payment_method?>' readonly>
+                    <input class="input-disable" type="text" id="card_number" name="card_number" value='<?=$preferred_payment_method??''?>' readonly>
                 </div>
             </section>
 
             <section class="section">
-                <h3>Shipping Information</h3>
+                <h3>Date & Time Selection</h3>
                 <div class="input-group">
-                    <label for="start_datetime">Start time</label>
-                    <input class="input-date" type="datetime-local" id="start_datetime" name="full_name">
+                    <label for="start_datetime">Start date</label>
+                    <input class="input-date" type="date" id="start_date" name="start_date">
                 </div>
                 <div class="input-group">
-                    <label for="end_datetime">Start time</label>
-                    <input class="input-date" type="datetime-local" id="end_datetime" name="full_name">
+                    <label for="start_datetime">Start time</label>
+                    <input class="input-time" type="time" id="start_time" name="start_time">
+                </div>
+                <div class="input-group">
+                    <label for="end_date">End date</label>
+                    <input class="input-date" type="date" id="end_date" name="end_date">
+                </div>
+
+                <div class="input-group">
+                    <label for="end_time">End time</label>
+                    <input class="input-time" type="time" id="end_time" name="end_time">
                 </div>
             </section>
 
             <div class="submit-button">
-            <button type="button">Place Order</button>
+            <button type="button" onclick="place_order()">Place Order</button>
         </div>
         </div>
     </div>
 </form>
 <script>
+    const is_user_logged_in = <?=$is_user_logged_in?'true':'false'?>;
     window.onload = function() {
-        if(!<?=$is_user_logged_in?>){
-            alert('please make an account before making an order')
+        if(!is_user_logged_in){
+            var userChoice = confirm('An account is required to place an order. Proceed to view checkout page anyways?')
+            if(userChoice){return;}
             window.location.href = "sign_in_up_page.php";
         }
     };
+
+    function place_order(){
+        is_category_buffet_in_this_order = <?=$is_category_buffet_in_this_order?'true':'false'?>;
+        // alert(is_category_buffet_in_this_order);
+        alert('placing order');
+        ////check that the values user enters correct
+        verify_values(is_category_buffet_in_this_order);
+    }
+
+    function verify_user(is_category_buffet_in_this_order){
+        alert(document.getElementById('full_name').value);
+        if(
+            document.getElementById('full_name').value   == '' ||
+            document.getElementById('address').value     == '' ||
+            document.getElementById('card_number').value == ''
+        ){
+            var userChoice = confirm("Account settings incomplete. Would you like to proceed to account settings page?")
+            if (userChoice){
+                window.location.href = "account_setting_page.php";
+            }
+            return false;
+        }
+        return true
+    }
+
+    function execute_payment_popup(){
+        var userChoice = window.confirm("Is payment successful?");
+        if (!userChoice){
+            alert('payment failed');
+            return false;
+        }
+        return true
+    }
 </script>
 
-    
+
            
 
 <?php

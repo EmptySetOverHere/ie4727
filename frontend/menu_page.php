@@ -16,6 +16,9 @@ foreach($_POST as $package_id=>$quantity){
         header("Location: checkout_page.php");
     }
 }
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = [];
+}
 
 
 function generate_menu_page(): string
